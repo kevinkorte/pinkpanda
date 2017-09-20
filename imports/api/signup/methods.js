@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 
+import stripePackage from 'stripe';
+
 import './signup.js';
 
-const stripe = require("stripe")(Meteor.settings.private.stripeSecretKey);
+const stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
 
 Meteor.methods({
   newUserSignup(email, password) {
