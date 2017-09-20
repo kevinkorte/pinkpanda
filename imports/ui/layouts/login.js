@@ -4,7 +4,7 @@ import { Accounts } from 'meteor/accounts-base';
 
 import './login.html';
 
-Meteor.App_login.events({
+Template.App_login.events({
   'submit .js-login'(event) {
     event.preventDefault();
     const email = event.target.email.value;
