@@ -30,6 +30,7 @@ Template.App_signup.events({
         console.log(error)
       } else {
         //Successfully logged in, go to the next route
+        FlowRouter.go( 'onboarding' );
       }
     })
   }

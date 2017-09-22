@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Subscriptions } from '../subscriptions/subscriptions.js';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import stripePackage from 'stripe';
 
@@ -35,7 +36,7 @@ let _updateUserAccount = ( customer, userId ) => {
 let _subscribeToPlan = ( customer, userId ) => {
   let asyncToSync = Meteor.wrapAsync( stripe.subscriptions.create, stripe.subscriptions );
   resultOfStripeCreateCustomer = asyncToSync( { customer: customer.id, trial_period_days: 7, items: [ { plan: 'basic0917'  } ] } );
-  
+
   Meteor.users.update(userId, { $set: { stripeSubscriptionId: resultOfStripeCreateCustomer.id } } );
   let sub = Subscriptions.insert({ resultOfStripeCreateCustomer });
   console.log(sub);
