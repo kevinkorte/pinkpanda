@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { Subscriptions } from '../subscriptions/subscriptions.js';
 
 import stripePackage from 'stripe';
 
@@ -15,6 +16,7 @@ Meteor.methods({
       resultOfStripeCreateCustomer = asyncToSync( { email: email } );
       let userId = _createUserAccount( resultOfStripeCreateCustomer, password );
                    _updateUserAccount( resultOfStripeCreateCustomer, userId );
+                   _subscribeToPlan( resultOfStripeCreateCustomer, userId );
     } else {
       throw new Meteor.Error('new-user-already-exists', "Email already exists.");
     }
@@ -25,7 +27,16 @@ let _createUserAccount = ( customer, password ) => {
   let userId = Accounts.createUser( { email: customer.email, password: password } );
   return userId;
 };
+
 let _updateUserAccount = ( customer, userId ) => {
-  //Todo Attach Stripe customer id to user accounts id
-  console.log(userId, 'update user Accounts', customer);
+  Meteor.users.update(userId, { $set: { stripeCustomerId: customer.id } } );
+}
+
+let _subscribeToPlan = ( customer, userId ) => {
+  let asyncToSync = Meteor.wrapAsync( stripe.subscriptions.create, stripe.subscriptions );
+  resultOfStripeCreateCustomer = asyncToSync( { customer: customer.id, trial_period_days: 7, items: [ { plan: 'basic0917'  } ] } );
+  
+  Meteor.users.update(userId, { $set: { stripeSubscriptionId: resultOfStripeCreateCustomer.id } } );
+  let sub = Subscriptions.insert({ resultOfStripeCreateCustomer });
+  console.log(sub);
 }
