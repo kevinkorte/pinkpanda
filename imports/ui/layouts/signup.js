@@ -33,5 +33,18 @@ Template.App_signup.events({
         FlowRouter.go( 'onboarding.step', {step: 'name'} );
       }
     })
+  },
+  'click .js-loginFacebook'(event) {
+    event.preventDefault();
+    Meteor.loginWithFacebook({
+      requestPermissions: [ "email", "public_profile" ]
+    }, (error) => {
+      if (error) {
+        Session.set('errorMessage', error.reason || 'Unknown error');
+      } else {
+        // FlowRouter.go('dashboard');
+        console.log(Meteor.user().services.facebook.email);
+      }
+    })
   }
 })

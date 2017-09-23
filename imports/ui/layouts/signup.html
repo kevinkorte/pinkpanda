@@ -1,13 +1,10 @@
 <template name="App_signup">
-  <form class="js-submit">
+  <form class="js-submit" style="margin-top: 100px">
     <input type="email" name="email">
     <input type="password" name="password">
     <button type="submit">Submit</button>
   </form>
-  <ul>
-    {{#each subs}}
-    <li>{{_id}}</li>
-    {{/each}}
-  </ul>
+
+  <button class="js-loginFacebook">Log In with Facebook</button>
 
 </template>
