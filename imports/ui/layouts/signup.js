@@ -37,6 +37,7 @@ Template.App_signup.events({
     })
   },
   'click .js-loginFacebook'(event) {
+    console.log(event);
     event.preventDefault();
     Meteor.loginWithFacebook({
       requestPermissions: [ "email", "public_profile" ]
