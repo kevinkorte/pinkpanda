@@ -13,5 +13,15 @@ Template.dashboard_navigation.helpers({
         //return a basic profile pic
       }
     }
+  },
+  getProfileName() {
+    let user = Meteor.users.findOne(Meteor.userId());
+    if ( user ) {
+      if ( user.profile.name ) {
+        return user.profile.name;
+      } else {
+        return user.emails[0].address;
+      }
+    }
   }
 })

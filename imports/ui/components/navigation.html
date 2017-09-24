@@ -1,6 +1,9 @@
 <template name="dashboard_navigation">
   <nav class="navi">
-    
+    <div class="user-details">
+      <span class="user-profile-name in-nav">{{getProfileName}}</span>
+      <img class="user-profile-pic small" src="{{getProfilePicUrl}}" alt="">
+      <i class="fa fa-caret-down"></i>
+    </div>
   </nav>
-  <img src="{{getProfilePicUrl}}" alt="">
 </template>
