@@ -18,6 +18,8 @@ ecmascript@0.8.1              # Enable ECMAScript2015+ syntax in app code
 
 accounts-base
 accounts-password
+accounts-facebook
+service-configuration
 
 kadira:flow-router      # FlowRouter is a very simple router for Meteor
 kadira:blaze-layout     # Layout manager for blaze (works well with FlowRouter)

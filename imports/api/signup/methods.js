@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
+import { HTTP } from 'meteor/http';
 import { Subscriptions } from '../subscriptions/subscriptions.js';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
@@ -22,6 +23,24 @@ Meteor.methods({
       throw new Meteor.Error('new-user-already-exists', "Email already exists.");
     }
   },
+  loginWithFacebook(email) {
+    Accounts.addEmail(Meteor.userId(), email, true);
+    let asyncToSync = Meteor.wrapAsync( stripe.customers.create, stripe.customers );
+    resultOfStripeCreateCustomer = asyncToSync( { email: email } );
+    _updateUserAccount( resultOfStripeCreateCustomer, Meteor.userId() );
+    _subscribeToPlan( resultOfStripeCreateCustomer, Meteor.userId() );
+    let res = HTTP.call('GET', 'https://graph.facebook.com/v2.10/me?fields=picture&access_token='+Meteor.user().services.facebook.accessToken);
+    _updateProfilePicFromFacebook( res, Meteor.userId() );
+  },
+  checkIfFacebookUserExists(email) {
+    let checkIfUserExists = Accounts.findUserByEmail( email );
+    if (!checkIfUserExists) {
+      Meteor.call('loginWithFacebook', email );
+    } else {
+      //user account already exists
+      console.log('user already exists');
+    }
+  }
 });
 
 let _createUserAccount = ( customer, password ) => {
@@ -40,4 +59,9 @@ let _subscribeToPlan = ( customer, userId ) => {
   Meteor.users.update(userId, { $set: { stripeSubscriptionId: resultOfStripeCreateCustomer.id } } );
   let sub = Subscriptions.insert({ resultOfStripeCreateCustomer });
   console.log(sub);
+}
+
+let _updateProfilePicFromFacebook = ( picture, userId ) => {
+  let profilePic = picture.data.picture.data.url;
+  Meteor.users.update(userId, { $set: { profilePicture: profilePic } } );
 }

@@ -1,11 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Subscriptions } from '../../api/subscriptions/subscriptions.js';
 
 import './signup.html';
 
 Template.App_signup.onCreated( function() {
   Meteor.subscribe('subs.all');
+  Meteor.subscribe('users.all');
   console.log(Meteor.subscribe('subs.all'));
 });
 
@@ -42,9 +44,14 @@ Template.App_signup.events({
       if (error) {
         Session.set('errorMessage', error.reason || 'Unknown error');
       } else {
-        // FlowRouter.go('dashboard');
-        console.log(Meteor.user().services.facebook.email);
+        Meteor.call('checkIfFacebookUserExists', Meteor.user().services.facebook.email, function(error, response) {
+          if (error) {
+            console.log(error)
+          } else {
+            FlowRouter.go('dashboard');
+          }
+        });
       }
-    })
+    });
   }
 })

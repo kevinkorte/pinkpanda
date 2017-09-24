@@ -6,6 +6,7 @@ import '../../ui/layouts/body/body.js';
 import '../../ui/layouts/login.js';
 import '../../ui/layouts/signup.js';
 import '../../ui/layouts/onboarding.js';
+import '../../ui/layouts/dashboard.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/not-found/not-found.js';
 
@@ -43,6 +44,13 @@ FlowRouter.route('/welcome/:step', {
   action() {
     console.log('fire');
     BlazeLayout.render('onboarding', { content: 'profile_name' } );
+  }
+});
+
+FlowRouter.route('/dashboard', {
+  name: 'dashboard',
+  action() {
+    BlazeLayout.render('dashboard');
   }
 })
 
