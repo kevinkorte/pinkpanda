@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import {zxcvbn} from 'zxcvbn';
 
 import './settings.html';
 
@@ -24,8 +25,10 @@ Template.settings.helpers({
   getFacebookProfileUrl() {
     let userId = Meteor.userId();
     let user = Meteor.users.findOne(userId);
-    if ( user.services.facebook.link ) {
-      return user.services.facebook.link;
+    if ( user ) {
+      if ( user.services.facebook.link ) {
+        return user.services.facebook.link;
+      }
     }
   }
 })

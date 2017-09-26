@@ -10,6 +10,7 @@
     "jquery": "^3.2.1",
     "meteor-node-stubs": "~0.2.4",
     "popper.js": "^1.12.5",
-    "stripe": "^5.0.0"
+    "stripe": "^5.0.0",
+    "zxcvbn": "^4.4.2"
   }
 }
