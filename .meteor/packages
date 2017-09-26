@@ -23,6 +23,7 @@ service-configuration
 
 kadira:flow-router      # FlowRouter is a very simple router for Meteor
 kadira:blaze-layout     # Layout manager for blaze (works well with FlowRouter)
+arillo:flow-router-helpers
 #less@2.7.9                    # Leaner CSS language
 fourseven:scss
 meteortoys:allthings

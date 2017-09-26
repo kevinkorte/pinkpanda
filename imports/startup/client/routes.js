@@ -8,6 +8,7 @@ import '../../ui/layouts/signup.js';
 import '../../ui/layouts/onboarding.js';
 import '../../ui/layouts/dashboard.js';
 import '../../ui/pages/home/home.js';
+import '../../ui/pages/settings.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
@@ -51,6 +52,13 @@ FlowRouter.route('/dashboard', {
   name: 'dashboard',
   action() {
     BlazeLayout.render('dashboard');
+  }
+});
+
+FlowRouter.route('/settings', {
+  name: 'settings',
+  action() {
+    BlazeLayout.render('App_body', { main: 'settings' });
   }
 })
 
