@@ -9,6 +9,7 @@ import '../../ui/layouts/onboarding.js';
 import '../../ui/layouts/dashboard.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/settings.js';
+import '../../ui/pages/new-date/new-date.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
@@ -54,6 +55,13 @@ FlowRouter.route('/dashboard', {
     BlazeLayout.render('dashboard');
   }
 });
+
+FlowRouter.route('/new-date', {
+  name: 'new.date',
+  action() {
+    BlazeLayout.render('App_body', { main: 'new_date' });
+  }
+})
 
 FlowRouter.route('/settings', {
   name: 'settings',
