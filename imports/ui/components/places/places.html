@@ -1,3 +1,29 @@
 <template name="places">
-  Places
+  <input type="text" id="place" value="" style="width: 800px">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        {{#with getPlace}}
+        <div class="card my-5">
+        <div class="card-body">
+          <div class="place d-flex">
+            <img src="{{icon}}" alt="">
+            <div class="place-info">
+              <h4 class="card-title">{{name}}</h4>
+              <h6 class="card-subtitle mb-2 text-muted">{{formatted_address}}</h6>
+              <p class="card-text"><strong>Phone:</strong> {{formatted_phone_number}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/with}}
+      </div>
+      <div class="col-6">
+        <div class="card my-5">
+          <div class="card-body">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

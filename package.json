@@ -5,8 +5,12 @@
     "start": "meteor run --settings settings.json"
   },
   "dependencies": {
+    "@google/maps": "^0.4.3",
     "babel-runtime": "^6.26.0",
     "bootstrap": "^4.0.0-beta",
+    "flatpickr": "^3.0.7",
+    "geocomplete": "^1.7.0",
+    "googleapis": "^22.2.0",
     "jquery": "^3.2.1",
     "meteor-node-stubs": "~0.2.4",
     "popper.js": "^1.12.5",
