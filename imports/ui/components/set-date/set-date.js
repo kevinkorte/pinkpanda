@@ -6,19 +6,20 @@ import './set-date.html';
 import 'flatpickr/dist/flatpickr.min.css';
 
 Template.setDate.onRendered(function() {
-  let start_date = $('.start-date').flatpickr({
+  let start_date = $('.start-time').flatpickr({
     minDate: "today",
-    dateFormat: "D, M J, Y"
-  });
-  $('.start-time').flatpickr({
     enableTime: true,
-    noCalendar: true,
-    dateFormat: "h:i K"
+    dateFormat: 'D n-j-y h:i K'
   });
+  let end_date = $('.end-time').flatpickr({
+    enableTime: true,
+    minDate: Session.get('start-date')
+  })
 });
 Template.setDate.events({
-  'change .start-date'(event, selectedDates, dateStr, instance) {
+  'change .start-time'(event, selectedDates, dateStr, instance) {
     console.log(event.target.value);
+    Session.set('start-date', new Date(event.target.value));
     console.log(selectedDates);
     console.log(dateStr);
     console.log(instance);
