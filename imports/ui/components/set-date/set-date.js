@@ -6,8 +6,8 @@ import './set-date.html';
 import 'flatpickr/dist/flatpickr.min.css';
 
 Template.setDate.onCreated(function() {
-  const start
-})
+
+});
 
 Template.setDate.onRendered(function() {
   let start_date = $('.start-date').flatpickr({
