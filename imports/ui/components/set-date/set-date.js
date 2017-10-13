@@ -11,38 +11,24 @@ Template.setDate.onCreated(function() {
 
 Template.setDate.onRendered(function() {
   let start_date = $('.start-date').flatpickr({
-    minDate: "today",
+    minDate: 'today',
     altInput: true,
-    onChange: function(selectedDates, dateStr, instance) {
-      Session.set('start-date-stamp', selectedDates[0]);
-    }
-  });
-  let start_time = $('.start-time').flatpickr({
     enableTime: true,
-    noCalendar: true,
-    altInput: true,
-    // dateFormat: 'h:i K'
     onChange: function(selectedDates, dateStr, instance) {
-      let hour = selectedDates[0].getHours();
-      let min = selectedDates[0].getMinutes();
-      let date = new Date(Session.get('start-date-stamp'));
-      date.setHours(hour);
-      date.setMinutes(min);
-      console.log(date.toISOString());
-      console.log(new Date().toISOString());
-      // Meteor.call('saveDate', date.toISOString());
+      Session.set('start-date-stamp', Date.parse(selectedDates[0]));
+      // Meteor.call('set-start-timestamp', selectedDates[0]);
+      console.log(typeof Session.get('start-date-stamp'));
+      $('.end-date').flatpickr({
+        minDate: Session.get('start-date-stamp'),
+        altInput: true,
+        enableTime: true,
+      })
     }
-  });
-  let end_time = $('.end-time').flatpickr({
-    enableTime: true,
-    noCalendar: true,
-    altInput: true,
-    dateFormat: 'h:i K'
   });
   let end_date = $('.end-date').flatpickr({
-    minDate: "today",
+    minDate: 1508562000000,
     altInput: true,
-    // dateFormat: 'D n-j-y'
+    enableTime: true,
   })
 });
 Template.setDate.events({
