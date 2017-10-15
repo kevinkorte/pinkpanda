@@ -10,40 +10,20 @@ Template.setDate.onCreated(function() {
 });
 
 Template.setDate.onRendered(function() {
-  let start_date = $('.start-date').flatpickr({
+  const start_date = $('.start-date').flatpickr({
     minDate: 'today',
     altInput: true,
     enableTime: true,
     onChange: function(selectedDates, dateStr, instance) {
-      Session.set('start-date-stamp', Date.parse(selectedDates[0]));
-      // Meteor.call('set-start-timestamp', selectedDates[0]);
-      console.log(typeof Session.get('start-date-stamp'));
-      $('.end-date').flatpickr({
-        minDate: Session.get('start-date-stamp'),
-        altInput: true,
-        enableTime: true,
-      })
+      end_date.set('minDate', Date.parse(selectedDates[0]));
     }
   });
-  let end_date = $('.end-date').flatpickr({
-    minDate: 1508562000000,
+  const end_date = $('.end-date').flatpickr({
+    minDate: 'today',
     altInput: true,
     enableTime: true,
-  })
-});
-Template.setDate.events({
-  'change .start-date'(event, selectedDates, dateStr, instance) {
-    Session.set('start-date', event.target.value);
-    if ( Session.get('start-date') ) {
-      $('.end-date').flatpickr({
-        minDate: Session.get('start-date'),
-        altInput: true,
-        // dateFormat: 'D n-j-y'
-      })
+    onChange: function(selectedDates, dateStr, instance) {
+      start_date.set('maxDate', Date.parse(selectedDates[0]));
     }
-  },
-  // 'change .start-time'(event, selectedDates, dateStr, instance) {
-  //   console.log(event.target.value);
-  //   console.log(selectedDates, dateStr, instance);
-  // }
-})
+  });
+});
