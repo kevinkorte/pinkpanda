@@ -1,13 +1,24 @@
 <template name="places">
-  <input type="text" id="place" value="" style="width: 800px">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-6">
+
+
+      <div class="col-12">
+        <input type="text" id="place" value="">
         {{#with getPlace}}
-        <div class="card my-5">
+
+        <div class="card my-2">
+          <div class="card-body p-0">
+            <div class="col-3 p-0">
+              <img src="{{getPlacePhoto}}" class="p-0 rounded-left w-100" alt="{{name}}">
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="card my-1">
         <div class="card-body">
           <div class="place d-flex">
-            <img src="{{icon}}" alt="">
+            <img src="{{icon}}" alt="" width="71px" height="71px">
             <div class="place-info">
               <h4 class="card-title">{{name}}</h4>
               <h6 class="card-subtitle mb-2 text-muted">{{formatted_address}}</h6>
@@ -16,14 +27,9 @@
           </div>
         </div>
       </div>
+
       {{/with}}
+      <div id="map" style="width: 100%; height: 300px"></div>
       </div>
-      <div class="col-6">
-        <div class="card my-5">
-          <div class="card-body">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 </template>
