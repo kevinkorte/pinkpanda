@@ -1,0 +1,10 @@
+.places-photo-wrapper {
+  overflow: hidden;
+}
+.place-cover-picture {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}

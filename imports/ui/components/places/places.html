@@ -7,9 +7,22 @@
 
         <div class="card my-2">
           <div class="card-body p-0">
-            <div class="col-3 p-0">
-              <img src="{{getPlacePhoto}}" class="p-0 rounded-left w-100" alt="{{name}}">
+            <div class="row">
+              <div class="col-3 p-0 rounded-left places-photo-wrapper">
+                <img src="{{getPlacePhoto}}" class="place-cover-picture" alt="">
+              </div>
+              <div class="col-9">
+                <h4 class="card-title mt-2">{{name}}</h4>
+                <h6 class="card-subtitle my-2 text-muted">{{formatted_address}}</h6>
+                <div>
+                  <i class="fa fa-phone text-primary"></i> {{formatted_phone_number}}
+                </div>
+                <div>
+                  <i class="fa fa-globe text-primary"></i> {{website}}
+                </div>
+              </div>
             </div>
+
 
           </div>
         </div>
