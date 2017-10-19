@@ -2,7 +2,7 @@
 
 
       <div class="col-12">
-        <input type="text" id="place" value="">
+        <input type="text" id="place" class="w-100" value="">
         {{#with getPlace}}
 
         <div class="card my-2">
@@ -18,7 +18,7 @@
                   <i class="fa fa-phone text-primary"></i> {{formatted_phone_number}}
                 </div>
                 <div>
-                  <i class="fa fa-globe text-primary"></i> {{website}}
+                  <i class="fa fa-globe text-primary"></i> <a href="{{website}}">Website <i class="fa fa-external-link-square"></i></a>
                 </div>
               </div>
             </div>
