@@ -16,6 +16,7 @@ Template.setDate.onRendered(function() {
     enableTime: true,
     onChange: function(selectedDates, dateStr, instance) {
       end_date.set('minDate', Date.parse(selectedDates[0]));
+      Session.set('start_date', selectedDates[0]);
     }
   });
   const end_date = $('.end-date').flatpickr({
