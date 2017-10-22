@@ -1,11 +1,11 @@
 <template name="places">
 
-
-      <div class="col-12">
+<div class="row">
+      <div class="col-12 my-3">
         <input type="text" id="place" class="w-100" value="">
         {{#with getPlace}}
 
-        <div class="card my-2">
+        <div class="card my-2 hide-overflow">
           <div class="card-body p-0">
             <div class="row">
               <div class="col-3 p-0 rounded-left places-photo-wrapper">
@@ -22,27 +22,11 @@
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
-
-
-        <div class="card my-1">
-        <div class="card-body">
-          <div class="place d-flex">
-            <img src="{{icon}}" alt="" width="71px" height="71px">
-            <div class="place-info">
-              <h4 class="card-title">{{name}}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">{{formatted_address}}</h6>
-              <p class="card-text"><strong>Phone:</strong> {{formatted_phone_number}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {{/with}}
       <div id="map" style="width: 100%; height: 300px"></div>
       </div>
-
+</div>
 </template>
