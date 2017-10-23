@@ -15,8 +15,7 @@ Template.places.onRendered( function() {
   autocomplete.addListener('place_changed', function() {
     let place = autocomplete.getPlace();
     Session.set('place', place);
-    Session.set('place_photo', place.photos[0].getUrl({maxWidth: 640}))
-    console.log(place.photos[0].getUrl({maxWidth: 640}));
+    // Session.set('place_photo', place.photos[0].getUrl({maxWidth: 640}))
     let map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17
     });
@@ -50,6 +49,18 @@ Template.places.helpers({
       return photo;
     } else {
       return;
+    }
+  },
+  hasPhoneNumber() {
+    let place = Session.get('place');
+    if ( place.formatted_phone_number ) {
+      return true;
+    }
+  },
+  hasWebsite() {
+    let place = Session.get('place');
+    if ( place.website ) {
+      return true;
     }
   }
 })

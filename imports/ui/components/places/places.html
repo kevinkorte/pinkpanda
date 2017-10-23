@@ -3,30 +3,19 @@
 <div class="row">
       <div class="col-12 my-3">
         <input type="text" id="place" class="w-100" value="">
-        {{#with getPlace}}
-
-        <div class="card my-2 hide-overflow">
-          <div class="card-body p-0">
-            <div class="row">
-              <div class="col-3 p-0 rounded-left places-photo-wrapper">
-                <img src="{{getPlacePhoto}}" class="place-cover-picture" alt="">
-              </div>
-              <div class="col-9">
-                <h4 class="card-title mt-2">{{name}}</h4>
-                <h6 class="card-subtitle my-2 text-muted">{{formatted_address}}</h6>
-                <div>
-                  <i class="fa fa-phone text-primary"></i> {{formatted_phone_number}}
-                </div>
-                <div>
-                  <i class="fa fa-globe text-primary"></i> <a href="{{website}}">Website <i class="fa fa-external-link-square"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      {{/with}}
-      <div id="map" style="width: 100%; height: 300px"></div>
+        <div class="my-3">
+          {{#with getPlace}}
+          <h1>{{name}}</h1>
+          <h6 class="text-muted">{{formatted_address}}</h6>
+          {{#if hasPhoneNumber}}
+          <i class="fa fa-phone text-primary"></i> {{formatted_phone_number}}
+          {{/if}}
+          {{#if hasWebsite}}
+          <i class="fa fa-globe text-primary"></i> <a class="text-dark" href="{{website}}">Website</a>
+          {{/if}}
+        {{/with}}
       </div>
+      <div id="map" style="width: 100%; height: 300px"></div>
+    </div>
 </div>
 </template>
