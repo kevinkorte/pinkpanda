@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import {zxcvbn} from 'zxcvbn';
 
 import './settings.html';
+import '../components/followers/edit_followers.js';
 
 Template.settings.onRendered(function() {
   $(function () {

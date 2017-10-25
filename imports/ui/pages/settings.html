@@ -14,6 +14,28 @@
         <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-upload"></i> Update Profile Picture</button>
       </div>
     </div>
+    <ul class="nav nav-pills" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="about-me-pill" data-toggle="pill" href="#about-me" role="tab" aria-controls="pills-about-me" aria-selected="true">About Me</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="security-pill" data-toggle="pill" href="#security" role="tab" aria-controls="pills-security" aria-selected="true">Security</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Followers</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Payment</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="about-me" role="tabpanel" aria-labelledby="about-me-tab">Content 1</div>
+  <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">Content 2</div>
+
+</div>
+
+
     <div class="row pt-5">
       <div class="col-md-2">
         About Me
@@ -36,5 +58,6 @@
         </div>
       </div>
     </div>
+    {{> edit_followers }}
   </div>
 </template>
