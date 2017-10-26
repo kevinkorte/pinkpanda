@@ -26,6 +26,7 @@ Template.App_signup.events({
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
+    Accounts.createUser( { email: email, password: password } );
     Meteor.call('newUserSignup', email, password, (error, response) => {
       if ( error ) {
         //Todo: Better error handling

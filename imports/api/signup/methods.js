@@ -16,9 +16,9 @@ Meteor.methods({
     if ( !checkIfUserExists ) {
       let asyncToSync = Meteor.wrapAsync( stripe.customers.create, stripe.customers );
       resultOfStripeCreateCustomer = asyncToSync( { email: email } );
-      let userId = _createUserAccount( resultOfStripeCreateCustomer, password );
-                   _updateUserAccount( resultOfStripeCreateCustomer, userId );
-                   _subscribeToPlan( resultOfStripeCreateCustomer, userId );
+      // let userId = _createUserAccount( resultOfStripeCreateCustomer, password );
+        _updateUserAccount( resultOfStripeCreateCustomer, Meteor.userId() );
+        _subscribeToPlan( resultOfStripeCreateCustomer, Meteor.userId() );
     } else {
       throw new Meteor.Error('new-user-already-exists', "Email already exists.");
     }
@@ -43,10 +43,10 @@ Meteor.methods({
   }
 });
 
-let _createUserAccount = ( customer, password ) => {
-  let userId = Accounts.createUser( { email: customer.email, password: password } );
-  return userId;
-};
+// let _createUserAccount = ( customer, password ) => {
+//   let userId = Accounts.createUser( { email: customer.email, password: password } );
+//   return userId;
+// };
 
 let _updateUserAccount = ( customer, userId ) => {
   Meteor.users.update(userId, { $set: { stripeCustomerId: customer.id } } );
