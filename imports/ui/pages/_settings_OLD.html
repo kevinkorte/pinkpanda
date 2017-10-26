@@ -1,0 +1,73 @@
+<template name="settings_OLD">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="{{getProfilePicUrl}}" alt="">
+      </div>
+      <div class="col-md-9">
+        <h3 class="m-0">{{getProfileName}}</h3>
+        <div class="social-accounts">
+          {{#if hasFacebookProfile}}
+          <a href="{{getFacebookProfileUrl}}" target="_blank"><i class="fa fa-facebook-official fa-2x facebook-blue" data-toggle="tooltip" data-placement="bottom" title="View Your Profile"></i></a>
+          {{/if}}
+        </div>
+        <button type="button" class="btn btn-outline-secondary btn-sm"><i class="fa fa-upload"></i> Update Profile Picture</button>
+      </div>
+    </div>
+    <ul class="nav nav-pills" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="about-me-pill" data-toggle="pill" href="#about-me" role="tab" aria-controls="pills-about-me" aria-selected="true">About Me</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="security-pill" data-toggle="pill" href="#security" role="tab" aria-controls="pills-security" aria-selected="true">Security</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Followers</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Payment</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div class="tab-pane fade show active" id="about-me" role="tabpanel" aria-labelledby="about-me-tab">Content 1</div>
+  <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="security-tab">Content 2</div>
+
+</div>
+
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-target
+  </button>
+
+  <div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+
+
+    <div class="row pt-5">
+      <div class="col-md-2">
+        About Me
+      </div>
+      <div class="col-md-10">
+        <div class="form-group row">
+          <div class="col-sm-2">Email</div>
+          <div class="col-sm-10">
+            <span>ksquaredzero@gmail.com</span>
+            <span class="badge badge-pill badge-success badge-success-outline"><i class="fa fa-check"></i> Verified</span>
+            <button type="button" class="btn btn-light float-right">Update Email</button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-2">Password</div>
+          <div class="col-sm-10">
+            <input type="password" class="form-control col-sm-8" placeholder="Password">
+            <input type="password" class="form-control col-sm-8" placeholder="Password">
+          </div>
+        </div>
+      </div>
+    </div>
+    {{> edit_followers }}
+  </div>
+</template>
