@@ -11,17 +11,19 @@ import './signup.js';
 const stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
 
 Meteor.methods({
-  newUserSignup(email, password) {
+  checkIfUserExists(email, password) {
     let checkIfUserExists = Accounts.findUserByEmail( email );
     if ( !checkIfUserExists ) {
-      let asyncToSync = Meteor.wrapAsync( stripe.customers.create, stripe.customers );
-      resultOfStripeCreateCustomer = asyncToSync( { email: email } );
-      // let userId = _createUserAccount( resultOfStripeCreateCustomer, password );
-        _updateUserAccount( resultOfStripeCreateCustomer, Meteor.userId() );
-        _subscribeToPlan( resultOfStripeCreateCustomer, Meteor.userId() );
+      return;
     } else {
       throw new Meteor.Error('new-user-already-exists', "Email already exists.");
     }
+  },
+  newUserSignup(email, password) {
+      let asyncToSync = Meteor.wrapAsync( stripe.customers.create, stripe.customers );
+      resultOfStripeCreateCustomer = asyncToSync( { email: email } );
+      _updateUserAccount( resultOfStripeCreateCustomer, Meteor.userId() );
+      _subscribeToPlan( resultOfStripeCreateCustomer, Meteor.userId() );
   },
   loginWithFacebook(email) {
     Accounts.addEmail(Meteor.userId(), email, true);

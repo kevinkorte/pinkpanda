@@ -26,16 +26,22 @@ Template.App_signup.events({
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    Accounts.createUser( { email: email, password: password } );
-    Meteor.call('newUserSignup', email, password, (error, response) => {
+    Meteor.call('checkIfUserExists', email, password, (error, response) => {
       if ( error ) {
-        //Todo: Better error handling
-        console.log(error)
+        console.log( error )
       } else {
-        //Successfully logged in, go to the next route
-        FlowRouter.go( 'onboarding.step', {step: 'name'} );
+        Accounts.createUser( { email: email, password: password } );
+        Meteor.call('newUserSignup', email, password, (error, response) => {
+          if ( error ) {
+            //Todo: Better error handling
+            console.log(error)
+          } else {
+            //Successfully logged in, go to the next route
+            FlowRouter.go( 'onboarding.step', {step: 'name'} );
+          }
+        });
       }
-    })
+    });
   },
   'click .js-loginFacebook'(event) {
     console.log(event);
