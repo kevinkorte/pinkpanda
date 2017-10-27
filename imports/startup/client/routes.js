@@ -44,7 +44,6 @@ FlowRouter.route('/welcome', {
 FlowRouter.route('/welcome/:step', {
   name: 'onboarding.step',
   action() {
-    console.log('fire');
     BlazeLayout.render('onboarding', { content: 'profile_name' } );
   }
 });
