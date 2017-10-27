@@ -1,4 +1,5 @@
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { Accounts } from 'meteor/accounts-base'
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 // Import needed templates
@@ -74,3 +75,13 @@ FlowRouter.notFound = {
     BlazeLayout.render('App_body', { main: 'App_notFound' });
   },
 };
+
+Accounts.onEmailVerificationLink( function( token,done ) {
+  Accounts.verifyEmail( token, function( error ) {
+    if ( error ) {
+      Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+    } else {
+      done();
+    }
+  })
+})
