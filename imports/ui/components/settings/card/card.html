@@ -1,0 +1,9 @@
+<template name="card">
+  <div class="d-flex justify-content-between align-items-center bg-light">
+    <span>Card</span>
+    <button class="btn btn-default" data-toggle="collapse" href="#collapse-payment" aria-expanded="false" aria-controls="collapse-payment">Expand</button>
+  </div>
+  <div class="collapse bg-white" id="collapse-payment">
+    {{> paymentInfo }}
+  </div>
+</template>

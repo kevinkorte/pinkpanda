@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Subscriptions } from '../../../api/subscriptions/subscriptions.js';
+import { Subscriptions } from '../../../../api/subscriptions/subscriptions.js';
 
 import moment from 'moment';
 
-import './subscription.html';
+import './subscription_data.html';
 
 Template.subscription.helpers({
   subscription() {
