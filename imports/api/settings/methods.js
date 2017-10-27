@@ -13,5 +13,14 @@ Meteor.methods({
       Accounts.sendVerificationEmail(Meteor.userId(), email );
       Accounts.removeEmail(Meteor.userId(), userEmail );
     }
-  }
+  },
+  sendChangedPasswordEmail() {
+    console.log('email', Meteor.user().emails[0].address);
+    Email.send({
+      to: "kevinkorte15@gmail.com",
+      from: "NurseTAP <admin@nursetap.net>",
+      subject: "Your password has been changed",
+      text: "Your password on NurseTap has been changed. If you are expecting this, you can ignore this email. If you did not reset your password, get in touch with us."
+    })
+  },
 })

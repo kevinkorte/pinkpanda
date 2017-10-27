@@ -3,6 +3,19 @@ import { Template } from 'meteor/templating';
 
 import './changePassword.html';
 
+Template.changePassword.helpers({
+  passwordsDontMatch() {
+    if (Session.get('passwordsDontMatch')) {
+      return true;
+    }
+  },
+  changePasswordError() {
+    if (Session.get('changePasswordError')) {
+      return Session.get('changePasswordError');
+    }
+  }
+});
+
 Template.changePassword.events({
   'submit #update-password'(event) {
     event.preventDefault();
