@@ -6,6 +6,8 @@ import './settings.html';
 import '../components/update_login/update_login.js';
 import '../components/followers/edit_followers.js';
 import '../components/changePassword/changePassword.js';
+import '../components/payment/payment_info.js';
+import '../components/subscription/subscription.js';
 
 Template.settings.onRendered(function() {
   $(function () {

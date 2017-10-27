@@ -36,9 +36,20 @@
               <button class="btn btn-default" data-toggle="collapse" href="#collapse-payment" aria-expanded="false" aria-controls="collapse-payment">Expand</button>
             </div>
             <div class="collapse bg-white" id="collapse-payment">
-              Payment Info
+              {{> paymentInfo }}
             </div>
           </li>
+          <div class="list-group-item">
+            <div class="d-flex justify-content-between align-items-center bg-light">
+              <span>Subscription
+              <span class="badge badge-pill badge-warning"><i class="fa fa-smile-o"></i> Trialing</span>
+              </span>
+              <button class="btn btn-default" data-toggle="collapse" href="#collapse-subscription" aria-expanded="false" aria-controls="collapse-subscription">Expand</button>
+            </div>
+            <div class="collapse bg-white" id="collapse-subscription">
+              {{> subscription }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
