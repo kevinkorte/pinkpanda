@@ -4,9 +4,9 @@ import {zxcvbn} from 'zxcvbn';
 
 import './settings.html';
 import '../components/settings/nav/tabs.js';
-import '../components/update_login/update_login.js';
+import '../components/settings/account/userEmail.js';
+import '../components/settings/password/password.js';
 import '../components/followers/edit_followers.js';
-import '../components/changePassword/changePassword.js';
 import '../components/payment/payment_info.js';
 import '../components/subscription/subscription.js';
 
@@ -35,24 +35,6 @@ Template.settings.helpers({
     if ( user ) {
       if ( user.services.facebook.link ) {
         return user.services.facebook.link;
-      }
-    }
-  },
-  getPrimaryUserEmail() {
-    let userId = Meteor.userId();
-    let user = Meteor.users.findOne(userId);
-    if ( user ) {
-      if ( user.emails[0].address ) {
-        return user.emails[0].address;
-      }
-    }
-  },
-  userEmailIsVerified() {
-    let userId = Meteor.userId();
-    let user = Meteor.users.findOne(userId);
-    if ( user ) {
-      if ( user.emails[0].verified ) {
-        return true;
       }
     }
   }
