@@ -2,6 +2,7 @@
 
 import './fixtures.js';
 import './register-api.js';
+import './smtp.js';
 
 ServiceConfiguration.configurations.upsert(
   { service: 'facebook' },
