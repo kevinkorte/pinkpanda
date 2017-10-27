@@ -4,6 +4,7 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
+import '../../ui/layouts/dashboard/settings.js';
 import '../../ui/layouts/login.js';
 import '../../ui/layouts/signup.js';
 import '../../ui/layouts/onboarding.js';
@@ -66,7 +67,7 @@ FlowRouter.route('/new-date', {
 FlowRouter.route('/settings', {
   name: 'settings',
   action() {
-    BlazeLayout.render('App_body', { main: 'settings' });
+    BlazeLayout.render('App_settings', { main: 'settings' });
   }
 })
 
