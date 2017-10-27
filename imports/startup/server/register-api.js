@@ -6,3 +6,5 @@ import '../../api/links/server/publications.js';
 import '../../api/signup/methods.js';
 
 import '../../api/subscriptions/methods.js';
+
+import '../../api/settings/methods.js';

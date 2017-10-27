@@ -33,5 +33,35 @@ Template.settings.helpers({
         return user.services.facebook.link;
       }
     }
+  },
+  getPrimaryUserEmail() {
+    let userId = Meteor.userId();
+    let user = Meteor.users.findOne(userId);
+    if ( user ) {
+      if ( user.emails[0].address ) {
+        return user.emails[0].address;
+      }
+    }
+  },
+  userEmailIsVerified() {
+    let userId = Meteor.userId();
+    let user = Meteor.users.findOne(userId);
+    if ( user ) {
+      if ( user.emails[0].verified ) {
+        return true;
+      }
+    }
+  }
+});
+
+Template.settings.events({
+  'click #send-verification-email'(event) {
+    Meteor.call('send_verification_email', (error, response) => {
+      if ( error ) {
+        console.log(error);
+      } else {
+        Bert.alert( 'Verification email sent, check your email.', 'success', 'fixed-top', 'fa-check');
+      }
+    })
   }
 })

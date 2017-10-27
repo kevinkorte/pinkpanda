@@ -6,8 +6,12 @@
           <li class="list-group-item">
             <div class="d-flex justify-content-between align-items-center bg-light">
             <span>
-              <span>ksquaredzero@gmail.com</span>
+              <span>{{getPrimaryUserEmail}}</span>
+              {{#if userEmailIsVerified}}
               <span class="badge badge-pill badge-success badge-success-outline"><i class="fa fa-check"></i> Verified</span>
+              {{else}}
+              <button id="send-verification-email" class="btn btn-warning btn-sm">Send Verification Email</button>
+              {{/if}}
             </span>
             <button class="btn btn-default" data-toggle="collapse" href="#collapse-my-settings" aria-expanded="false" aria-controls="collapse-my-settings">Expand</button>
             </div>
