@@ -1,1 +1,12 @@
-<template name="subscription">Sub</template>
+<template name="subscription">
+  {{#with subscription}}
+  <div class="d-flex justify-content-between">
+    <div class="d-inline-block">
+      <strong>Renews: </strong>{{subscriptionRenewDate resultOfStripeCreateCustomer.current_period_end}}
+    </div>
+    <div class="d-inline-block">
+      {{subscriptionAmount resultOfStripeCreateCustomer.items}}
+    </div>
+  </div>
+  {{/with}}
+</template>

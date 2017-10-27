@@ -10,6 +10,7 @@ import '../components/payment/payment_info.js';
 import '../components/subscription/subscription.js';
 
 Template.settings.onRendered(function() {
+  Meteor.subscribe('subs.all');
   $(function () {
     $('[data-toggle="tooltip"]').tooltip()
   })
