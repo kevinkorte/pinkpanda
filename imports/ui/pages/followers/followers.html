@@ -1,0 +1,60 @@
+<template name="manageFollowers">
+  <div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Add New Follower</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Add a phone number, an email, or both!</h6>
+    <form class="js-create-new-follower">
+      <div class="form-group row {{hasDanger}}">
+        <label for="name" class="col-sm-4 col-form-label">Name</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" name="name" id="name" placeholder="Person's Name">
+          {{#if nameRequired}}
+            <div class="form-control-feedback">{{nameRequired}}</div>
+          {{else}}
+            <p class="form-text text-muted">A name is required</p>
+          {{/if}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="phoneNumber" class="col-sm-4 col-form-label">Phone Number</label>
+        <div class="col-sm-6">
+          <input type="tel" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Phone Number">
+          <p class="form-text text-muted">Please enter a 10 digit phone number.</p>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="emailAddress" class="col-sm-4 col-form-label">Email Address</label>
+        <div class="col-sm-6">
+          <input type="email" class="form-control" name="emailAddress" id="emailAddress" placeholder="Email">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-purple btn-block">Create New Follower</button>
+
+    </form>
+  </div>
+</div>
+<div class="card mt-3">
+  <div class="card-header">
+    Followers
+  </div>
+  {{#if Template.subscriptionsReady}}
+    <ul class="list-group list-group-flush">
+      {{#each follower}}
+      <li class="list-group-item d-flex justify-content-between">
+        <div class="follower">
+          {{name}}
+          {{{hasPhone _id}}}
+          {{{hasEmail _id}}}
+        </div>
+        <div class="follower-action-btns">
+          <button class="editFollower ui button" data-id="{{_id}}" data-toggle="modal" data-target="#editModal">Edit</button>
+          <button class="removeFollower ui button">Delete</button>
+        </div>
+      </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div class="ui active centered inline loader my-5"></div>
+  {{/if}}
+</div>
+</template>

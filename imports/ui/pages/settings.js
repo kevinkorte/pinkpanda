@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import {zxcvbn} from 'zxcvbn';
 
 import './settings.html';
+import './followers/followers.js';
 import '../components/settings/nav/tabs.js';
 import '../components/settings/account/userEmail.js';
 import '../components/settings/password/password.js';

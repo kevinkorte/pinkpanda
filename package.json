@@ -12,6 +12,7 @@
     "geocomplete": "^1.7.0",
     "googleapis": "^22.2.0",
     "jquery": "^3.2.1",
+    "jquery-mask-plugin": "^1.14.12",
     "meteor-node-stubs": "~0.2.4",
     "moment": "^2.19.1",
     "popper.js": "^1.12.5",
