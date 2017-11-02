@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
+import { Followers } from '../../../api/followers/followers.js';
 
 import './followers.html';
 
@@ -34,5 +36,64 @@ Template.manageFollowers.events({
         }
       });
     }
-  }
+  },'click .editFollower'(event) {
+    event.preventDefault();
+    let followerId = $(event.target).data('id');
+    let follower = Followers.findOne(followerId);
+    if (follower) {
+      Session.set('follower', follower);
+      Tracker.afterFlush(() => { $('#editPhoneNumber').trigger('input') })
+    }
+  },
+  'click .close-edit-modal'(event) {
+    Session.set('follower', null);
+    // $('#editPhoneNumber').unbind('trigger');
+  },
+});
+
+Template.manageFollowers.helpers({
+  hasPhone(id) {
+    let follower = Followers.findOne(id);
+    if (follower) {
+      if (follower.phoneNumber) {
+        return '<i class="fa fa-phone"></i>';
+      }
+    }
+  },
+  hasEmail(id) {
+    let follower = Followers.findOne(id);
+    if (follower) {
+      if (follower.email) {
+        return '<i class="fa fa-envelope"></i>';
+      }
+    }
+  },
+  editFollowerName() {
+    let follower = Session.get('follower');
+    if (follower) {
+      return follower.name;
+    }
+  },
+  editFollowerPhone() {
+    let follower = Session.get('follower');
+    if (follower) {
+      return follower.phoneNumber;
+    }
+  },
+  editFollowerEmail() {
+    let follower = Session.get('follower');
+    if (follower) {
+      return follower.email;
+    }
+  },
+  hasDanger() {
+    if (Session.get('nameRequired')) {
+      return 'has-danger';
+    }
+  },
+  nameRequired() {
+    if (Session.get('nameRequired')) {
+      return Session.get('nameRequired');
+    }
+  },
 })

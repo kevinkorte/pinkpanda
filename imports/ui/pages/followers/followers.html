@@ -47,14 +47,63 @@
           {{{hasEmail _id}}}
         </div>
         <div class="follower-action-btns">
-          <button class="editFollower ui button" data-id="{{_id}}" data-toggle="modal" data-target="#editModal">Edit</button>
-          <button class="removeFollower ui button">Delete</button>
+          <button class="editFollower btn btn-dark" data-id="{{_id}}" data-toggle="modal" data-target="#editModal">Edit</button>
+          <button class="removeFollower btn btn-outline-danger border-0">Delete</button>
         </div>
       </li>
       {{/each}}
     </ul>
   {{else}}
-    <div class="ui active centered inline loader my-5"></div>
+    <div class="ui active centered inline loader my-5">Loading...</div>
   {{/if}}
+</div>
+
+
+<div class="modal fade" id="editModal">
+  <form class="js-update-new-follower">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+
+          <div class="form-group row {{hasDanger}}">
+            <label for="name" class="col-sm-4 col-form-label">Name</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" value="{{editFollowerName}}" name="name" id="name" placeholder="Person's Name">
+              {{#if nameRequired}}
+                <div class="form-control-feedback">{{nameRequired}}</div>
+              {{else}}
+              {{/if}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="editPhoneNumber" class="col-sm-4 col-form-label">Phone Number</label>
+            <div class="col-sm-8">
+              <input type="tel" class="form-control" value="{{editFollowerPhone}}" name="editPhoneNumber" id="editPhoneNumber" placeholder="Phone Number">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="emailAddress" class="col-sm-4 col-form-label">Email Address</label>
+            <div class="col-sm-8">
+              <input type="email" class="form-control" value="{{editFollowerEmail}}" name="emailAddress" id="emailAddress" placeholder="Email">
+            </div>
+          </div>
+          <input type="hidden" name="id" value="">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-purple">Update Contact Person</button>
+        <button type="button" class="btn btn-secondary close-edit-modal" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </form>
 </div>
 </template>

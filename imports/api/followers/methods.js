@@ -21,6 +21,12 @@ Meteor.methods({
       name: name,
       phoneNumber: phoneNumber,
       email: email,
+    }, function(err,res) {
+      if (err) {
+        console.log(err)
+      } else {
+        console.log(res)
+      }
     });
   },
 })
