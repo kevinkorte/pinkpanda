@@ -37,3 +37,4 @@ johanbrook:publication-collector  # Test a Meteor publication by collecting its 
 natestrauser:select2
 themeteorchef:bert
 email
+aldeed:collection2-core

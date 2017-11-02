@@ -18,7 +18,9 @@
     "popper.js": "^1.12.5",
     "select2": "^4.0.4",
     "simpl-schema": "^0.3.2",
+    "simple-schema": "^1.1.0",
     "stripe": "^5.0.0",
+    "twilio": "^3.9.1",
     "zxcvbn": "^4.4.2"
   }
 }
