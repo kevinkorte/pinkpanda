@@ -7,6 +7,10 @@ import './followers.html';
 
 import 'jquery-mask-plugin';
 
+Template.manageFollowers.onCreated(function () {
+  Meteor.subscribe('followers.all');
+});
+
 Template.manageFollowers.onRendered(function() {
   $('#phoneNumber').mask('(000) 000-0000', {
     placeholder: "(   )   -    "
@@ -52,6 +56,10 @@ Template.manageFollowers.events({
 });
 
 Template.manageFollowers.helpers({
+  follower() {
+    console.log(Followers.find());
+    return Followers.find();
+  },
   hasPhone(id) {
     let follower = Followers.findOne(id);
     if (follower) {
