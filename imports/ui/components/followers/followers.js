@@ -4,7 +4,18 @@ import { Followers } from '../../../api/followers/followers.js';
 
 import './followers.html';
 
+Template.followers.onCreated(function () {
+  Meteor.subscribe('followers.all');
+});
 
-Template.manageFollowers.onRendered(function() {
-  $('#select').select2({});
+Template.followers.onRendered(function() {
+  $('#select').select2({
+    'multiple': true
+  });
+});
+
+Template.followers.helpers({
+  follower() {
+    return Followers.find();
+  },
 })

@@ -57,7 +57,6 @@ Template.manageFollowers.events({
 
 Template.manageFollowers.helpers({
   follower() {
-    console.log(Followers.find());
     return Followers.find();
   },
   hasPhone(id) {
