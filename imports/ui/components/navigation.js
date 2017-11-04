@@ -28,4 +28,17 @@ Template.dashboard_navigation.helpers({
   //     }
   //   }
   // }
-})
+});
+
+Template.dashboard_navigation.events({
+  'click .js-new-date'(event) {
+    Meteor.call('createNewDate', (error, result) => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log(result);
+        FlowRouter.go('new.date', {user: Meteor.userId(), id: result});
+      }
+    });
+  }
+});

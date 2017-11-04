@@ -57,7 +57,7 @@ FlowRouter.route('/dashboard', {
   }
 });
 
-FlowRouter.route('/new-date', {
+FlowRouter.route('/date/:user/:id', {
   name: 'new.date',
   action() {
     BlazeLayout.render('App_body', { main: 'new_date' });

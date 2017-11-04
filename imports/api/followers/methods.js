@@ -29,9 +29,8 @@ Meteor.methods({
       }
     });
   },
-  addFollowers: function(followers, eventId) {
+  addFollowers: function(followers) {
     check(followers, [String]);
-    check(eventId, String)
     followers.forEach(function(followerId) {
       let follower = Followers.findOne(followerId);
       let viewing = Viewings.findOne(eventId);
