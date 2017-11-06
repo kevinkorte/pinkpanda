@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Followers } from './followers.js';
+import { Dates} from '../dates/dates.js';
 
 import twilio from 'twilio';
 
@@ -29,13 +30,13 @@ Meteor.methods({
       }
     });
   },
-  addFollowers: function(followers) {
+  addFollowers: function(followers, eventId) {
     check(followers, [String]);
     followers.forEach(function(followerId) {
       let follower = Followers.findOne(followerId);
-      let viewing = Viewings.findOne(eventId);
+      let viewing = Dates.findOne(eventId);
       if (follower) {
-        Viewings.update(eventId, {$addToSet: {
+        Dates.update(eventId, {$addToSet: {
           followers: {
             id: follower._id,
             name: follower.name,

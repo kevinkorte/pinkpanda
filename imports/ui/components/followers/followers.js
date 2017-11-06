@@ -24,7 +24,6 @@ Template.followers.events({
   'submit .add-followers'(event) {
     event.preventDefault();
     let followers = $('.edit-followers-input').val();
-    // followers.forEach(function(el) {console.log(el)});
     let eventId = FlowRouter.getParam('id');
     Meteor.call('addFollowers', followers, eventId, function(error, result) {
       if (error) {
