@@ -53,6 +53,29 @@ Template.manageFollowers.events({
     Session.set('follower', null);
     // $('#editPhoneNumber').unbind('trigger');
   },
+  'submit .js-update-new-follower'(event) {
+      event.preventDefault();
+      const target = event.target;
+      const phone = target.editPhoneNumber.value;
+      const email = target.emailAddress.value;
+      const name = target.name.value;
+      const phoneCleaned = phone.replace(/[()-\s]/g, '');
+      let session = Session.get('follower');
+      if(!name) {
+        Session.set('nameRequired', 'Don\'t forget a name is required!');
+      } else {
+        Session.set('nameRequired', null);
+        Meteor.call('updateFollower', session._id, phoneCleaned, email, name, function(error, result) {
+          if (error) {
+            Bert.alert(error.reason, 'danger', 'fixed-top', 'fa-frown-o');
+          } else {
+            $('#editModal').modal('hide');
+            Bert.alert('Cool, successfully added!', 'success', 'fixed-top', 'fa-check');
+            $('.js-update-new-follower')[0].reset();
+          }
+        });
+      }
+    }
 });
 
 Template.manageFollowers.helpers({

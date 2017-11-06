@@ -77,5 +77,21 @@ Meteor.methods({
       }
     });
     // Viewings.update(eventId, {$set: {followers.id: followers}})
-  }
+  },
+  updateFollower: function(id, phoneNumber, email, name) {
+    check(name, String);
+    check(id, String);
+    if(phoneNumber) {
+      check(phoneNumber, String);
+    }
+    if(email) {
+      check(email, String)
+    }
+    Followers.update({_id: id}, {$set: {
+      name: name,
+      phoneNumber: phoneNumber,
+      email: email,
+    }});
+
+  },
 })

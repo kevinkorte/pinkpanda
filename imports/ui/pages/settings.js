@@ -10,6 +10,7 @@ import '../components/settings/password/password.js';
 import '../components/settings/card/card.js';
 import '../components/settings/subscription/subscription.js';
 import '../components/followers/edit_followers.js';
+import '../components/payment/payment.js';
 
 Template.settings.onRendered(function() {
   Meteor.subscribe('subs.all');
