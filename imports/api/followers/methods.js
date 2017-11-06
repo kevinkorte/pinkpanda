@@ -5,9 +5,9 @@ import { Dates} from '../dates/dates.js';
 
 import twilio from 'twilio';
 
-// let accountSid = Meteor.settings.private.twilio.accountsid;
-// let authToken = Meteor.settings.private.twilio.authToken;
-// let client = new twilio(accountSid, authToken);
+let accountSid = Meteor.settings.private.twilio.accountsid;
+let authToken = Meteor.settings.private.twilio.authToken;
+let client = new twilio(accountSid, authToken);
 
 Meteor.methods({
   'addFollower'(phoneNumber, email, name) {
