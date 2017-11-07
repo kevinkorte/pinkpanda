@@ -1,6 +1,19 @@
 <template name="dashboard">
   {{> dashboard_navigation }}
-  {{#each dates}}
-  {{_id}}
-  {{/each}}
+  <div class="container-fluid pt-5">
+    <div class="card-deck">
+      {{#each dates}}
+      <div class="col-4">
+        <div class="card">
+          <img class="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{lng}}&zoom=14&size=290x160&scale=2&maptype=roadmap&markers=size:mid%7Ccolor:red%7C{{lat}},{{lng}}&key=AIzaSyDopWicZjc_ohjfNM8ol6OUDV3ut8FqKjk" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title">{{placeName}}</h4>
+            <p class="card-text">{{formatted_address}}</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
 </template>

@@ -17,6 +17,14 @@ const DatingSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  placeName: {
+    type: String,
+    optional: true
+  },
+  formatted_address: {
+    type: String,
+    optional: true
+  },
   lat: {
     type: String,
     optional: true

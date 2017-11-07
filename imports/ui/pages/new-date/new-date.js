@@ -15,6 +15,8 @@ Template.new_date.events({
     const start = target.startDate.value;
     const end = target.endDate.value;
     const place = target.place.value;
+    const placeName = target.placeName.value;
+    const formatted_address = target.formatted_address.value;
     const lat = target.lat.value;
     const lng = target.lng.value;
     const dateName = target.dateName.value;
@@ -25,6 +27,8 @@ Template.new_date.events({
       start,
       end,
       place,
+      placeName,
+      formatted_address,
       lat,
       lng,
       dateName,
