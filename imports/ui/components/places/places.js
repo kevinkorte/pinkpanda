@@ -22,6 +22,8 @@ Template.places.onRendered( function() {
     let geocoder = new google.maps.Geocoder();
     geocoder.geocode( { 'address': place.formatted_address}, function( results, status) {
       if (status == 'OK') {
+        $('#lat').val(results[0].geometry.location.lat());
+        $('#lng').val(results[0].geometry.location.lng());
         map.setCenter(results[0].geometry.location);
         var marker = new google.maps.Marker({
           map: map,
