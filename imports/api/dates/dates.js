@@ -13,6 +13,26 @@ const DatingSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
+  place: {
+    type: String,
+    optional: true
+  },
+  lat: {
+    type: String,
+    optional: true
+  },
+  lng: {
+    type: String,
+    optional: true
+  },
+  dateName: {
+    type: String,
+    optional: true
+  },
+  dateURL: {
+    type: String,
+    optional: true
+  },
   followers: {
     type: Array,
     optional: true
