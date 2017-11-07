@@ -19,6 +19,7 @@ Template.new_date.events({
     const lng = target.lng.value;
     const dateName = target.dateName.value;
     const dateURL = target.dateURL.value;
+    const followers = $('.edit-followers-input').val();
     Meteor.call('updateDate',
       id,
       start,
@@ -29,9 +30,14 @@ Template.new_date.events({
       dateName,
       dateURL,
     (error, result) => {
-      if (error) {
+      if ( error ) {
+        Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
+      }
+    });
+    Meteor.call('addFollowers', followers, id, (error, result) => {
+      if ( error ) {
         Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
       }
     });
   }
-})
+});
