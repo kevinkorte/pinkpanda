@@ -7,9 +7,21 @@
         <div class="card">
           <img class="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{lng}}&zoom=14&size=290x160&scale=2&maptype=roadmap&markers=size:mid%7Ccolor:red%7C{{lat}},{{lng}}&key=AIzaSyDopWicZjc_ohjfNM8ol6OUDV3ut8FqKjk" alt="Card image cap">
           <div class="card-body">
+            <div class="card-text">
+              <div class="time-block d-flex justify-content-between align-items-end">
+                <span class="time-block-start">
+                  {{getStartHour starting}}
+                </span>
+                <span class="time-block-day">
+                  {{{getStartDay starting}}}
+                </span>
+                <span class="time-block-end">
+                  {{getEndHour ending}}
+                </span>
+              </div>
+            </div>
             <h4 class="card-title">{{placeName}}</h4>
             <p class="card-text">{{formatted_address}}</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
         </div>
       </div>
