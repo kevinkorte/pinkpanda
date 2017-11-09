@@ -1,0 +1,14 @@
+.dashboard-card {
+  flex: 0 0 auto !important;
+  margin-bottom: 30px;
+}
+@media screen and ( max-width: 1200px ) {
+  .dashboard-card {
+    width: calc(33% - 30px);
+  }
+}
+@media screen and ( max-width: 992px ) {
+  .dashboard-card {
+    width: 25%;
+  }
+}
