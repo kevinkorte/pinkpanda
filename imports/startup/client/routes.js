@@ -62,7 +62,14 @@ FlowRouter.route('/date/:user/:id', {
   action() {
     BlazeLayout.render('App_body', { main: 'new_date' });
   }
-})
+});
+
+FlowRouter.route('/:user/:id', {
+  name: 'single.date',
+  action() {
+    BlazeLayout.render('App_body', { main: 'new_date' });
+  }
+});
 
 FlowRouter.route('/settings', {
   name: 'settings',

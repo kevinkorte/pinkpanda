@@ -20,15 +20,24 @@ Template.dashboard.helpers({
     let dates = Dates.find()
     return dates;
   },
-  getStartHour(timestamp) {
-    return moment(timestamp).format('ha');
+  getUserName(id) {
+    let user = Meteor.users.findOne(id);
+    if ( user ) {
+      return user.emails[0].address;
+    }
   },
-  getStartDay(timestamp) {
-    let month = moment(timestamp).format('MMM');
-    let day = moment(timestamp).format('D');
-    return '<small>'+month+'</small><span class="font-weight-bold">'+day+'</span>';
+  cardDate(timestamp) {
+    return moment(timestamp).format('MMM Do h:mm a');
   },
-  getEndHour(timestamp) {
-    return moment(timestamp).format('ha');
-  }
+  getNumOfFollowers(id) {
+    let dates = Dates.findOne(id);
+    if (dates) {
+      if (dates.followers) {
+        let num = Object.keys(dates.followers).length;
+        return num;
+      } else {
+        return 0;
+      }
+    }
+  },
 })

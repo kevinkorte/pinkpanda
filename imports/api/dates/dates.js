@@ -5,6 +5,12 @@ import SimpleSchema from 'simpl-schema';
 export const Dates = new Mongo.Collection('dates');
 
 const DatingSchema = new SimpleSchema({
+  user: {
+    type: String,
+    autoValue: function() {
+      return Meteor.userId();
+    }
+  },
   starting: {
     type: Date,
     optional: true
