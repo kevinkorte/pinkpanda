@@ -12,6 +12,8 @@ import '../../ui/layouts/dashboard.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/settings.js';
 import '../../ui/pages/new-date/new-date.js';
+import '../../ui/pages/date_can_edit/date_can_edit.js';
+import '../../ui/pages/date_public/date_public.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
@@ -57,6 +59,13 @@ FlowRouter.route('/dashboard', {
   }
 });
 
+FlowRouter.route('/dashboard/me', {
+  name: 'dashboard.me',
+  action() {
+    BlazeLayout.render('dashboard');
+  }
+});
+
 FlowRouter.route('/date/:user/:id', {
   name: 'new.date',
   action() {
@@ -66,8 +75,13 @@ FlowRouter.route('/date/:user/:id', {
 
 FlowRouter.route('/:user/:id', {
   name: 'single.date',
-  action() {
-    BlazeLayout.render('App_body', { main: 'new_date' });
+  triggersEnter: function(context, params) {
+    let user = FlowRouter.current().params.user;
+    if ( Meteor.userId() == user ) {
+      BlazeLayout.render('App_body', { main: 'date_can_edit' });
+    } else {
+      BlazeLayout.render('App_body', { main: 'date_public' });
+    }
   }
 });
 
