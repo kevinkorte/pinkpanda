@@ -2,6 +2,9 @@
   flex: 0 0 auto !important;
   margin-bottom: 30px;
 }
+.edit-card {
+  position: fixed;
+}
 @media screen and ( max-width: 1200px ) {
   .dashboard-card {
     width: calc(33% - 30px);
@@ -9,6 +12,12 @@
 }
 @media screen and ( max-width: 992px ) {
   .dashboard-card {
-    width: 25%;
+    width: calc(50% - 30px);
+  }
+}
+
+@media screen and ( max-width: 576px ) {
+  .dashboard-card {
+    width: calc(100% - 30px);
   }
 }

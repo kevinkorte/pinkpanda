@@ -1,17 +1,12 @@
 <template name="date_can_edit">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-6">
-        <div id="map" style="height: 500px"></div>
+      <div class="col-12">
+        <div id="map" style="height: calc(100vh - 62px)"></div>
       </div>
-      <div class="col-6">
-        {{#with date}}
-          {{> setDate }}
-          {{> places }}
-          {{> plusOne }}
-          {{> followers }}
-        {{/with}}
-      </div>
+    </div>
+    <div class="col-6 edit-card">
+      content
     </div>
   </div>
 </template>
