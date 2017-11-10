@@ -2,8 +2,8 @@
   flex: 0 0 auto !important;
   margin-bottom: 30px;
 }
-.edit-card {
-  position: fixed;
+.card-active {
+  box-shadow: 0px 0px 0px 2px #5ad428;
 }
 @media screen and ( max-width: 1200px ) {
   .dashboard-card {
