@@ -29,5 +29,33 @@ Meteor.methods({
         dateURL: dateURL
       }
     });
+  },
+  'autoEndDate'(id) {
+    Dates.update(id, { $set: { expired: true, alertSent: true } }, function(error, response) {
+      if ( error ) {
+        console.log(error);
+      } else {
+        Notifications.insert({
+          dateId: id,
+          timestamp: new Date().getTime(),
+          eventType: 'auto-end'
+        }, function(error, response) {
+          if ( error ) {
+            console.log(error)
+          } else {
+            let date = Dates.findOne(id);
+            if ( date ) {
+              SSR.compileTemplate('auto-end-message', Assets.getText('auto-end-text.html'));
+              let t_user = Meteor.users.findOne(date.user);
+              let data = {
+                userName: t_user.profile.name,
+                address: date.address,
+                endTime: moment(date.ending).format('h:mm a')
+              };
+            }
+          }
+        })
+      }
+    })
   }
 });

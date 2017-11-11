@@ -26,8 +26,11 @@ Template.dashboard.helpers({
       return user.emails[0].address;
     }
   },
-  cardDate(timestamp) {
-    return moment(timestamp).format('MMM Do h:mm a');
+  dateDay(timestamp) {
+    return moment(timestamp).format('ddd MMM, Do')
+  },
+  dateTime(timestamp) {
+    return moment(timestamp).format('h:mm a');
   },
   getNumOfFollowers(id) {
     let dates = Dates.findOne(id);
@@ -40,4 +43,12 @@ Template.dashboard.helpers({
       }
     }
   },
+  isActive(id) {
+    let dates = Dates.findOne(id);
+    if (dates) {
+      if (dates.active == true) {
+        return 'card-active'
+      }
+    }
+  }
 })
