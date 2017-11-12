@@ -58,7 +58,7 @@ Meteor.methods({
                 userName: t_user.profile.name,
                 address: date.address
               };
-              dates.followers.forEach(function(follower) {
+              date.followers.forEach(function(follower) {
                 if ( follower.phoneNumber ) {
                   client.messages.create({
                     body: SSR.render('auto-start-message', data),
