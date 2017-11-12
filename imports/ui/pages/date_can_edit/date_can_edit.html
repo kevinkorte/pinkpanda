@@ -1,15 +1,17 @@
 <template name="date_can_edit">
+  {{#with date}}
   <div class="container-fluid">
     <div class="row">
-      <div class="col-6 fixed-map">
-        <div id="map" style="height: calc(100vh - 62px)"></div>
+      <div class="col-12">
+        <h1>{{placeName}}</h1> <button class="btn btn-primary">Edit</button>
       </div>
-      <div class="col-6 editable-date">
-        {{> setDate }}
-        {{> places }}
-        {{> plusOne }}
-        {{> followers }}
+    </div>
+    <div class="row">
+      <div class="col-7" style="height: 500px">
+        <!-- <div id="map" style="height: 100px; background: red"></div> -->
+        {{> googleMap name="locationMap" options=locationMapOptions}}
       </div>
     </div>
   </div>
+  {{/with}}
 </template>

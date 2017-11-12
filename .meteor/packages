@@ -33,7 +33,7 @@ practicalmeteor:mocha             # A package for writing and running your meteo
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
 
 #jeremy:geocomplete
-#dburles:google-maps
+dburles:google-maps
 natestrauser:select2
 themeteorchef:bert
 email

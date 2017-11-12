@@ -78,7 +78,7 @@ FlowRouter.route('/:user/:id', {
   triggersEnter: function(context, params) {
     let user = FlowRouter.current().params.user;
     if ( Meteor.userId() == user ) {
-      BlazeLayout.render('App_body', { main: 'new_date' });
+      BlazeLayout.render('App_body', { main: 'date_can_edit' });
     } else {
       BlazeLayout.render('App_body', { main: 'date_public' });
     }
