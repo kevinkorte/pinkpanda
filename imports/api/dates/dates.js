@@ -8,7 +8,9 @@ const DatingSchema = new SimpleSchema({
   user: {
     type: String,
     autoValue: function() {
-      return Meteor.userId();
+      if (this.isInsert) {
+        return Meteor.userId();
+      }
     }
   },
   starting: {
@@ -50,6 +52,34 @@ const DatingSchema = new SimpleSchema({
   followers: {
     type: Array,
     optional: true
+  },
+  expired: {
+    type: Boolean,
+    autoValue: function() {
+      if (this.isInsert) {
+        return false;
+      }
+    }
+  },
+  active: {
+    type: Boolean,
+    autoValue: function() {
+      if (this.isInsert) {
+        return false;
+      }
+    }
+  },
+  activeAt: {
+    type: Date,
+    optional: true
+  },
+  alertsSent: {
+    type: Boolean,
+    autoValue: function() {
+      if (this.isInsert) {
+        return false
+      }
+    }
   },
   "followers.$": {
     type: Object
