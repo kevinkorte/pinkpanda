@@ -17,7 +17,7 @@ Template.dashboard.onCreated(function() {
 
 Template.dashboard.helpers({
   dates() {
-    let dates = Dates.find()
+    let dates = Dates.find({}, {sort: {starting: 1}});
     return dates;
   },
   getUserName(id) {
