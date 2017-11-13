@@ -44,8 +44,8 @@ Meteor.methods({
       } else {
         Notifications.insert({
           dateId: id,
-          timestamp: new Date().getTime(),
-          eventType: 'auto-start'
+          timestamp: new Date().toISOString(),
+          notificationType: 'auto-start'
         }, function(error, response) {
           if ( error ) {
             console.log(error);
@@ -83,8 +83,8 @@ Meteor.methods({
       } else {
         Notifications.insert({
           dateId: id,
-          timestamp: new Date().getTime(),
-          eventType: 'auto-end'
+          timestamp: new Date().toISOString(),
+          notificationType: 'auto-end'
         }, function(error, response) {
           if ( error ) {
             console.log(error)

@@ -20,9 +20,9 @@ const NotificationsSchema = new SimpleSchema({
     optional: true
   },
   timestamp: {
-    type: Number,
+    type: Date
   },
-  eventType: {
+  notificationType: {
     type: String
   }
 });
