@@ -10,6 +10,9 @@ import '../../api/dates/methods.js';
 import '../../api/followers/methods.js';
 import '../../api/followers/server/publications.js';
 
+import '../../api/notifications/methods.js';
+import '../../api/notifications/server/publications.js'
+
 import '../../api/signup/methods.js';
 
 import '../../api/subscriptions/methods.js';

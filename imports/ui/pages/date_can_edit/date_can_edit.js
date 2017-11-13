@@ -3,11 +3,13 @@ import { Template } from 'meteor/templating';
 import { Dates } from '../../../api/dates/dates.js';
 
 import './date_can_edit.html';
+import '../../components/notifications/notifications.js';
 
 Template.date_can_edit.onCreated(function() {
   let self = this;
   self.autorun(function() {
     self.subscribe('dates.single', FlowRouter.getParam('id') );
+
     GoogleMaps.ready('locationMap', function(map) {
       let marker = new google.maps.Marker({
         position: map.options.center,
@@ -35,11 +37,6 @@ Template.date_can_edit.onRendered(function() {
     }
   });
 });
-
-Template.date_can_edit.onDestroyed(function() {
-  Session.set('lat', null);
-  Session.set('lng', null);
-})
 
 Template.date_can_edit.helpers({
   date() {
