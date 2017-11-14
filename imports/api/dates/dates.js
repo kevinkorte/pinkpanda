@@ -41,6 +41,14 @@ const DatingSchema = new SimpleSchema({
     type: String,
     optional: true
   },
+  phone: {
+    type: String,
+    optional: true
+  },
+  website: {
+    type: String,
+    optional: true
+  },
   dateName: {
     type: String,
     optional: true

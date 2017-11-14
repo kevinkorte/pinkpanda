@@ -16,24 +16,19 @@ Template.places.onRendered( function() {
     Session.set('place', place);
     $('#placeName').val(place.name);
     $('#formatted_address').val(place.formatted_address);
+    $('#phone').val(place.formatted_phone_number);
+    $('#url').val(place.website);
+    $('#lat').val(place.geometry.location.lat());
+    $('#lng').val(place.geometry.location.lng());
     // Session.set('place_photo', place.photos[0].getUrl({maxWidth: 640}))
     let map = new google.maps.Map(document.getElementById('map'), {
       zoom: 17
     });
-    let geocoder = new google.maps.Geocoder();
-    geocoder.geocode( { 'address': place.formatted_address}, function( results, status) {
-      if (status == 'OK') {
-        $('#lat').val(results[0].geometry.location.lat());
-        $('#lng').val(results[0].geometry.location.lng());
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status)
-      }
-    })
+    map.setCenter(place.geometry.location);
+    let marker = new google.maps.Marker({
+      map: map,
+      position: place.geometry.location
+    });
   })
 });
 

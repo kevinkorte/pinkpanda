@@ -28,6 +28,7 @@ Template.date_can_edit.onCreated(function() {
 });
 
 Template.date_can_edit.onRendered(function() {
+  GoogleMaps.initialize();
   let self = this;
   self.autorun(function() {
     let date = Dates.findOne();

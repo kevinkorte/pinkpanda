@@ -19,6 +19,8 @@ Template.new_date.events({
     const formatted_address = target.formatted_address.value;
     const lat = target.lat.value;
     const lng = target.lng.value;
+    const phone = target.phone.value;
+    const url = target.url.value;
     const dateName = target.dateName.value;
     const dateURL = target.dateURL.value;
     const followers = $('.edit-followers-input').val();
@@ -31,6 +33,8 @@ Template.new_date.events({
       formatted_address,
       lat,
       lng,
+      phone,
+      url,
       dateName,
       dateURL,
     (error, result) => {

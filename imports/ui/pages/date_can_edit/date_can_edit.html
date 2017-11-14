@@ -3,6 +3,12 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12">
+        {{#if phone}}
+        <i class="fa fa-phone text-primary"></i> {{phone}}
+        {{/if}}
+        {{#if website}}
+        <i class="fa fa-globe text-primary"></i> <a class="text-dark" href="{{website}}">Website</a>
+        {{/if}}
         <h1>{{placeName}}</h1> <button class="btn btn-primary">Edit</button>
       </div>
     </div>
