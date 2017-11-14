@@ -2,14 +2,19 @@
   {{#with date}}
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12">
-        {{#if phone}}
-        <i class="fa fa-phone text-primary"></i> {{phone}}
-        {{/if}}
-        {{#if website}}
-        <i class="fa fa-globe text-primary"></i> <a class="text-dark" href="{{website}}">Website</a>
-        {{/if}}
-        <h1>{{placeName}}</h1> <button class="btn btn-primary">Edit</button>
+      <div class="col-7">
+        <h2 class="display-4">{{placeName}}</h2>
+        <p class="lead text-muted">{{formatted_address}}</p>
+      </div>
+      <div class="col-5">
+        <div class="row">
+          <div class="col-6">
+            <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white" value="{{starting}}">
+          </div>
+          <div class="col-6">
+            <input type="text">
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -18,6 +23,14 @@
         {{> googleMap name="locationMap" options=locationMapOptions}}
       </div>
       <div class="col-5">
+        <div>
+          {{#if phone}}
+          <i class="fa fa-phone text-primary"></i> {{phone}}
+          {{/if}}
+          {{#if website}}
+          <i class="fa fa-globe text-primary"></i> <a class="text-dark" href="{{website}}">Website</a>
+          {{/if}}
+        </div>
         {{> notifications }}
       </div>
     </div>

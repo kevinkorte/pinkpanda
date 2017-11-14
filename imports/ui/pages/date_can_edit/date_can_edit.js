@@ -1,6 +1,9 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Tracker } from 'meteor/tracker'
 import { Dates } from '../../../api/dates/dates.js';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 
 import './date_can_edit.html';
 import '../../components/notifications/notifications.js';
@@ -8,7 +11,21 @@ import '../../components/notifications/notifications.js';
 Template.date_can_edit.onCreated(function() {
   let self = this;
   self.autorun(function() {
-    self.subscribe('dates.single', FlowRouter.getParam('id') );
+    self.subscribe('dates.single', FlowRouter.getParam('id'), function() {
+      Tracker.afterFlush(function() {
+        let date = Dates.findOne();
+        const start_date = $('.start-date').flatpickr({
+          minDate: 'today',
+          altInput: true,
+          enableTime: true,
+          onChange: function(selectedDates, dateStr, instance) {
+            end_date.set('minDate', Date.parse(selectedDates[0]));
+            Session.set('start_date', selectedDates[0]);
+          }
+        });
+        start_date.setDate(date.starting);
+      });
+    } );
 
     GoogleMaps.ready('locationMap', function(map) {
       let marker = new google.maps.Marker({
@@ -17,26 +34,10 @@ Template.date_can_edit.onCreated(function() {
       });
     });
   });
-  // let map = new google.maps.Map(document.getElementById('map'), {
-  //   zoom: 17
-  // });
-  // map.setCenter({ lat: 46.2267042, lng:-119.24917970000001 });
-  // let marker = new google.maps.Marker({
-  //   map: map,
-  //   position: { lat: 46.2267042, lng:-119.24917970000001 }
-  // })
 });
 
 Template.date_can_edit.onRendered(function() {
   GoogleMaps.initialize();
-  let self = this;
-  self.autorun(function() {
-    let date = Dates.findOne();
-    if ( date ) {
-      Session.set('lat', date.lat);
-      Session.set('lng', date.lng);
-    }
-  });
 });
 
 Template.date_can_edit.helpers({
