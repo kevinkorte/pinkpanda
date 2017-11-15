@@ -1,0 +1,28 @@
+html, body, #__blaze-root {
+  height: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: auto 400px;
+  grid-template-rows: min-content auto;
+  height: calc(100% - 62px);
+}
+.location {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+.map {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+.information {
+  grid-column: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}

@@ -8,6 +8,9 @@
 .card-expired {
   box-shadow: 0px 0px 0px 2px #ef3c33;
 }
+.card-light-shadow {
+  box-shadow: 0px 0px 16px 0px #abbac336;
+}
 @media screen and ( max-width: 1200px ) {
   .dashboard-card {
     width: calc(33% - 30px);

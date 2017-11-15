@@ -1,27 +1,38 @@
 <template name="date_can_edit">
 
-  <div class="wrapper">
-  <div class="box a">A</div>
-  <div class="box b">B</div>
-  <div class="box c"></div>
-  <div class="box d">
-    <div class="box e">E</div>
-    <div class="box f">F</div>
-    <div class="box g">G</div>
-  </div>
-</div>
-
+{{#with date}}
 <div class="grid">
-  <div class="item-b">
-    {{> googleMap name="locationMap" options=locationMapOptions}}
+  <div class="location px-3">
+    <h4 class="display-4">{{placeName}}</h4>
+    <p class="lead text-muted">{{formatted_address}}</p>
   </div>
-
+  <div class="map">{{> googleMap name="locationMap" options=locationMapOptions}}</div>
+  <div class="information bg-light px-3">
+    <div class="card card-light-shadow my-3">
+      <div class="card-body">
+        <div class="form-group">
+            <label for="start-date">Start</label>
+            <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white">
+        </div>
+        <div class="form-group">
+            <label for="end-date">End</label>
+            <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
+        </div>
+      </div>
+    </div>
+    <div class="card card-light-shadow bg-dark text-light">
+      <div class="card-body">
+        <p class="h5 text-warning"><i class="fa fa-lock" aria-hidden="true"></i> Private</p>
+      </div>
+    </div>
+  </div>
 </div>
+{{/with}}
 
 
 
 
-
+<!--
   {{#with date}}
   <div class="container-fluid">
     <div class="row">
@@ -42,7 +53,6 @@
     </div>
     <div class="row">
       <div class="col-7" style="height: 500px">
-        <!-- <div id="map" style="height: 100px; background: red"></div> -->
 
       </div>
       <div class="col-5">
@@ -58,5 +68,5 @@
       </div>
     </div>
   </div>
-  {{/with}}
+  {{/with}} -->
 </template>
