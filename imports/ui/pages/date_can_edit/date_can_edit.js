@@ -23,7 +23,16 @@ Template.date_can_edit.onCreated(function() {
             Session.set('start_date', selectedDates[0]);
           }
         });
+        const end_date = $('.end-date').flatpickr({
+          minDate: 'today',
+          altInput: true,
+          enableTime: true,
+          onChange: function(selectedDates, dateStr, instance) {
+            start_date.set('maxDate', Date.parse(selectedDates[0]));
+          }
+        });
         start_date.setDate(date.starting);
+        end_date.setDate(date.ending);
       });
     } );
 
