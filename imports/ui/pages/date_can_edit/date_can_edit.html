@@ -8,15 +8,21 @@
   </div>
   <div class="map">{{> googleMap name="locationMap" options=locationMapOptions}}</div>
   <div class="information bg-light px-3">
+    <button class="btn btn-primary btn-block" id="check-in">Check-in</button>
     <div class="card card-light-shadow my-3">
       <div class="card-body">
-        <div class="form-group">
-            <label for="start-date">Start</label>
-            <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white">
-        </div>
-        <div class="form-group">
-            <label for="end-date">End</label>
-            <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
+        <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion1" aria-expanded="true" aria-controls="exampleAccordion1">
+          <p class="h6"><i class="fa fa-calendar" aria-hidden="true"></i> Edit Time</p>
+        </a>
+        <div id="exampleAccordion1" class="collapse show" role="tabpanel">
+          <div class="form-group">
+              <label for="start-date">Start</label>
+              <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white">
+          </div>
+          <div class="form-group">
+              <label for="end-date">End</label>
+              <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
+          </div>
         </div>
       </div>
     </div>
