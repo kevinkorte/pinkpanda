@@ -26,11 +26,24 @@
         </div>
       </div>
     </div>
-    <div class="card card-light-shadow bg-dark text-light">
+    <div class="card card-light-shadow bg-dark text-light my-3">
       <div class="card-body">
         <p class="h5 text-warning"><i class="fa fa-lock" aria-hidden="true"></i> Private</p>
       </div>
     </div>
+    <div class="card card-light-shadow my-3">
+      <ul class="list-group list-group-flush">
+        {{#each notifications}}
+          <div class="list-group-item">
+            <h5 class="mb-1">{{notificationTitle notificationType}}</h5>
+            <small></small>
+            <p class="mb-1">{{notificationAddress _id}}</p>
+            <small></small>
+          </div>
+        {{/each}}
+      </ul>
+    </div>
+
   </div>
 </div>
 {{/with}}

@@ -2,7 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Tracker } from 'meteor/tracker'
 import { Dates } from '../../../api/dates/dates.js';
+import { Notifications } from '../../../api/notifications/notifications.js';
 import flatpickr from 'flatpickr';
+import moment from 'moment';
 import 'flatpickr/dist/flatpickr.min.css';
 
 import './date_can_edit.html';
@@ -11,6 +13,7 @@ import '../../components/notifications/notifications.js';
 Template.date_can_edit.onCreated(function() {
   let self = this;
   self.autorun(function() {
+    self.subscribe('notifications', FlowRouter.getParam('id'));
     self.subscribe('dates.single', FlowRouter.getParam('id'), function() {
       Tracker.afterFlush(function() {
         let date = Dates.findOne();
@@ -41,6 +44,41 @@ Template.date_can_edit.onCreated(function() {
         position: map.options.center,
         map: map.instance
       });
+      let infowindow = new google.maps.InfoWindow();
+      let id = FlowRouter.getParam('id');
+      let notifications = Notifications.find({dateId: id});
+      notifications.forEach(function(notification) {
+        if (notification.notificationType == 'check-in') {
+          let position = new google.maps.LatLng(notification.lat, notification.lng);
+          let marker = new google.maps.Marker({
+            position: position,
+            map: map.instance,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+          });
+          let circle = new google.maps.Circle({
+            strokeColor: '#1f9be2',
+            strokeOpacity: 0.6,
+            strokeWeight: 2,
+            fillColor: '#52a5ea',
+            fillOpacity: 0.15,
+            map: map.instance,
+            center: position,
+            radius: notification.accuracy
+          });
+          google.maps.event.addListener(marker, 'click', function(){
+            infowindow.close(); // Close previously opened infowindow
+            infowindow.setContent( "<div id='infowindow'>"+ notification.result[0].formattedAddress +"</div>" + "<div class='time-ago text-muted'><i class='fa fa-clock-o' aria-hidden='true'></i> "+moment(notification.timestamp).fromNow()+"</div>");
+            infowindow.open(map, marker);
+          });
+        } else if (notification.notificationType == 'manual-start') {
+          let position = new google.maps.LatLng(notification.lat, notification.lng);
+          let marker = new google.maps.Marker({
+            position: position,
+            map: map.instance,
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+          });
+        }
+      });
     });
   });
 });
@@ -53,6 +91,10 @@ Template.date_can_edit.helpers({
   date() {
     return Dates.findOne();
   },
+  notifications() {
+    console.log(Notifications.find());
+    return Notifications.find();
+  },
   locationMapOptions() {
     if ( GoogleMaps.loaded() ) {
       let dates = Dates.findOne(FlowRouter.getParam('id'));
@@ -64,6 +106,25 @@ Template.date_can_edit.helpers({
         };
       }
     };
+  },
+  notificationTitle(type) {
+    if (type == 'check-in') {
+      return "Check-In"
+    } else if (type == 'manual-start') {
+      return "Start"
+    } else if (type == 'auto-start') {
+      return "Auto Start"
+    } else if (type == 'auto-end') {
+      return "Time Expired"
+    } else if (type == 'manual-end') {
+      return "Ended"
+    }
+  },
+  notificationAddress(id) {
+    let notification = Notifications.findOne(id);
+    if ( notification ) {
+      return notification.result[0].formattedAddress;
+    }
   }
 });
 
@@ -77,7 +138,7 @@ Template.date_can_edit.events({
         let accuracy = position.coords.accuracy;
         let timestamp = position.timestamp;
         let id = FlowRouter.getParam('id');
-        Meteor.call('addEvent', lat, lng, accuracy, timestamp, id, function(error, response) {
+        Meteor.call('addNotification', lat, lng, accuracy, timestamp, id, function(error, response) {
           if ( error && error.error === "add-event" ) {
             Bert.alert( error.reason, "warning" );
           } else {
