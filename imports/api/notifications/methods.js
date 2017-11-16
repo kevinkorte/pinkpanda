@@ -50,16 +50,19 @@ Meteor.methods({
               lng: result.lng
             };
           console.log('data', data);
-          date.followers.forEach(function(follower) {
-            if (follower.phoneNumber) {
-              client.messages.create({
-                body: SSR.render('checkin-text-message', data),
-                to: '+1'+follower.phoneNumber,
-                from: '+15097923432'
-              })
-              .then((message) => console.log(message.sid));
-            }
-          });
+          if ( date.followers ) {
+            date.followers.forEach(function(follower) {
+              if (follower.phoneNumber) {
+                client.messages.create({
+                  body: SSR.render('checkin-text-message', data),
+                  to: '+1'+follower.phoneNumber,
+                  from: '+15097923432'
+                })
+                .then((message) => console.log(message.sid));
+              }
+            });
+          }
+          return response;
         }
       });
     });

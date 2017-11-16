@@ -47,38 +47,40 @@ Template.date_can_edit.onCreated(function() {
       let infowindow = new google.maps.InfoWindow();
       let id = FlowRouter.getParam('id');
       let notifications = Notifications.find({dateId: id});
-      notifications.forEach(function(notification) {
-        if (notification.notificationType == 'check-in') {
-          let position = new google.maps.LatLng(notification.lat, notification.lng);
-          let marker = new google.maps.Marker({
-            position: position,
-            map: map.instance,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-          });
-          let circle = new google.maps.Circle({
-            strokeColor: '#1f9be2',
-            strokeOpacity: 0.6,
-            strokeWeight: 2,
-            fillColor: '#52a5ea',
-            fillOpacity: 0.15,
-            map: map.instance,
-            center: position,
-            radius: notification.accuracy
-          });
-          google.maps.event.addListener(marker, 'click', function(){
-            infowindow.close(); // Close previously opened infowindow
-            infowindow.setContent( "<div id='infowindow'>"+ notification.result[0].formattedAddress +"</div>" + "<div class='time-ago text-muted'><i class='fa fa-clock-o' aria-hidden='true'></i> "+moment(notification.timestamp).fromNow()+"</div>");
-            infowindow.open(map, marker);
-          });
-        } else if (notification.notificationType == 'manual-start') {
-          let position = new google.maps.LatLng(notification.lat, notification.lng);
-          let marker = new google.maps.Marker({
-            position: position,
-            map: map.instance,
-            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
-          });
-        }
-      });
+      if ( notifications ) {
+        notifications.forEach(function(notification) {
+          if (notification.notificationType == 'check-in') {
+            let position = new google.maps.LatLng(notification.lat, notification.lng);
+            let marker = new google.maps.Marker({
+              position: position,
+              map: map.instance,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            });
+            let circle = new google.maps.Circle({
+              strokeColor: '#1f9be2',
+              strokeOpacity: 0.6,
+              strokeWeight: 2,
+              fillColor: '#52a5ea',
+              fillOpacity: 0.15,
+              map: map.instance,
+              center: position,
+              radius: notification.accuracy
+            });
+            google.maps.event.addListener(marker, 'click', function(){
+              infowindow.close(); // Close previously opened infowindow
+              infowindow.setContent( "<div id='infowindow'>"+ notification.result[0].formattedAddress +"</div>" + "<div class='time-ago text-muted'><i class='fa fa-clock-o' aria-hidden='true'></i> "+moment(notification.timestamp).fromNow()+"</div>");
+              infowindow.open(map, marker);
+            });
+          } else if (notification.notificationType == 'manual-start') {
+            let position = new google.maps.LatLng(notification.lat, notification.lng);
+            let marker = new google.maps.Marker({
+              position: position,
+              map: map.instance,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            });
+          }
+        });
+      }
     });
   });
 });
@@ -92,17 +94,15 @@ Template.date_can_edit.helpers({
     return Dates.findOne();
   },
   notifications() {
-    console.log(Notifications.find());
     return Notifications.find();
   },
   locationMapOptions() {
     if ( GoogleMaps.loaded() ) {
       let dates = Dates.findOne(FlowRouter.getParam('id'));
-      console.log(dates);
       if ( dates ) {
         return {
           center: new google.maps.LatLng(dates.lat, dates.lng),
-          zoom: 17
+          zoom: 10
         };
       }
     };
@@ -130,7 +130,6 @@ Template.date_can_edit.helpers({
 
 Template.date_can_edit.events({
   'click #check-in'(event) {
-    console.log(event, 'check in');
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function(position) {
         let lat = position.coords.latitude;
@@ -138,11 +137,11 @@ Template.date_can_edit.events({
         let accuracy = position.coords.accuracy;
         let timestamp = position.timestamp;
         let id = FlowRouter.getParam('id');
-        Meteor.call('addNotification', lat, lng, accuracy, timestamp, id, function(error, response) {
+        Meteor.call('addNotification', lat, lng, accuracy, timestamp, id, function(error, result) {
           if ( error && error.error === "add-event" ) {
             Bert.alert( error.reason, "warning" );
           } else {
-            console.log('success');
+            console.log(result);
           }
         });
       });
