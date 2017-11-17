@@ -32,16 +32,21 @@
       </div>
     </div>
     <div class="card card-light-shadow my-3">
+      <h4 class="card-header bg-light border-bottom-0"><i class="fa fa-exclamation" aria-hidden="true"></i> Notifications</h4>
+      {{#if hasNotifications}}
       <ul class="list-group list-group-flush">
         {{#each notifications}}
           <div class="list-group-item">
-            <h5 class="mb-1">{{notificationTitle notificationType}}</h5>
-            <small></small>
+            <h5 class="mb-1">{{{getNotificationIcon notificationType}}} {{notificationTitle notificationType}} <small class="float-right text-muted font-weight-light">{{notificationTimestamp timestamp}}</small></h5>
+            <small>{{getLatLng _id}}</small>
             <p class="mb-1">{{notificationAddress _id}}</p>
-            <small></small>
+
           </div>
         {{/each}}
       </ul>
+      {{else}}
+      <div class="card-body">Nothing to show</div>
+      {{/if}}
     </div>
 
   </div>

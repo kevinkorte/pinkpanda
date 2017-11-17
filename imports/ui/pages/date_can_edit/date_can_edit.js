@@ -96,6 +96,14 @@ Template.date_can_edit.helpers({
   notifications() {
     return Notifications.find();
   },
+  hasNotifications() {
+    let notifications = Notifications.find().count();
+    if ( notifications > 0 ) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   locationMapOptions() {
     if ( GoogleMaps.loaded() ) {
       let dates = Dates.findOne(FlowRouter.getParam('id'));
@@ -106,6 +114,18 @@ Template.date_can_edit.helpers({
         };
       }
     };
+  },
+  getNotificationIcon(type) {
+    console.log(type);
+    if ( type == 'check-in') {
+        return '<span class="fa-stack text-primary"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-location-arrow fa-stack-1x fa-inverse"></i></span>';
+      } else if ( type == 'manual-start' || type == 'auto-start') {
+        return '<i class="icon circular flag"></i>';
+      } else if ( type == 'auto-end') {
+        return '<i class="icon circular warning sign"></i>'
+      } else if ( type == 'manual-end') {
+        return '<i class="icon circular flag checkered"></i>'
+      }
   },
   notificationTitle(type) {
     if (type == 'check-in') {
@@ -120,10 +140,19 @@ Template.date_can_edit.helpers({
       return "Ended"
     }
   },
+  notificationTimestamp(timestamp) {
+    return moment(timestamp).fromNow();
+  },
   notificationAddress(id) {
     let notification = Notifications.findOne(id);
     if ( notification ) {
       return notification.result[0].formattedAddress;
+    }
+  },
+  getLatLng(id) {
+    let notification = Notifications.findOne(id);
+    if ( notification ) {
+      return notification.result[0].latitude + " " + notification.result[0].longitude
     }
   }
 });
@@ -141,7 +170,7 @@ Template.date_can_edit.events({
           if ( error && error.error === "add-event" ) {
             Bert.alert( error.reason, "warning" );
           } else {
-            console.log(result);
+            // console.log(result);
           }
         });
       });

@@ -43,8 +43,15 @@ Meteor.methods({
           SSR.compileTemplate('checkin-text-message', Assets.getText('checkin-text.html'));
           let t_userId = date.user;
           let t_user = Meteor.users.findOne(t_userId);
+          function username(user) {
+            if ( user.profile.name ) {
+              return user.profile.name;
+            } else {
+              return user.emails[0].address
+            }
+          }
             let data = {
-              userName: t_user.profile.name,
+              // userName: username(t_user),
               address: result[0].formattedAddress,
               lat: result.lat,
               lng: result.lng
