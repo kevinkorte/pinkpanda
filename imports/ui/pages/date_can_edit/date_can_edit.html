@@ -8,13 +8,18 @@
   </div>
   <div class="map">{{> googleMap name="locationMap" options=locationMapOptions}}</div>
   <div class="information bg-light px-3">
-    <button class="btn btn-primary btn-block" id="check-in">Check-in</button>
-    <div class="card card-light-shadow my-3">
+    <div class="btn-group edit-button-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-success"><i class="fa fa-flag"></i> Start</button>
+      <button type="button" class="btn btn-primary" id="check-in"><i class="fa fa-map-marker"></i> Check-in</button>
+      <button type="button" class="btn btn-danger disabled"><i class="fa fa-flag-checkered"></i> Stop</button>
+    </div>
+
+    <div class="card card-light-shadow my-3 bg-dark text-light">
       <div class="card-body">
         <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion1" aria-expanded="true" aria-controls="exampleAccordion1">
-          <p class="h6"><i class="fa fa-calendar" aria-hidden="true"></i> Edit Time</p>
+          <p class="h5 text-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit/Update Options</p>
         </a>
-        <div id="exampleAccordion1" class="collapse show" role="tabpanel">
+        <div id="exampleAccordion1" class="collapse" role="tabpanel">
           <div class="form-group">
               <label for="start-date">Start</label>
               <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white">
@@ -24,11 +29,6 @@
               <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
           </div>
         </div>
-      </div>
-    </div>
-    <div class="card card-light-shadow bg-dark text-light my-3">
-      <div class="card-body">
-        <p class="h5 text-warning"><i class="fa fa-lock" aria-hidden="true"></i> Private</p>
       </div>
     </div>
     <div class="card card-light-shadow my-3">

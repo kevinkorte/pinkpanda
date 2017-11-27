@@ -110,7 +110,7 @@ Template.date_can_edit.helpers({
       if ( dates ) {
         return {
           center: new google.maps.LatLng(dates.lat, dates.lng),
-          zoom: 10
+          zoom: 15
         };
       }
     };
@@ -141,6 +141,7 @@ Template.date_can_edit.helpers({
     }
   },
   notificationTimestamp(timestamp) {
+    Session.get('time');
     return moment(timestamp).fromNow();
   },
   notificationAddress(id) {
