@@ -12,13 +12,13 @@ Template.registerHelper( 'getProfilePicUrl', () => {
   }
 });
 
-// Template.registerHelper( 'getProfileName', () => {
-//   let user = Meteor.users.findOne(Meteor.userId());
-//   if ( user ) {
-//     if ( user.profile.name ) {
-//       return user.profile.name;
-//     } else {
-//       return user.emails[0].address;
-//     }
-//   }
-// })
+Template.registerHelper( 'getProfileName', () => {
+  let user = Meteor.users.findOne(Meteor.userId());
+  if ( user ) {
+    if ( user.profile.name ) {
+      return user.profile.name;
+    } else {
+      return user.emails[0].address;
+    }
+  }
+})
