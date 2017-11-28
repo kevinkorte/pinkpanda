@@ -25,4 +25,15 @@ padding-right: 35px;
   & button {
     flex-grow: 1 !important;
   }
+  & button:not(.disabled) {
+    background: #fff;
+    border: 1px solid #dae0e5; //color comes from BS4
+  }
+
+  & #start:hover {
+    color: #28a745!important; //color comes from BS4
+  }
+  & #check-in:hover {
+    color: #007bff!important; //color comes from BS4
+  }
 }
