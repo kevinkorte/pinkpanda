@@ -45,3 +45,22 @@ button.btn-hero-nav {
   background: #ebeafb;
   color: #4d438a;
 }
+.start-trial-button {
+  width: 100%;
+  margin-top: 20px;
+  background: #93d893;
+  border: none;
+  color: #4e3f80;
+  padding: 16px;
+  font-size: 23px;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  border-radius: 4px;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0px 0px 0px 3px #64a564;
+    cursor: pointer;
+  }
+}
