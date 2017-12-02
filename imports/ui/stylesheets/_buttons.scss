@@ -12,12 +12,12 @@
 
 .k {
   background: #ee0979;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #ff6a00, #ee0979);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-border: none;
-margin: 5px;
-padding-left: 35px;
-padding-right: 35px;
+  background: -webkit-linear-gradient(to right, #ff6a00, #ee0979);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #ff6a00, #ee0979); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  margin: 5px;
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 .edit-button-group {
@@ -46,6 +46,7 @@ button.btn-hero-nav {
   color: #4d438a;
 }
 .start-trial-button {
+  display: block;
   width: 100%;
   margin-top: 20px;
   background: #93d893;
