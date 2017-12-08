@@ -31,6 +31,7 @@ FlowRouter.route('/signup', {
   },
   triggersExit: function(context, params) {
     $('body').removeClass('signup-page');
+    Session.set('error', null);
   },
   action() {
     BlazeLayout.render('App_signup');
