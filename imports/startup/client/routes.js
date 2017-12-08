@@ -27,10 +27,10 @@ FlowRouter.route('/', {
 FlowRouter.route('/signup', {
   name: 'App.signup',
   triggersEnter: function(context, params) {
-    $('body').addClass('login-page');
+    $('body').addClass('signup-page');
   },
   triggersExit: function(context, params) {
-    $('body').removeClass('login-page');
+    $('body').removeClass('signup-page');
   },
   action() {
     BlazeLayout.render('App_signup');
@@ -39,6 +39,12 @@ FlowRouter.route('/signup', {
 
 FlowRouter.route('/login', {
   name: 'App.login',
+  triggersEnter: function(context, params) {
+    $('body').addClass('login-page');
+  },
+  triggersExit: function(context, params) {
+    $('body').removeClass('login-page');
+  },
   action() {
     BlazeLayout.render('App_login');
   },

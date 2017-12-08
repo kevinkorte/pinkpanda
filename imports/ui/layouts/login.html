@@ -1,9 +1,13 @@
 <template name="App_login">
-  <form class="js-login">
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email">
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password">
-    <button type="submit">Login</button>
-  </form>
+  <div class="container">
+    <a href="{{pathFor 'App.home'}}" class="text-white"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Return to Homepage</a>
+      <form class="form-signin js-login mt-5">
+        <h3 class="form-signin-heading font-heavy text-white text-center">Sign In</h3>
+        <label for="email" class="sr-only">Email address</label>
+        <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required="" autofocus="" autocomplete="off">
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="">
+        <button class="btn btn-lg btn-light btn-block" type="submit">Sign in</button>
+      </form>
+    </div>
 </template>
