@@ -14,6 +14,28 @@ Template.App_signup.onCreated( function() {
 
 Template.App_signup.onRendered( function() {
   Meteor.subscribe('subs.all');
+  $('.js-submit').validate({
+    rules: {
+      firstName: {
+        required: true
+      },
+      lastName: {
+        required: true
+      },
+      email: {
+        required: true,
+        email: true
+      },
+      password: {
+        required: true
+      }
+    },
+    errorClass: 'is-invalid',
+    validClass: 'is-valid',
+    submitHandler: function(form) {
+      $(form).submit();
+    }
+  })
 });
 
 Template.App_signup.helpers({

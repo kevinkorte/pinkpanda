@@ -64,3 +64,10 @@ body.signup-page {
     border-top-right-radius: 0;
   }
 }
+
+label.is-invalid {
+  //bootstrap 4 styles
+  margin-top: .25rem;
+  font-size: .875rem;
+  color: #dc3545;
+}
