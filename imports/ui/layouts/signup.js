@@ -33,7 +33,9 @@ Template.App_signup.onRendered( function() {
     errorClass: 'is-invalid',
     validClass: 'is-valid',
     submitHandler: function(form) {
-      $(form).submit();
+      let spinner = $('.sign-up-button').data('btn-spin');
+      $('.sign-up-button').html( spinner );
+      console.log(event);
     }
   })
 });
