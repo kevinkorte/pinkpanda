@@ -35,7 +35,34 @@ Template.App_signup.onRendered( function() {
     submitHandler: function(form) {
       let spinner = $('.sign-up-button').data('btn-spin');
       $('.sign-up-button').html( spinner );
-      console.log(event);
+      event.preventDefault();
+      const firstName = event.target.firstName.value;
+      const lastName = event.target.lastName.value;
+      const email = event.target.email.value;
+      const password = event.target.password.value;
+      if (firstName && lastName && email && password) {
+        Meteor.call('checkIfUserExists', email, password, (error, response) => {
+          if ( error ) {
+            console.log( error );
+            Session.set('error', error.reason);
+            $('.sign-up-button').html('Create My Account');
+          } else {
+            Accounts.createUser( { email: email, password: password, profile: {name: { first: firstName, last: lastName } } } );
+            Meteor.call('newUserSignup', email, password, (error, response) => {
+              if ( error ) {
+                //Todo: Better error handling
+                console.log(error)
+                $('.sign-up-button').html('Create My Account');
+              } else {
+                //Successfully logged in, go to the next route
+                FlowRouter.go( 'onboarding.step', {step: 'name'} );
+              }
+            });
+          }
+        });
+      } else {
+        Session.set('error', 'Please make sure all fields are filled in.');
+      }
     }
   })
 });
