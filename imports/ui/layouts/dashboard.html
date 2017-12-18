@@ -8,7 +8,7 @@
           <img class="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?center={{lat}},{{lng}}&zoom=14&size=290x160&scale=2&maptype=roadmap&markers=size:mid%7Ccolor:red%7C{{lat}},{{lng}}&key=AIzaSyDopWicZjc_ohjfNM8ol6OUDV3ut8FqKjk" alt="Card image cap">
           <div class="card-body">
             <div class="card-text">
-              <div class="user text-secondary">{{getUserName user}}</div>
+              <div class="user text-secondary">{{getUserName user}} {{#if isMine _id}}<span class="badge badge-pill badge-secondary float-right">Owner</span>{{/if}}</div>
             </div>
             <h2 class="card-title font-weight-bold"><a href="{{pathFor 'single.date' user=user id=_id}}">{{placeName}}</a></h2>
             <p class="card-text">{{formatted_address}}</p>
@@ -24,7 +24,9 @@
                 {{dateTime ending}}
               </div>
             </li>
-            <li class="list-group-item bg-light text-secondary"><i class="fa fa-users" aria-hidden="true"></i> {{getNumOfFollowers _id}}</li>
+            <li class="list-group-item bg-light text-secondary">
+              <i class="fa fa-users" aria-hidden="true"></i> {{getNumOfFollowers _id}}
+            </li>
           </ul>
         </div>
       <!-- </div> -->

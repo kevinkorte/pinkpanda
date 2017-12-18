@@ -23,7 +23,7 @@ Template.dashboard.helpers({
   getUserName(id) {
     let user = Meteor.users.findOne(id);
     if ( user ) {
-      return user.emails[0].address;
+      return user.profile.name.first + " " + user.profile.name.last;
     }
   },
   dateDay(timestamp) {
@@ -48,6 +48,17 @@ Template.dashboard.helpers({
     if (dates) {
       if (dates.active == true) {
         return 'card-active'
+      }
+    }
+  },
+  isMine(id) {
+    let date = Dates.findOne(id);
+    if ( date ) {
+      let user = date.user;
+      if ( user == Meteor.userId() ) {
+        return true;
+      } else {
+        return false;
       }
     }
   }
