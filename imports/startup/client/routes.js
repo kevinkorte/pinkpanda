@@ -45,6 +45,7 @@ FlowRouter.route('/login', {
   },
   triggersExit: function(context, params) {
     $('body').removeClass('login-page');
+    Session.set('error', null);
   },
   action() {
     BlazeLayout.render('App_login');

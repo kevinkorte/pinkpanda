@@ -77,3 +77,11 @@ button.btn-hero-nav {
     text-align: center;
     border-radius: 4px;
 }
+
+.btn-main {
+  background-color: #ffb751;
+  background-image: -webkit-linear-gradient(left, #ffb751 0%, #ff5866 100%);
+  background-image: -o-linear-gradient(left, #ffb751 0%, #ff5866 100%);
+  background-image: linear-gradient(to right, #ffb751 0%, #ff5866 100%);
+
+}
