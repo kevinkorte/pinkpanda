@@ -12,11 +12,11 @@ Template.registerHelper( 'getProfilePicUrl', () => {
   }
 });
 
-Template.registerHelper( 'getProfileName', () => {
+Template.registerHelper( 'getProfileFirstName', () => {
   let user = Meteor.users.findOne(Meteor.userId());
   if ( user ) {
     if ( user.profile.name ) {
-      return user.profile.name;
+      return user.profile.name.first;
     } else {
       return user.emails[0].address;
     }
