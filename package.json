@@ -7,6 +7,7 @@
   "dependencies": {
     "@google/maps": "^0.4.3",
     "babel-runtime": "^6.26.0",
+    "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-beta",
     "flatpickr": "^3.0.7",
     "geocomplete": "^1.7.0",

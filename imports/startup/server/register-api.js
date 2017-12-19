@@ -16,5 +16,6 @@ import '../../api/notifications/server/publications.js'
 import '../../api/signup/methods.js';
 
 import '../../api/subscriptions/methods.js';
+import '../../api/subscriptions/server/publications.js';
 
 import '../../api/settings/methods.js';

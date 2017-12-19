@@ -8,6 +8,3 @@ import { Subscriptions } from '../imports/api/subscriptions/subscriptions.js';
 Meteor.publish('users.all', function() {
   return Meteor.users.find({});
 });
-Meteor.publish('subs.all', function() {
-  return Subscriptions.find({});
-})
