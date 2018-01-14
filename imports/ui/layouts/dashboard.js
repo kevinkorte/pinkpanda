@@ -10,12 +10,19 @@ import '../components/navigation.js';
 Template.dashboard.onCreated(function() {
   let self = this;
   self.autorun(function() {
-    console.log(self.subscribe('dates.all'));
     self.subscribe('dates.all');
   });
 });
 
 Template.dashboard.helpers({
+  hasdates() {
+    let dates = Dates.find({}).count();
+    if ( dates > 0 ) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   dates() {
     let dates = Dates.find({}, {sort: {starting: 1}});
     return dates;

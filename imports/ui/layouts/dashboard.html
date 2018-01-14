@@ -1,6 +1,7 @@
 <template name="dashboard">
   {{> dashboard_navigation }}
   <div class="container-fluid pt-5">
+    {{#if hasdates}}
     <div class="card-deck">
       {{#each dates}}
       <!-- <div class="col-4 col-lg-3"> -->
@@ -32,5 +33,9 @@
       <!-- </div> -->
       {{/each}}
     </div>
+    {{else}}
+      <p class="lead">There's nothing on your dashboard yet. You can change that by starting a new date.</p>
+        <a href="#" class="btn btn-primary" role="button">Start a New Date</a>
+    {{/if}}
   </div>
 </template>
