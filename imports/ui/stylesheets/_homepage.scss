@@ -23,6 +23,13 @@ header .header {
   background-size: cover;
   background-position: center;
 }
+.dark-block {
+  position: absolute;
+  top: 500px;
+  height: 150px;
+  width: 100%;
+  background: #181619;
+}
 
 // header .stripes {
 //   transform: skewY(-12deg);
