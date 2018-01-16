@@ -68,6 +68,12 @@ FlowRouter.route('/welcome/:step', {
 
 FlowRouter.route('/dashboard', {
   name: 'dashboard',
+  triggersEnter: [function() {
+    $('body').addClass('dashboard');
+  }],
+  triggersExit: [function() {
+    $('body').removeClass('dashboard');
+  }],
   action() {
     BlazeLayout.render('dashboard');
   }
