@@ -1,14 +1,19 @@
 <template name="new_date">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-8 my-4">
-        <h3 class="border border-secondary border-top-0 border-left-0 border-right-0 pb-2">
-          Hey {{getProfileName}}, let's create a new date!
+      <div class="col-10 my-4">
+        <h3 class="pb-2">
+          Create a new date
           <br>
           <small class="text-muted">You decide to share where, when, and who you'll be with.</small>
         </h3>
         <form id="updateDate">
-          {{> setDate }}
+          <hr>
+          <div class="my-5">
+              {{> setDate }}
+          </div>
+          <hr>
+          
           {{> places }}
           {{> plusOne }}
           {{> followers }}
