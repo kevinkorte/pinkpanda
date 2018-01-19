@@ -88,6 +88,12 @@ FlowRouter.route('/dashboard/me', {
 
 FlowRouter.route('/date/:user/:id', {
   name: 'new.date',
+  triggersEnter: [function() {
+    $('body').addClass('new-date');
+  }],
+  triggersExit: [function() {
+    $('body').removeClass('new-date');
+  }],
   action() {
     BlazeLayout.render('App_body', { main: 'new_date' });
   }

@@ -1,6 +1,6 @@
 <template name="plusOne">
-  <div class="card">
-    <div class="card-header text-muted"><i class="fa fa-lock"></i> Your Date</div>
+  <div class="card border-warning">
+    <div class="card-header text-white bg-warning"><i class="fa fa-lock"></i> Your Date</div>
     <div class="card-body">
       <div class="alert alert-dark" role="alert">
         The information you provide about your date will be kept private from everyone
@@ -15,6 +15,9 @@
           <div class="form-group">
             <label for="date-url">Their Facebook Profile Link</label>
             <input type="url" name="dateURL" class="form-control" id="date-url" placeholder="Facebook URL">
+            <small class="form-text text-muted">This can be left blank, or added later. This URL would help someone identify
+              the correct Facebook profile quickly.
+            </small>
           </div>
         </div>
       </div>
