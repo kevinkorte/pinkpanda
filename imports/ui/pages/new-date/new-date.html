@@ -1,6 +1,6 @@
 <template name="new_date">
-  <div class="container">
-    <div class="row justify-content-center bg-light rounded mb-5">
+  <div class="container mt-5">
+    <div class="row justify-content-center bg-light rounded mb-5 new-form-container">
       <div class="col-10 my-4">
         <h3 class="pb-2">
           Create a new date
@@ -10,13 +10,34 @@
         <form id="updateDate">
           <hr>
           <div class="my-5">
-              {{> setDate }}
+            {{> setDate }}
           </div>
           <hr>
-          
-          {{> places }}
-          {{> plusOne }}
-          {{> followers }}
+          <div class="my-5">
+            {{> places }}
+          </div>
+          <hr>
+          <div class="my-5">
+            {{> plusOne }}
+          </div>
+          <hr>
+          <div class="my-5">
+            {{> followers }}
+          </div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <button type="submit" class="btn btn-success btn-block">Create</button>
+                </div>
+                <div class="col-3">
+                  <button class="btn btn-outline-secondary btn-block">Cancel</button>
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
         </form>
       </div>
     </div>

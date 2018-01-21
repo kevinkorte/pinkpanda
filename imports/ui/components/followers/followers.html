@@ -2,12 +2,13 @@
   <div class="row my-3">
     <div class="col-12">
       <!-- <form class="add-followers"> -->
+        <label for="select">Add Followers</label>
         <select class="edit-followers-input" id="select" multiple="multiple" style="width: 100%;">
           {{#each follower _id}}
           <option value="{{_id}}">{{name}}</option>
           {{/each}}
         </select>
-        <button class="btn btn-primary js-add-follower mt-3" type="submit">Add Follower</button>
+        <!-- <button class="btn btn-primary js-add-follower mt-3" type="submit">Add Follower</button> -->
       <!-- </form> -->
     </div>
   </div>
