@@ -13,6 +13,14 @@ const DatingSchema = new SimpleSchema({
       }
     }
   },
+  draft: {
+    type: Boolean,
+    autoValue: function() {
+      if (this.isInsert) {
+        return true
+      }
+    }
+  },
   starting: {
     type: Date,
     optional: true

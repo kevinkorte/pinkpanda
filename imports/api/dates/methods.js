@@ -14,6 +14,7 @@ Meteor.methods({
     return Dates.insert({});
   },
   'updateDate'(id, start, end, place, placeName, formatted_address, lat, lng, phone, url, dateName, dateURL) {
+    console.log('was called');
     check(id, String);
     check(start, String);
     check(end, String);
@@ -37,7 +38,8 @@ Meteor.methods({
         phone: phone,
         website: url,
         dateName: dateName,
-        dateURL: dateURL
+        dateURL: dateURL,
+        draft: false
       }
     });
   },
