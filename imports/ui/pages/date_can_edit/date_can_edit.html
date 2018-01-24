@@ -1,4 +1,20 @@
 <template name="date_can_edit">
+<div class="navbar navbar-expand-lg navbar-light bg-dark text-light">
+  <div class="container">
+    <span class="navbar-text h3 text-light">
+        <i class="fa fa-unlock" aria-hidden="true"></i> Controls
+    </span>
+    <div class="d-inline-block">
+      <button type="button" class="btn btn-warning mr-5"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary">Start</button>
+        <button type="button" class="btn btn-secondary">Check-in</button>
+        <button type="button" class="btn btn-secondary">Stop</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 {{#with date}}
 <div class="grid">
