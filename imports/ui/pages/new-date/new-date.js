@@ -47,5 +47,6 @@ Template.new_date.events({
         Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
       }
     });
+    FlowRouter.go('dashboard');
   }
 });
