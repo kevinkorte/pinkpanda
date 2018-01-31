@@ -90,6 +90,13 @@ Template.date_can_edit.onRendered(function() {
 });
 
 Template.date_can_edit.helpers({
+  //dateTime and dateDay are duplicated helpers from the dashboard
+  dateTime(timestamp) {
+    return moment(timestamp).format('h:mm a');
+  },
+  dateDay(timestamp) {
+    return moment(timestamp).format('ddd MMM, Do')
+  },
   date() {
     return Dates.findOne();
   },

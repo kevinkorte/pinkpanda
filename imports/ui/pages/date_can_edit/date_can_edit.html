@@ -5,11 +5,11 @@
         <i class="fa fa-unlock" aria-hidden="true"></i> Controls
     </span>
     <div class="d-inline-block">
-      <button type="button" class="btn btn-warning mr-5"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+      <button type="button" class="btn btn-warning mr-5" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-secondary">Start</button>
-        <button type="button" class="btn btn-secondary">Check-in</button>
-        <button type="button" class="btn btn-secondary">Stop</button>
+        <button type="button" class="btn btn-secondary" id="start"><i class="fa fa-flag"></i> Start</button>
+        <button type="button" class="btn btn-secondary" id="check-in"><i class="fa fa-map-marker"></i> Check-in</button>
+        <button type="button" class="btn btn-secondary"><i class="fa fa-flag-checkered"></i> Stop</button>
       </div>
     </div>
 
@@ -23,36 +23,17 @@
     <p class="lead text-muted">{{formatted_address}}</p>
   </div>
   <div class="map">{{> googleMap name="locationMap" options=locationMapOptions}}</div>
-  <div class="information bg-light px-3">
-    <div class="btn-group edit-button-group" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-light" id="start"><i class="fa fa-flag"></i> Start</button>
-      <button type="button" class="btn btn-light" id="check-in"><i class="fa fa-map-marker"></i> Check-in</button>
-      <button type="button" class="btn btn-light disabled"><i class="fa fa-flag-checkered"></i> Stop</button>
-    </div>
-
-    <div class="card card-light-shadow my-3 bg-dark text-light">
-      <div class="card-body">
-        <a data-toggle="collapse" data-parent="#exampleAccordion" href="#exampleAccordion1" aria-expanded="true" aria-controls="exampleAccordion1">
-          <p class="h5 text-warning"><i class="fa fa-pencil" aria-hidden="true"></i> Edit/Update Options</p>
-        </a>
-        <div id="exampleAccordion1" class="collapse" role="tabpanel">
-          <div class="form-group">
-              <label for="start-date">Start</label>
-              <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white">
-          </div>
-          <div class="form-group">
-              <label for="end-date">End</label>
-              <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
-          </div>
+  <div class="information px-3">
+      <div class="start-time">
+          {{dateDay starting}}
+          {{dateTime starting}}
+          <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+          {{dateTime ending}}
         </div>
-      </div>
-    </div>
-    <div class="card card-light-shadow my-3">
-      <h4 class="card-header bg-light border-bottom-0"><i class="fa fa-exclamation" aria-hidden="true"></i> Notifications</h4>
       {{#if hasNotifications}}
       <ul class="list-group list-group-flush">
         {{#each notifications}}
-          <div class="list-group-item">
+          <div class="list-group-item border-0">
             <h5 class="mb-1">{{{getNotificationIcon notificationType}}} {{notificationTitle notificationType}} <small class="float-right text-muted font-weight-light">{{notificationTimestamp timestamp}}</small></h5>
             <small>{{getLatLng _id}}</small>
             <p class="mb-1">{{notificationAddress _id}}</p>
@@ -63,50 +44,38 @@
       {{else}}
       <div class="card-body">Nothing to show</div>
       {{/if}}
-    </div>
+
 
   </div>
 </div>
 {{/with}}
 
 
-
-
-<!--
-  {{#with date}}
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-7">
-        <h2 class="display-4">{{placeName}}</h2>
-        <p class="lead text-muted">{{formatted_address}}</p>
-      </div>
-      <div class="col-5">
-        <div class="row">
-          <div class="col-6">
-            <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white">
-          </div>
-          <div class="col-6">
-            <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
-          </div>
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-7" style="height: 500px">
-
-      </div>
-      <div class="col-5">
-        <div>
-          {{#if phone}}
-          <i class="fa fa-phone text-primary"></i> {{phone}}
-          {{/if}}
-          {{#if website}}
-          <i class="fa fa-globe text-primary"></i> <a class="text-dark" href="{{website}}">Website</a>
-          {{/if}}
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="start-date">Start</label>
+                <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white">
+            </div>
+            <div class="form-group">
+                <label for="end-date">End</label>
+                <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
+            </div>
         </div>
-        {{> notifications }}
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-  {{/with}} -->
 </template>
