@@ -181,3 +181,30 @@ background: linear-gradient(to left, rgba(238,242,243,0.2) 0%, rgba(142,158,171,
   margin-top: -225px;
   z-index: -1;
 }
+
+.ol-homepage {
+  margin-left: 0;
+  padding-right: 0;
+  list-style-type: none;
+
+  & li {
+    counter-increment: step-counter;
+
+    &::before {
+      // content: attr(data-background-icon);
+      // font-family: "FontAwesome";
+      content: counter(step-counter);
+      background: #5144b7;
+      padding: 5px 18px;
+      border-radius: 7px;
+      color: #d8d3ff;
+      font-size: 2.5em;
+    }
+  }
+}
+
+.homepage-row {
+  border-radius: 9px;
+  background-image: linear-gradient(to top, #f1eaff, #ffffff);
+}
+
