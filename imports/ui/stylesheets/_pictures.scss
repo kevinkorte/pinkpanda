@@ -9,7 +9,8 @@
   transform: translateX(-50%);
 }
 .homepage-img {
+  display: block;
+  margin: 0 auto;
   width: auto;
-  max-height: 250px;
-  height: 175px;
+  max-height: 175px;
 }

@@ -14,7 +14,7 @@
        <div class="homepage-trial-tag font-weight-light">Free for 30 days - $7.99 per month after</div>
      </div>
    </div>
-   <div class="row justify-content-center homepage-row">
+   <div class="row justify-content-center homepage-row mb-5">
      <div class="col-9">
        <h1 class="font-heavy mt-4 text-center">How it works</h1>
        <ol class="ol-homepage">
@@ -34,53 +34,64 @@
      </div>
    </div>
   </div>
-  <div class="container-fluid">
+  <div class="dark-container-wrapper">
+  <div class="container">
    <div class="row marketing-items">
-     <div class="col-md-12 py-3" style="background: #1c1f46">
-       <div class="d-flex flex-row-reverse justify-content-center">
-          <img src="/img/devices.svg" class="homepage-img" alt="Works on all Devices">
-          <div class="d-flex flex-column justify-content-center mr-4">
-            <p class="font-weight-bold font-heavy h1 text-white">Works on all devices</p>
-            <p class="text-light">Works on all internet connected devices that have a web browser.</p>
+     <div class="card-deck mb-3">
+       <div class="card bg-light-purple text-center">
+         <div class="card-body">
+           {{> devices_svg }}
+            <h2 class="card-title font-heavy text-white">Works on All Devices</h2>
+            <p class="card-text text-light">Works on all internet connected devices that have a web browser.</p>
+         </div>
+       </div>
+       <div class="card bg-light-purple text-center">
+         <div class="card-body">
+            {{> alerts_svg }}
+           <h2 class="card-title font-heavy text-white">Alerts on Auto, Sent to Peers</h2>
+           <p class="card-text text-light">Schedule notifications and alerts to be sent based on a time you set, or by manually starting or ending an appoitment, or checking in.</p>
+         </div>
+       </div>
+      </div>
+      <div class="card-deck">
+        <div class="card bg-light-purple text-center">
+          <div class="card-body">
+            {{> peers_svg }}
+            <h2 class="card-title font-heavy text-white">You Control Who You Send Alerts To</h2>
+            <p class="card-text text-light">For each appointment, you pick who you send alerts to for that appointment. You can add or remove peers at anytime.</p>
           </div>
-       </div>
-     </div>
-     <div class="col-md-4">
-       <div class="marketing-box box-orange">
-         <i class="fa fa-bell-o fa-4x"></i>
-       </div>
-       <p class="font-weight-bold">Alerts are sent automatically to your peers</p>
-       <p>Schedule notifications and alerts to be sent based on a time you set, or by manually starting or ending an appoitment, or checking in.</p>
-     </div>
-     <div class="col-md-4">
-       <div class="marketing-box box-blue">
-         <i class="fa fa-users fa-4x"></i>
-       </div>
-       <p class="font-weight-bold">You control who you send alerts to</p>
-       <p>For each appointment, you pick who you send alerts to for that appointment. You can add or remove peers at anytime.</p>
-     </div>
+        </div>
+        <div class="card bg-light-purple text-center">
+          <div class="card-body">
+            {{> updates_svg }}
+            <h2 class="card-title font-heavy text-white">Updates in Near Real Time</h2>
+            <p class="card-text text-light">No page refreshes, or delayed interval updates. Information updates live on your display in near real time</p>
+          </div>
+        </div>
+      </div>
    </div>
-   <div class="row marketing-items">
-     <div class="col-md-4">
-       <div class="marketing-box box-purple">
-         <i class="fa fa-umbrella fa-4x" aria-hidden="true"></i>
-       </div>
-       <p class="font-weight-bold">Your team under one umbrella</p>
-       <p>You can easily add or remove team members to your organization, under one simple billing.</p>
-     </div>
-     <div class="col-md-4">
-       <div class="marketing-box box-pink">
-         <i class="fa fa-clock-o fa-4x"></i>
-       </div>
-       <p class="font-weight-bold">Updates in Near Real Time</p>
-       <p>No page refreshes, or delayed interval updates. Information updates live on your display in near real time</p>
-     </div>
-     <div class="col-md-4">
-       <div class="marketing-box box-yellow">
-         <i class="fa fa-tasks fa-4x"></i>
-       </div>
-       <p class="font-weight-bold">Create Unlimted Appointments</p>
-       <p>No account upgrades, no limits on the number of appointments your team can create.</p>
+   <div class="row py-5">
+     <div class="col-6">
+        <h2 class="text-white font-heavy mb-0">Be Up and Running in <u>Minutes</u></h2>
+      </div>
+      <div class="col-6">
+        <a href="{{pathFor 'App.signup'}}" class="start-trial-button">Try it Free</a>
+        <div class="homepage-trial-tag font-weight-light">Free for 30 days - $7.99 per month after</div>
+      </div>
+    </div>
+  </div>
+ </div>
+ <div class="darker-container-wrapper">
+   <div class="container">
+     <div class="row pt-5 pb-3">
+        <ul class="nav justify-content-end text-light">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{pathFor 'App.signup'}}">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{pathFor 'App.login'}}">Login</a>
+            </li>
+          </ul>
      </div>
    </div>
  </div>
