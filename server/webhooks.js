@@ -3,7 +3,7 @@ import { Picker } from 'meteor/meteorhacks:picker';
 
 Picker.middleware(bodyParser.json());
 
-Picker.route('/stripe', (params, request, response, next) => {
+Picker.route('/webhooks/stripe', (params, request, response, next) => {
   const webhook = new Promise((resolve, reject) => {
     console.log(request.body.type);
     switch (request.body.type) {

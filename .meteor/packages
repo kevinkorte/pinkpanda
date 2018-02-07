@@ -43,3 +43,5 @@ percolate:synced-cron
 aldeed:geocoder
 themeteorchef:jquery-validation
 meteorhacks:picker
+
+autopublish                   # REMOVE BEFORE FLIGHT

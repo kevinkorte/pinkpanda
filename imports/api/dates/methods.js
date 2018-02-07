@@ -46,7 +46,7 @@ Meteor.methods({
   'autoStartDate'(id) {
     Dates.update(id, { $set: { active: true } }, { validate: false }, function(error, response) {
       if ( error ) {
-        console.log(error);
+        // console.log(error);
       } else {
         Notifications.insert({
           dateId: id,
@@ -54,7 +54,7 @@ Meteor.methods({
           notificationType: 'auto-start'
         }, function(error, response) {
           if ( error ) {
-            console.log(error);
+            // console.log(error);
           } else {
             let date = Dates.findOne(id);
             if ( date ) {

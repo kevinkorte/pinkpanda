@@ -13,6 +13,8 @@ import '../../api/followers/server/publications.js';
 import '../../api/notifications/methods.js';
 import '../../api/notifications/server/publications.js'
 
+import '../../api/payments/methods.js';
+
 import '../../api/signup/methods.js';
 
 import '../../api/subscriptions/methods.js';
