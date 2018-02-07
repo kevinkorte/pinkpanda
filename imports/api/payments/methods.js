@@ -1,10 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Payments } from './methods.js';
+import { Payments } from './payments.js';
 
 Meteor.methods({
   createNewPaymentEvent(request) {
-    console.log(request);
+    console.log('getting rid to create new payment event');
     Payments.insert(request, {filter: false, validate: false}, function (error, result) {
       if (error) {
         console.log(error);

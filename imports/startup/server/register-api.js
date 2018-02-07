@@ -14,6 +14,7 @@ import '../../api/notifications/methods.js';
 import '../../api/notifications/server/publications.js'
 
 import '../../api/payments/methods.js';
+import '../../api/payments/server/publications.js';
 
 import '../../api/signup/methods.js';
 

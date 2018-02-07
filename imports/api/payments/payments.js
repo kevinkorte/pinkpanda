@@ -1,4 +1,6 @@
-Payments = new Mongo.Collection("Payments");
+import SimpleSchema from 'simpl-schema';
+
+export const Payments = new Mongo.Collection("Payments");
 
 PaymentSchema = new SimpleSchema({
   createdAt: {

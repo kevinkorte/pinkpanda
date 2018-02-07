@@ -1,17 +1,20 @@
 <template name="payment">
   <div class="invite-wrapper full-width">
+    {{#each findPayments}}
+    {{_id}}
+    {{/each}}
     <div class="invite-header">
       <div class="d-flex">
         {{{getAccountStatusLabel}}}
         <div class="floated content pl-3">Next Payment: {{getAccountStatusDate}}</div>
       </div>
       <div>
-        {{#with organization}}
+        {{#each payments}}
         Last Four: <strong>{{getLast4ofCard customerId}}</strong>
 
         <!-- <img src="/icons/credit.png" alt=""> -->
         <img src="{{creditCardIcon customerId}}" alt="">
-        {{/with}}
+        {{/each}}
       </div>
     </div>
     {{#with organization}}
@@ -43,8 +46,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#with organization}}
-      {{#each getPayments}}
+      {{#each payments}}
       <tr>
         <td>
           {{#if data.object.paid}}
@@ -56,7 +58,6 @@
         <td class="font-weight-bold">{{getPaymentAmount data.object.total}}</td>
       </tr>
       {{/each}}
-    {{/with}}
   </tbody>
 </table>
     <div class="ui middle aligned list">
