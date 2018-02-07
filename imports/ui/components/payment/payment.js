@@ -8,7 +8,6 @@ import { Payments } from '../../../api/payments/payments';
 Template.payment.onRendered(function() {
   let self = this;
   self.autorun(function() {
-    console.log(self.subscribe('payments'));
     self.subscribe('payments');
   });
 });
@@ -18,7 +17,8 @@ Template.payment.helpers({
     return Payments.find();
   },
   hasSource( id ) {
-    let source = Sources.findOne({'data.object.customer': id});
+    let source;
+    // let source = Sources.findOne({'data.object.customer': id});
     if ( source ) {
       return true;
     } else {
