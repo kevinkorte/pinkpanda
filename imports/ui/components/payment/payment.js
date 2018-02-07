@@ -17,6 +17,14 @@ Template.payment.helpers({
   payments() {
     return Payments.find();
   },
+  hasSource( id ) {
+    let source = Sources.findOne({'data.object.customer': id});
+    if ( source ) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   getLast4ofCard( id ) {
 
   },

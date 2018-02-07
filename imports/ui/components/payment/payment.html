@@ -1,13 +1,12 @@
 <template name="payment">
   <div class="invite-wrapper full-width">
-    {{#each findPayments}}
-    {{_id}}
-    {{/each}}
     <div class="invite-header">
+      {{#each payments}}
       <div class="d-flex">
         {{{getAccountStatusLabel}}}
-        <div class="floated content pl-3">Next Payment: {{getAccountStatusDate}}</div>
+        <div class="floated content pl-3">Next Payment: {{getEndDate data.object.lines.data.[0].period.end}}</div>
       </div>
+      {{/each}}
       <div>
         {{#each payments}}
         Last Four: <strong>{{getLast4ofCard customerId}}</strong>
@@ -17,7 +16,6 @@
         {{/each}}
       </div>
     </div>
-    {{#with organization}}
     {{#if hasSource customerId}}
       <button class="ui button green my-2" data-toggle="modal" data-target="#payment-modal">Update Card</button>
     {{else}}
@@ -26,7 +24,6 @@
       <button class="ui button yellow" data-toggle="modal" data-target="#payment-modal">Add Card</button>
     </div>
     {{/if}}
-    {{/with}}
 
 
 
