@@ -1,4 +1,12 @@
 <template name="paymentInfo">
+    {{#if hasSource customerId}}
+    <button class="ui button green my-2" data-toggle="modal" data-target="#payment-modal">Update Card</button>
+  {{else}}
+  <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
+    <p class="mb-0"><strong>Hey There!</strong> You have no payment method currently!</p>
+    <button class="ui button yellow" data-toggle="modal" data-target="#payment-modal">Add Card</button>
+  </div>
+  {{/if}}
   <form action="/charge" method="post" id="payment-form1">
     <div class="form-group">
       <label for="card-element">

@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import moment from 'moment';
 
 import './payment.html';
+import '../settings/card/add_card_modal.js';
 import { Payments } from '../../../api/payments/payments';
 
 Template.payment.onRendered(function() {
@@ -16,6 +17,7 @@ Template.payment.helpers({
   payments() {
     return Payments.find();
   },
+  //this helper duplicated on settings page
   hasSource( id ) {
     let source;
     // let source = Sources.findOne({'data.object.customer': id});

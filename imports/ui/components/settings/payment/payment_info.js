@@ -25,4 +25,17 @@ Template.paymentInfo.onRendered( () => {
 
 Template.paymentInfo.onDestroyed( function() {
   card.destroy();
+});
+
+Template.paymentInfo.helpers({
+  //this helper duplicated on payments page
+  hasSource( id ) {
+    let source;
+    // let source = Sources.findOne({'data.object.customer': id});
+    if ( source ) {
+      return true;
+    } else {
+      return false;
+    }
+  },
 })
