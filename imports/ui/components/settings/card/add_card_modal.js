@@ -52,7 +52,9 @@ Template.add_card_modal.onRendered( () => {
     hiddenInput.setAttribute('name', 'stripeToken');
     hiddenInput.setAttribute('value', token.id);
     form.appendChild(hiddenInput);
-    console.log(form);
+    $('#payment-form').submit( (event) => {
+      event.preventDefault();
+    });
     // form.submit(function(event) {
     //   event.preventDefault();
     //   let target = event.target;
@@ -79,3 +81,13 @@ Template.add_card_modal.onRendered( () => {
 Template.add_card_modal.onDestroyed( () => {
   card.destroy();
 });
+
+Template.add_card_modal.events({
+  'submit #payment-form'(event) {
+    event.preventDefault();
+    console.log(event);
+    let target = event.target;
+    let token = target.stripeToken.value;
+    console.log(token);
+  }
+})
