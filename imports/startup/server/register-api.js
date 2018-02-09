@@ -18,6 +18,8 @@ import '../../api/payments/server/publications.js';
 
 import '../../api/signup/methods.js';
 
+import '../../api/sources/methods.js';
+
 import '../../api/subscriptions/methods.js';
 import '../../api/subscriptions/server/publications.js';
 
