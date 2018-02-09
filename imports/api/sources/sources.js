@@ -2,9 +2,9 @@ import { Mongo } from 'meteor/mongo'
 
 import SimpleSchema from 'simpl-schema';
 
-export const Payments = new Mongo.Collection("payments");
+export const Sources = new Mongo.Collection("sources");
 
-PaymentSchema = new SimpleSchema({
+SourcesSchema = new SimpleSchema({
   createdAt: {
     type: Date,
     autoValue: function() {
@@ -18,5 +18,3 @@ PaymentSchema = new SimpleSchema({
     }
   }
 });
-
-Payments.attachSchema( PaymentSchema );
