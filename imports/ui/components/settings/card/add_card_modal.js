@@ -87,6 +87,7 @@ Template.add_card_modal.events({
     event.preventDefault();
     console.log(event);
     let target = event.target;
+    console.log(target.stripeToken);
     let token = target.stripeToken.value;
     console.log(token);
   }
