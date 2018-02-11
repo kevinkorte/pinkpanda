@@ -1,6 +1,8 @@
 <template name="dashboard">
   {{> dashboard_navigation }}
   <div class="container-fluid pt-5">
+      
+    {{#if Template.subscriptionsReady}}
     {{#if hasdates}}
     <div class="card-deck">
       {{#each dates}}
@@ -40,6 +42,9 @@
           <a href="#" class="btn btn-primary js-new-date" role="button">Start a New Date</a>
       </div>
       
+    {{/if}}
+    {{else}}
+    <i class="fa fa-circle-o-notch fa-3x fa-spin center-loader" aria-hidden="true"></i>
     {{/if}}
   </div>
 </template>
