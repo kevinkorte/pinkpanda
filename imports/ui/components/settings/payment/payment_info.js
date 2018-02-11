@@ -20,8 +20,19 @@ Template.paymentInfo.helpers({
     if ( source ) {
       switch ( source.data.object.brand ) {
         case 'Visa':
-        return 'visa';
-        break;
+          return 'visa';
+          break;
+        case 'MasterCard':
+          return 'mastercard';
+          break;
+        case 'American Express':
+          return 'amex';
+          break;
+        case 'Discover':
+          return 'discover';
+          break;
+        default:
+          return 'credit'
       }
     }
   },

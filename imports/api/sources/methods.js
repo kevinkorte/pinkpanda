@@ -29,5 +29,11 @@ Meteor.methods({
         console.log(response)
       }
     })
+  },
+  deletePaymentSource(request) {
+    let cardToRemove = Sources.findOne({'data.object.id': request.data.object.id});
+    if ( cardToRemove ) {
+      Sources.remove(cardToRemove._id);
+    }
   } 
 })
