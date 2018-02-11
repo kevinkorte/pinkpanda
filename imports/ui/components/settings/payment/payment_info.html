@@ -1,26 +1,14 @@
 <template name="paymentInfo">
-    {{#if hasSource customerId}}
-    <button class="ui button green my-2" data-toggle="modal" data-target="#payment-modal">Update Card</button>
+    {{#if hasSource}}
+    <div class="d-flex align-items-center">
+      <img src="icons/{{creditCardIcon}}.png" alt="Payment Brand Image">
+      <div class="last4 ml-3">Last Four Digits: <span class="font-weight-bold">{{last4}}</span></div> 
+      <button class="btn btn-dark ml-auto" data-toggle="modal" data-target="#payment-modal">Update Card</button>  
+    </div>
   {{else}}
   <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
     <p class="mb-0"><strong>Hey There!</strong> You have no payment method currently!</p>
     <button class="btn btn-warning" data-toggle="modal" data-target="#payment-modal">Add Card</button>
   </div>
   {{/if}}
-  <!-- <form action="/charge" method="post" id="payment-form1">
-    <div class="form-group">
-      <label for="card-element">
-        Credit or debit card
-      </label>
-      <div id="card-element" class="form-control col-6"> -->
-        <!-- a Stripe Element will be inserted here. -->
-      <!-- </div> -->
-  
-      <!-- Used to display Element errors -->
-      <!-- <div id="card-errors" role="alert"></div>
-    </div>
-  
-    <button>Submit Payment</button>
-  </form> -->
-  
 </template>
