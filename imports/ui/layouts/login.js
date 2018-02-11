@@ -4,6 +4,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
 import './login.html';
+import '../components/svg/signin.html';
 
 Template.App_login.helpers({
   hasError() {
@@ -21,6 +22,8 @@ Template.App_login.helpers({
 Template.App_login.events({
   'submit .js-login'(event) {
     event.preventDefault();
+    let spinner = $('.sign-up-button').data('btn-spin');
+    $('.sign-in-button').html( spinner );
     const email = event.target.email.value;
     const password = event.target.password.value;
     Meteor.loginWithPassword(email, password, (error, response) => {
@@ -28,6 +31,7 @@ Template.App_login.events({
         Session.set('error', error.reason);
       } else {
         FlowRouter.go('dashboard');
+        $('.sign-in-button').html('Log In');
       }
     })
   }
