@@ -34,8 +34,12 @@
       {{/each}}
     </div>
     {{else}}
-      <p class="lead">There's nothing on your dashboard yet. You can change that by starting a new date.</p>
-        <a href="#" class="btn btn-primary" role="button">Start a New Date</a>
+    <div class="dashboard-svg">{{> dashboard_svg}}</div>
+      <p class="lead text-center">Ahh zen. There's nothing to show right now.</p>
+      <div class="d-flex justify-content-center">
+          <a href="#" class="btn btn-primary js-new-date" role="button">Start a New Date</a>
+      </div>
+      
     {{/if}}
   </div>
 </template>

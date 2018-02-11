@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import "./dashboard.html";
 import '../components/navigation.js';
+import '../components/svg/dashboard.html';
 
 Template.dashboard.onCreated(function() {
   let self = this;
@@ -68,5 +69,19 @@ Template.dashboard.helpers({
         return false;
       }
     }
+  }
+});
+
+Template.dashboard.events({
+  //duplicated from navigation events
+  'click .js-new-date'(event) {
+    Meteor.call('createNewDate', (error, result) => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log(result);
+        FlowRouter.go('new.date', {user: Meteor.userId(), id: result});
+      }
+    });
   }
 })
