@@ -1,6 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Accounts } from 'meteor/accounts-base'
+import { Accounts } from 'meteor/accounts-base';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+import { Session } from 'meteor/session';
 
 // Import needed templates
 import '../../ui/layouts/body/body.js';
@@ -17,6 +19,19 @@ import '../../ui/pages/date_public/date_public.js';
 import '../../ui/pages/not-found/not-found.js';
 
 // Set up all routes in the app
+Accounts.onLogout( () => {
+  FlowRouter.redirect('/login');
+});
+
+let authRoutes = FlowRouter.group({
+  name: 'auth',
+  triggersEnter: [function(context, redirect) {
+    if ( !Meteor.userId() ) {
+      redirect('/signup')
+    }
+  }]
+});
+
 FlowRouter.route('/', {
   name: 'App.home',
   action() {
@@ -48,8 +63,25 @@ FlowRouter.route('/login', {
     Session.set('error', null);
   },
   action() {
-    BlazeLayout.render('App_login');
+    if ( Meteor.userId() ) {
+      FlowRouter.go('dashboard');
+    } else {
+      BlazeLayout.render('App_login');
+    }
   },
+});
+
+FlowRouter.route('/logout', {
+  name: 'App.logout',
+  action() {
+    Meteor.logout( (error) => {
+      if ( error ) {
+        console.log(error);
+      } else {
+        FlowRouter.redirect('/login');
+      }
+    });
+  }
 });
 
 FlowRouter.route('/welcome', {
@@ -66,7 +98,7 @@ FlowRouter.route('/welcome/:step', {
   }
 });
 
-FlowRouter.route('/dashboard', {
+authRoutes.route('/dashboard', {
   name: 'dashboard',
   triggersEnter: [function() {
     $('body').addClass('dashboard');
@@ -79,14 +111,14 @@ FlowRouter.route('/dashboard', {
   }
 });
 
-FlowRouter.route('/dashboard/me', {
+authRoutes.route('/dashboard/me', {
   name: 'dashboard.me',
   action() {
     BlazeLayout.render('dashboard');
   }
 });
 
-FlowRouter.route('/date/:user/:id', {
+authRoutes.route('/date/:user/:id', {
   name: 'new.date',
   triggersEnter: [function() {
     $('body').addClass('new-date');
@@ -111,7 +143,7 @@ FlowRouter.route('/:user/:id', {
   }
 });
 
-FlowRouter.route('/settings', {
+authRoutes.route('/settings', {
   name: 'settings',
   action() {
     BlazeLayout.render('App_settings', { main: 'settings' });
