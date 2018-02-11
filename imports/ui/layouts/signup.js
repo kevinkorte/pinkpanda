@@ -5,6 +5,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Subscriptions } from '../../api/subscriptions/subscriptions.js';
 
 import './signup.html';
+import '../components/svg/signup.html';
+
 
 Template.App_signup.onCreated( function() {
   Meteor.subscribe('subs.all');

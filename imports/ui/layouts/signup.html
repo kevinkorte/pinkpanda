@@ -1,11 +1,12 @@
 <template name="App_signup">
-  <div class="container-fluid">
+  <div class="container-fluid mt-5 mb-2">
     <div class="row">
       <div class="col-12">
         <div class="d-flex flex-column justify-content-center h-100 align-items-center">
           <h3 class="mb-5 font-heavy sign-up-title">Create an Account</h3>
           <div class="signup-wrapper">
-            <p class="text-muted font-weight-light text-center">Sign up <em>free</em>, for 30 days. Just $6.99 per month after</p>
+            <div class="signup-svg">{{> signup_svg }}</div>
+            <p class="text-muted font-weight-light text-center">Sign up <em>free</em>, for 30 days. Just $7.99 per month after</p>
             <hr>
             {{#if hasError}}
             <div class="alert alert-danger" role="alert">
