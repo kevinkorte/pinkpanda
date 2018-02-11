@@ -4,12 +4,15 @@ import moment from 'moment';
 
 import './payment.html';
 import '../settings/card/add_card_modal.js';
-import { Payments } from '../../../api/payments/payments';
+import { Payments } from '../../../api/payments/payments.js';
+import { Sources } from '../../../api/sources/sources.js';
+import { Subscriptions } from '../../../api/subscriptions/subscriptions.js';
 
 Template.payment.onRendered(function() {
   let self = this;
   self.autorun(function() {
     self.subscribe('payments');
+    self.subscribe('sources');
   });
 });
 
@@ -17,18 +20,32 @@ Template.payment.helpers({
   payments() {
     return Payments.find();
   },
+  sources() {
+    return Sources.find();
+  },
   //this helper duplicated on settings page
   hasSource( id ) {
-    let source;
-    // let source = Sources.findOne({'data.object.customer': id});
+    let source = Sources.findOne();
     if ( source ) {
       return true;
     } else {
       return false;
     }
   },
-  getLast4ofCard( id ) {
-
+  getSubStatus() {
+    let sub = Subscriptions.findOne();
+    if ( sub ) {
+      console.log(sub.resultOfStripeCreateCustomer.status);
+      return sub.resultOfStripeCreateCustomer.status;
+    }
+  },
+  getLast4ofCard() {
+    let source = Sources.findOne();
+    console.log(source);
+    if ( source ) {
+      console.log(source);
+      return source.data.object.last4;
+    }
   },
   getStartDate( date ) {
     if ( date ) {

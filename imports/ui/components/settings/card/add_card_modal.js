@@ -40,21 +40,21 @@ Template.add_card_modal.onRendered( () => {
       errorElement.textContent = error.message;
     } else {
       // Send the token to your server
+      // stripeTokenHandler(token);
       stripeTokenHandler(token);
     }
   });
 
   const stripeTokenHandler = (token) => {
     // Insert the token ID into the form so it gets submitted to the server
-    const form = document.getElementById('payment-form');
-    const hiddenInput = document.createElement('input');
-    hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('name', 'stripeToken');
-    hiddenInput.setAttribute('value', token.id);
-    form.appendChild(hiddenInput);
-    $('#payment-form').submit( (event) => {
-      event.preventDefault();
-    });
+      Meteor.call('updateSource', token, function(error, response) {
+        if ( error ) {
+          console.log(error.reason);
+        } else {
+          $('#payment-modal').modal('hide');
+          $('#modal-body').removeClass('modal-waiting');
+        }
+      });
     // form.submit(function(event) {
     //   event.preventDefault();
     //   let target = event.target;
@@ -83,12 +83,12 @@ Template.add_card_modal.onDestroyed( () => {
 });
 
 Template.add_card_modal.events({
-  'submit #payment-form'(event) {
-    event.preventDefault();
-    console.log(event);
-    let target = event.target;
-    console.log(target.stripeToken);
-    let token = target.stripeToken.value;
-    console.log(token);
-  }
+  // 'submit #payment-form'(event) {
+  //   event.preventDefault();
+  //   console.log(event);
+  //   let target = event.target;
+  //   console.log(target.stripeToken);
+  //   let token = target.stripeToken.value;
+  //   console.log(token);
+  // }
 })

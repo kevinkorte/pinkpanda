@@ -8,11 +8,12 @@ let stripe = require("stripe")(
 
 Meteor.methods({
   updateSource(token) {
+    console.log('called update source');
     let user = Meteor.users.findOne(Meteor.userId);
     let cus = user.stripeCustomerId;
     if ( cus ) {
       stripe.customers.update(cus, {
-        source: token
+        source: token.id
       }, function(err, customer) {
         // asynchronously called
       });

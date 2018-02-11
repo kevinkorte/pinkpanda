@@ -1,4 +1,52 @@
 <template name="payment">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title mb-0">Payments</h5>
+    </div>
+    <div class="card-body">
+      {{#unless hasSource}}
+      <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
+        <p class="mb-0"><strong>Hey There!</strong> You have no payment method currently!</p>
+        <button class="btn btn-warning" data-toggle="modal" data-target="#payment-modal"><i class="fa fa-credit-card" aria-hidden="true"></i> Add Card</button>
+      </div>
+      {{/unless}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            {{#each payments}}
+            <tr>
+              <td>
+                {{#if data.object.paid}}
+                  <span class="badge badge-pill badge-success">Paid</span>
+                {{/if}}
+              </td>
+              <td>{{getStartDate data.object.date}}</td>
+              <td class="font-weight-bold">{{getPaymentAmount data.object.total}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+      
+      <div class="d-flex">
+      {{#if hasSource}}
+        {{#with source}}
+        Last Four: <strong>{{getLast4ofCard}}</strong>
+        {{/with}}
+      {{/if}}
+      </div>
+
+  PAYMENT
+  {{#each source}}
+  Last Four: <strong>{{getLast4ofCard}}</strong>
+  {{/each}}
   <div class="invite-wrapper full-width">
     <div class="invite-header">
       {{#each payments}}
@@ -8,8 +56,8 @@
       </div>
       {{/each}}
       <div>
-        {{#each payments}}
-        Last Four: <strong>{{getLast4ofCard customerId}}</strong>
+        {{#each sources}}
+        Last Four: <strong>{{getLast4ofCard}}</strong>
 
         <!-- <img src="/icons/credit.png" alt=""> -->
         <img src="{{creditCardIcon customerId}}" alt="">
@@ -17,6 +65,7 @@
       </div>
     </div>
     {{#if hasSource customerId}}
+    Last Four: <strong>{{getLast4ofCard}}</strong>
       <button class="ui button green my-2" data-toggle="modal" data-target="#payment-modal">Update Card</button>
     {{else}}
     <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
