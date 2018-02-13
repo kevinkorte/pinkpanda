@@ -4,18 +4,19 @@ import { Dates } from '../../api/dates/dates.js';
 
 import moment from 'moment';
 
-import "./dashboard.html";
+import "./dashboard_drafts.html";
 import '../components/navigation.js';
 import '../components/svg/dashboard.html';
 
-Template.dashboard.onCreated(function() {
+
+Template.dashboard_drafts.onCreated(function() {
   let self = this;
   self.autorun(function() {
     self.subscribe('dates.all');
   });
 });
 
-Template.dashboard.helpers({
+Template.dashboard_drafts.helpers({
   hasdates() {
     let dates = Dates.find().count();
     if ( dates > 0 ) {
@@ -25,7 +26,7 @@ Template.dashboard.helpers({
     }
   },
   dates() {
-    return Dates.find({ draft: false }, {sort: {starting: 1}});
+    return Dates.find({ draft: true }, {sort: {starting: 1}});
   },
   getUserName(id) {
     let user = Meteor.users.findOne(id);

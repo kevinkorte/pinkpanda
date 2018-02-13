@@ -11,12 +11,14 @@ import '../../ui/layouts/login.js';
 import '../../ui/layouts/signup.js';
 import '../../ui/layouts/onboarding.js';
 import '../../ui/layouts/dashboard.js';
+import '../../ui/layouts/dashboard_drafts.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/pages/settings.js';
 import '../../ui/pages/new-date/new-date.js';
 import '../../ui/pages/date_can_edit/date_can_edit.js';
 import '../../ui/pages/date_public/date_public.js';
 import '../../ui/pages/not-found/not-found.js';
+
 
 // Set up all routes in the app
 Accounts.onLogout( () => {
@@ -108,6 +110,19 @@ authRoutes.route('/dashboard', {
   }],
   action() {
     BlazeLayout.render('dashboard');
+  }
+});
+
+authRoutes.route('/dashboard/drafts', {
+  name: 'dashboard.draft',
+  triggersEnter: [function() {
+    $('body').addClass('dashboard');
+  }],
+  triggersExit: [function() {
+    $('body').removeClass('dashboard');
+  }],
+  action() {
+    BlazeLayout.render('dashboard_drafts');
   }
 });
 

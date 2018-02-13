@@ -6,7 +6,7 @@
           <a href="{{pathFor 'dashboard'}}" class="nav-link">Dashboard</a>
         </li>
         <li class="nav-item">
-          <button class="btn btn-link nav-link">Drafts <span class="badge badge-light">0</span></button>
+          <a href="{{pathFor 'dashboard.draft'}}" class="btn btn-link nav-link">Drafts <span class="badge badge-light">{{getDraftCount}}</span></a>
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
