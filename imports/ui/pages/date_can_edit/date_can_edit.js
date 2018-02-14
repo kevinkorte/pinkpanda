@@ -130,7 +130,6 @@ Template.date_can_edit.helpers({
     };
   },
   getNotificationIcon(type) {
-    console.log(type);
     if ( type == 'check-in') {
         return '<span class="fa-stack text-primary"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-location-arrow fa-stack-1x fa-inverse"></i></span>';
       } else if ( type == 'manual-start' || type == 'auto-start') {
