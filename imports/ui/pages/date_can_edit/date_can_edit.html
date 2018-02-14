@@ -1,4 +1,9 @@
 <template name="date_can_edit">
+  {{#if currentUser}}
+  {{> dashboard_navigation }}
+  {{/if}}
+  {{#with date}}
+  {{#if canEditThisDate user}}
 <div class="navbar navbar-expand-lg navbar-light bg-dark text-light">
   <div class="container">
     <span class="navbar-text h3 text-light">
@@ -15,8 +20,15 @@
 
   </div>
 </div>
+{{else}}
+ {{#if currentUser}}
+  logged user
+ {{else}}
+  Unlogged user
+ {{/if}}
+{{/if}}
 
-{{#with date}}
+
 <div class="grid">
   <div class="location px-3">
     <h4 class="display-4">{{placeName}}</h4>
@@ -48,7 +60,7 @@
 
   </div>
 </div>
-{{/with}}
+
 
 
 <!-- Modal -->
@@ -78,4 +90,5 @@
       </div>
     </div>
   </div>
+  {{/with}}
 </template>

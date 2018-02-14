@@ -133,7 +133,7 @@ authRoutes.route('/dashboard/me', {
   }
 });
 
-authRoutes.route('/date/:user/:id', {
+authRoutes.route('/date/:user/:id/new', {
   name: 'new.date',
   triggersEnter: [function() {
     $('body').addClass('new-date');
@@ -146,14 +146,18 @@ authRoutes.route('/date/:user/:id', {
   }
 });
 
-FlowRouter.route('/:user/:id', {
+FlowRouter.route('/date/:user/:id', {
   name: 'single.date',
   triggersEnter: function(context, params) {
+  },
+  action() {
     let user = FlowRouter.current().params.user;
     if ( Meteor.userId() == user ) {
       BlazeLayout.render('App_body', { main: 'date_can_edit' });
     } else {
-      BlazeLayout.render('App_body', { main: 'date_public' });
+      //Don't worry, someone still can't edit it, handling this on the
+      //template level, need to sort this out
+      BlazeLayout.render('App_body', { main: 'date_can_edit' });
     }
   }
 });

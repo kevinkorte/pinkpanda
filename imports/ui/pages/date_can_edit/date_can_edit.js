@@ -90,6 +90,13 @@ Template.date_can_edit.onRendered(function() {
 });
 
 Template.date_can_edit.helpers({
+  canEditThisDate( user ) {
+    if ( Meteor.userId() == user ) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   //dateTime and dateDay are duplicated helpers from the dashboard
   dateTime(timestamp) {
     return moment(timestamp).format('h:mm a');
