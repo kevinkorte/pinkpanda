@@ -25,7 +25,15 @@ const DatingSchema = new SimpleSchema({
     type: Date,
     optional: true
   },
+  started: {
+    type: Date,
+    optional: true
+  },
   ending: {
+    type: Date,
+    optional: true
+  },
+  ended: {
     type: Date,
     optional: true
   },

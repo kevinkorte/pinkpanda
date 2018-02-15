@@ -109,5 +109,49 @@ Meteor.methods({
         })
       }
     })
+  },
+  startDate(lat, lng, accuracy, timestamp, id) {
+    console.log(lat,lng,accuracy, timestamp, id);
+    check(lat, Number);
+    check(lng, Number);
+    check(accuracy, Number);
+    check(timestamp, Number);
+    check(id, String);
+    let date = Dates.findOne(id);
+    Dates.update(id, { $set: { active: true, started: new Date() } } );
+    let geo = new GeoCoder({
+      httpAdapter: "https",
+      apiKey: Meteor.settings.public.googleApiKey
+    });
+    let coords = geo.reverse(lat, lng);
+    Notifications.insert({
+      dateId: id,
+      lat: lat,
+      lng: lng,
+      accuracy: accuracy,
+      timestamp: timestamp,
+      notificationType: 'manual-start'
+    }, ( error, result ) => {
+      if ( error ) {
+        throw new Meteor.Error('add-notification', 'We encountered a problem');
+      } else {
+        Notifications.update(result, { $set: { result } }, { filter: false, validate: false }, ( error, result ) => {
+          if ( error ) {
+            throw new Meteor.Error('add-notification', 'We encountered a problem');
+          } else {
+            SSR.compileTemplate('manual-start-message', Assets.getText('manual-start-text.html'));
+            let t_userId = date.user;
+            let t_user = Meteor.users.findOne(t_userId);
+            let data = { 
+              userName: t_user.profile.name,
+              address: result[0].place,
+              lat: result.lat,
+              lng: result.lng
+            };
+            //This is where we send that message to all followers
+          }
+        })
+      }
+    })
   }
 });
