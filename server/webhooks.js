@@ -48,6 +48,7 @@ Picker.route('/webhooks/stripe', (params, request, response, next) => {
         });
       break;
       case 'customer.subscription.updated':
+        //THIS METHOD DOES NOT EXIST
         Meteor.call('customerSubscriptionUpdated', request.body, function(error, result) {
           if (error) {
             console.log(error)

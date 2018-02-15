@@ -135,18 +135,16 @@ Meteor.methods({
       if ( error ) {
         throw new Meteor.Error('add-notification', 'We encountered a problem');
       } else {
-        Notifications.update(result, { $set: { result } }, { filter: false, validate: false }, ( error, result ) => {
+        Notifications.update(result, { $set: { coords } }, { filter: false, validate: false }, ( error, result ) => {
           if ( error ) {
             throw new Meteor.Error('add-notification', 'We encountered a problem');
           } else {
             SSR.compileTemplate('manual-start-message', Assets.getText('manual-start-text.html'));
-            let t_userId = date.user;
-            let t_user = Meteor.users.findOne(t_userId);
             let data = { 
-              userName: t_user.profile.name,
-              address: result[0].place,
-              lat: result.lat,
-              lng: result.lng
+              userName: Meteor.users.findOne(date.user).profile.name,
+              address: date.place,
+              lat: date.lat,
+              lng: date.lng
             };
             //This is where we send that message to all followers
           }

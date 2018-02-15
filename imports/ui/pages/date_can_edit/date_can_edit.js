@@ -108,7 +108,7 @@ Template.date_can_edit.helpers({
     return Dates.findOne();
   },
   notifications() {
-    return Notifications.find();
+    return Notifications.find({},{ sort: { timestamp: -1 } });
   },
   hasNotifications() {
     let notifications = Notifications.find().count();
@@ -133,7 +133,7 @@ Template.date_can_edit.helpers({
     if ( type == 'check-in') {
         return '<span class="fa-stack text-primary"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-location-arrow fa-stack-1x fa-inverse"></i></span>';
       } else if ( type == 'manual-start' || type == 'auto-start') {
-        return '<i class="icon circular flag"></i>';
+        return '<span class="fa-stack text-success"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-flag fa-stack-1x fa-inverse"></i></span>';
       } else if ( type == 'auto-end') {
         return '<i class="icon circular warning sign"></i>'
       } else if ( type == 'manual-end') {
@@ -160,13 +160,15 @@ Template.date_can_edit.helpers({
   notificationAddress(id) {
     let notification = Notifications.findOne(id);
     if ( notification ) {
-      return notification.result[0].formattedAddress;
+      return notification.coords[0].formattedAddress;
     }
   },
   getLatLng(id) {
+    console.log(id);
     let notification = Notifications.findOne(id);
     if ( notification ) {
-      return notification.result[0].latitude + " " + notification.result[0].longitude
+      console.log(notification);
+      return notification.coords[0].latitude + " " + notification.coords[0].longitude
     }
   }
 });

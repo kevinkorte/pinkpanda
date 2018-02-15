@@ -22,7 +22,7 @@ Meteor.methods({
       httpAdapter: "https",
       apiKey: Meteor.settings.public.googleApiKey
     });
-    var result = geo.reverse(lat, lng);
+    var coords = geo.reverse(lat, lng);
     // console.log(result);
     Notifications.insert({
       dateId: eventId,
@@ -36,7 +36,7 @@ Meteor.methods({
         console.log(error);
         throw new Meteor.Error('add-event', 'Opps, something went wrong updating your location');
       }
-      Notifications.update(response, {$set: {result}}, {filter: false, validate: false}, function(error,response){
+      Notifications.update(response, {$set: {coords}}, {filter: false, validate: false}, function(error,response){
         if (error) {
           throw new Meteor.Error('add-event', 'Opps, something went wrong updating your location');
         } else {
@@ -52,9 +52,9 @@ Meteor.methods({
           }
             let data = {
               // userName: username(t_user),
-              address: result[0].formattedAddress,
-              lat: result.lat,
-              lng: result.lng
+              address: coords[0].formattedAddress,
+              lat: coords.lat,
+              lng: coords.lng
             };
           console.log('data', data);
           if ( date.followers ) {
