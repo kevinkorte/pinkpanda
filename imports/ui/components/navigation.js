@@ -4,6 +4,13 @@ import { Dates } from '../../api/dates/dates.js';
 
 import './navigation.html';
 
+Template.dashboard_navigation.onCreated(function() {
+  let self = this;
+  self.autorun(function() {
+    self.subscribe('dates.all');
+  });
+});
+
 Template.dashboard_navigation.onRendered( function() {
 
 })
