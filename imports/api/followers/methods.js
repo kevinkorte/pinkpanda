@@ -24,9 +24,8 @@ Meteor.methods({
       email: email,
     }, function(err,res) {
       if (err) {
-        console.log(err)
+        console.log('addfollower error', err)
       } else {
-        console.log(res)
       }
     });
   },
@@ -95,4 +94,8 @@ Meteor.methods({
     }});
 
   },
+  removeFollower(id) {
+    check(id, String);
+    Followers.remove(id);
+  }
 })

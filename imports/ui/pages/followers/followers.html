@@ -28,7 +28,7 @@
           <input type="email" class="form-control" name="emailAddress" id="emailAddress" placeholder="Email">
         </div>
       </div>
-      <button type="submit" class="btn btn-purple btn-block">Create New Follower</button>
+      <button type="submit" class="btn btn-success btn-block">Create New Follower</button>
 
     </form>
   </div>
@@ -38,21 +38,25 @@
     Followers
   </div>
   {{#if Template.subscriptionsReady}}
+    {{#if hasFollowers}}
     <ul class="list-group list-group-flush">
-      {{#each follower}}
-      <li class="list-group-item d-flex justify-content-between">
-        <div class="follower">
-          {{name}}
-          {{{hasPhone _id}}}
-          {{{hasEmail _id}}}
-        </div>
-        <div class="follower-action-btns">
-          <button class="editFollower btn btn-dark" data-id="{{_id}}" data-toggle="modal" data-target="#editModal">Edit</button>
-          <button class="removeFollower btn btn-outline-danger border-0">Delete</button>
-        </div>
-      </li>
-      {{/each}}
-    </ul>
+        {{#each follower}}
+        <li class="list-group-item d-flex justify-content-between">
+          <div class="follower">
+            {{name}}
+            {{{hasPhone _id}}}
+            {{{hasEmail _id}}}
+          </div>
+          <div class="follower-action-btns">
+            <button class="editFollower btn btn-dark" data-id="{{_id}}" data-toggle="modal" data-target="#editModal">Edit</button>
+            <button class="removeFollower btn btn-outline-danger border-0" data-id="{{_id}}">Delete</button>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+    {{else}}
+     <span class="my-5 text-center">Add your first follower above!</span>
+    {{/if}}
   {{else}}
     <div class="ui active centered inline loader my-5">Loading...</div>
   {{/if}}
@@ -99,7 +103,7 @@
           <input type="hidden" name="id" value="">
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-purple">Update Contact Person</button>
+        <button type="submit" class="btn btn-success">Update Contact Person</button>
         <button type="button" class="btn btn-secondary close-edit-modal" data-dismiss="modal">Close</button>
       </div>
     </div>
