@@ -101,7 +101,7 @@ Template.App_signup.events({
         Meteor.call('newUserSignup', email, password, (error, response) => {
           if ( error ) {
             //Todo: Better error handling
-            console.log(error)
+            Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
           } else {
             //Successfully logged in, go to the next route
             FlowRouter.go( 'onboarding.step', {step: 'name'} );
