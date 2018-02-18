@@ -7,6 +7,8 @@ import './followers/followers.js';
 import '../components/settings/nav/tabs.js';
 import '../components/settings/account/userEmail.js';
 import '../components/settings/password/password.js';
+import '../components/settings/changePassword/resetPassword.js';
+import '../components/settings/changePassword/setNewPassword.js';
 import '../components/settings/card/card.js';
 import '../components/settings/subscription/subscription.js';
 import '../components/followers/edit_followers.js';

@@ -23,4 +23,13 @@ Meteor.methods({
       text: "Your password on NurseTap has been changed. If you are expecting this, you can ignore this email. If you did not reset your password, get in touch with us."
     })
   },
+  sendResetPassword(email) {
+    let user = Accounts.findUserByEmail(email);
+    console.log(user);
+    if ( user ) {
+      Accounts.sendResetPasswordEmail(user._id);
+    } else {
+      throw new Meteor.Error('no-user', 'No user found')
+    }
+  }
 })
