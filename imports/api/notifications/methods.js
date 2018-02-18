@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { Email } from 'meteor/email';
 import { Dates } from '../dates/dates.js';
 import { Notifications } from './notifications.js';
 
@@ -40,32 +41,42 @@ Meteor.methods({
         if (error) {
           throw new Meteor.Error('add-event', 'Opps, something went wrong updating your location');
         } else {
-          SSR.compileTemplate('checkin-text-message', Assets.getText('checkin-text.html'));
-          let t_userId = date.user;
-          let t_user = Meteor.users.findOne(t_userId);
+          SSR.compileTemplate('checkin-text-message', Assets.getText('checkin-text-message.html'));
+          SSR.compileTemplate('checkin-text-email', Assets.getText('checkin-text-email.html'));
+          
           function username(user) {
-            if ( user.profile.name ) {
-              return user.profile.name;
-            } else {
-              return user.emails[0].address
+            let the_user = Meteor.users.findOne(user);
+            if ( the_user ) {
+              if ( the_user.profile.name ) {
+                return the_user.profile.name.first;
+              } else {
+                return the_user.emails[0].address
+              }
             }
           }
             let data = {
-              // userName: username(t_user),
+              userName: username(date.user),
               address: coords[0].formattedAddress,
-              lat: coords.lat,
-              lng: coords.lng
+              lat: coords[0].latitude,
+              lng: coords[0].longitude
             };
-          console.log('data', data);
           if ( date.followers ) {
             date.followers.forEach(function(follower) {
               if (follower.phoneNumber) {
                 client.messages.create({
                   body: SSR.render('checkin-text-message', data),
                   to: '+1'+follower.phoneNumber,
-                  from: '+15097923432'
+                  from: Meteor.settings.private.twilio.number
                 })
                 .then((message) => console.log(message.sid));
+              }
+              if (follower.email) {
+                Email.send({
+                  from: 'SafeTap <notifications@safetap.com>',
+                  to: follower.email,
+                  subject: data.userName + ' has just checked in',
+                  html: SSR.render('checkin-text-email', data)
+                });
               }
             });
           }
