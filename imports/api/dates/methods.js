@@ -58,20 +58,31 @@ Meteor.methods({
           } else {
             let date = Dates.findOne(id);
             if ( date ) {
-              SSR.compileTemplate('auto-start-message', Assets.getText('auto-start-text.html'));
-              let t_user = Meteor.users.findOne(date.user);
-              let data = {
-                userName: t_user.profile.name,
-                address: date.address
-              };
+              SSR.compileTemplate('auto-start-text', Assets.getText('auto-start-text.html'));
+              SSR.compileTemplate('auto-start-email', Assets.getText('auto-start-email.html'));
+              let the_user = Meteor.users.findOne(date.user);
+              if ( the_user ) {
+                let data = {
+                  userName: the_user.profile.name.first,
+                  address: date.address
+                };
+              }
               date.followers.forEach(function(follower) {
                 if ( follower.phoneNumber ) {
                   client.messages.create({
-                    body: SSR.render('auto-start-message', data),
+                    body: SSR.render('auto-start-text', data),
                     to: '+1'+follower.phoneNumber,
                     from: Meteor.settings.private.twilio.number
                   })
                   .then((message) => console.log(message.sid));
+                }
+                if ( follower.email ) {
+                  Email.send({
+                    from: 'SafeTap <notifications@safetap.com>',
+                    to: follower.email,
+                    subject: 'Auto-start for ' + data.userName,
+                    html: SSR.render('checkin-start-email', data)
+                  });
                 }
               });
             } else {
@@ -97,13 +108,36 @@ Meteor.methods({
           } else {
             let date = Dates.findOne(id);
             if ( date ) {
-              SSR.compileTemplate('auto-end-message', Assets.getText('auto-end-text.html'));
-              let t_user = Meteor.users.findOne(date.user);
-              let data = {
-                userName: t_user.profile.name,
-                address: date.address,
-                endTime: moment(date.ending).format('h:mm a')
-              };
+              SSR.compileTemplate('auto-end-text', Assets.getText('auto-end-text.html'));
+              SSR.compileTemplate('auto-end-email', Assets.getText('auto-end-email.html'));
+              let the_user = Meteor.users.findOne(date.user);
+              if ( the_user ) {
+                let data = {
+                  userName: the_user.profile.name.first,
+                  address: date.address,
+                  endTime: moment(date.ending).format('h:mm a')
+                };
+                if ( date.followers ) {
+                  date.followers.forEach(function(follower) {
+                    if (follower.phoneNumber) {
+                      client.messages.create({
+                        body: SSR.render('auto-end-text', data),
+                        to: '+1'+follower.phoneNumber,
+                        from: Meteor.settings.private.twilio.number
+                      })
+                      .then((message) => console.log(message.sid));
+                    }
+                    if (follower.email) {
+                      Email.send({
+                        from: 'SafeTap <notifications@safetap.com>',
+                        to: follower.email,
+                        subject: 'Auto-end for ' + data.userName,
+                        html: SSR.render('auto-end-email', data)
+                      });
+                    }
+                  });
+                }
+              }
             }
           }
         })
@@ -139,13 +173,113 @@ Meteor.methods({
           if ( error ) {
             throw new Meteor.Error('add-notification', 'We encountered a problem');
           } else {
-            SSR.compileTemplate('manual-start-message', Assets.getText('manual-start-text.html'));
+            SSR.compileTemplate('manual-start-text', Assets.getText('manual-start-text.html'));
+            SSR.compileTemplate('manual-start-email', Assets.getText('manual-start-email.html'));
+            function username(user) {
+              let the_user = Meteor.users.findOne(user);
+              if ( the_user ) {
+                if ( the_user.profile.name ) {
+                  return the_user.profile.name.first;
+                } else {
+                  return the_user.emails[0].address
+                }
+              }
+            }
             let data = { 
-              userName: Meteor.users.findOne(date.user).profile.name,
-              address: date.place,
-              lat: date.lat,
-              lng: date.lng
+              userName: username(date.user),
+              address: coords[0].formattedAddress
             };
+            if ( date.followers ) {
+              date.followers.forEach(function(follower) {
+                if (follower.phoneNumber) {
+                  client.messages.create({
+                    body: SSR.render('manual-start-text', data),
+                    to: '+1'+follower.phoneNumber,
+                    from: Meteor.settings.private.twilio.number
+                  })
+                  .then((message) => console.log(message.sid));
+                }
+                if (follower.email) {
+                  Email.send({
+                    from: 'SafeTap <notifications@safetap.com>',
+                    to: follower.email,
+                    subject: data.userName + ' has just started',
+                    html: SSR.render('manual-start-email', data)
+                  });
+                }
+              });
+            }            
+            //This is where we send that message to all followers
+          }
+        })
+      }
+    })
+  },
+  endDate(lat, lng, accuracy, timestamp, id) {
+    console.log(lat,lng,accuracy, timestamp, id);
+    check(lat, Number);
+    check(lng, Number);
+    check(accuracy, Number);
+    check(timestamp, Number);
+    check(id, String);
+    let date = Dates.findOne(id);
+    Dates.update(id, { $set: { active: false, ended: new Date() } } );
+    let geo = new GeoCoder({
+      httpAdapter: "https",
+      apiKey: Meteor.settings.public.googleApiKey
+    });
+    let coords = geo.reverse(lat, lng);
+    Notifications.insert({
+      dateId: id,
+      lat: lat,
+      lng: lng,
+      accuracy: accuracy,
+      timestamp: timestamp,
+      notificationType: 'manual-end'
+    }, ( error, result ) => {
+      if ( error ) {
+        throw new Meteor.Error('add-notification', 'We encountered a problem');
+      } else {
+        Notifications.update(result, { $set: { coords } }, { filter: false, validate: false }, ( error, result ) => {
+          if ( error ) {
+            throw new Meteor.Error('add-notification', 'We encountered a problem');
+          } else {
+            SSR.compileTemplate('manual-end-text', Assets.getText('manual-end-text.html'));
+            SSR.compileTemplate('manual-end-email', Assets.getText('manual-end-email.html'));
+            function username(user) {
+              let the_user = Meteor.users.findOne(user);
+              if ( the_user ) {
+                if ( the_user.profile.name ) {
+                  return the_user.profile.name.first;
+                } else {
+                  return the_user.emails[0].address
+                }
+              }
+            }
+            let data = { 
+              userName: username(date.user),
+              address: coords[0].formattedAddress
+            };
+            if ( date.followers ) {
+              date.followers.forEach(function(follower) {
+                if (follower.phoneNumber) {
+                  client.messages.create({
+                    body: SSR.render('manual-end-text', data),
+                    to: '+1'+follower.phoneNumber,
+                    from: Meteor.settings.private.twilio.number
+                  })
+                  .then((message) => console.log(message.sid));
+                }
+                if (follower.email) {
+                  Email.send({
+                    from: 'SafeTap <notifications@safetap.com>',
+                    to: follower.email,
+                    subject: data.userName + ' has just completed their appointment',
+                    html: SSR.render('manual-end-email', data)
+                  });
+                }
+              });
+            }            
             //This is where we send that message to all followers
           }
         })
