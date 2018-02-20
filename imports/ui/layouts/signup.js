@@ -57,7 +57,7 @@ Template.App_signup.onRendered( function() {
                 $('.sign-up-button').html('Create My Account');
               } else {
                 //Successfully logged in, go to the next route
-                FlowRouter.go( 'onboarding.step', {step: 'name'} );
+                FlowRouter.go( 'dashboard' );
               }
             });
           }
@@ -86,30 +86,30 @@ Template.App_signup.helpers({
 })
 
 Template.App_signup.events({
-  'submit .js-submit'(event) {
-    event.preventDefault();
-    const firstName = event.target.firstName.value;
-    const lastName = event.target.lastName.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    Meteor.call('checkIfUserExists', email, password, (error, response) => {
-      if ( error ) {
-        console.log( error );
-        Session.set('error', error.reason);
-      } else {
-        Accounts.createUser( { email: email, password: password, profile: {name: { first: firstName, last: lastName } } } );
-        Meteor.call('newUserSignup', email, password, (error, response) => {
-          if ( error ) {
-            //Todo: Better error handling
-            console.log(error)
-          } else {
-            //Successfully logged in, go to the next route
-            FlowRouter.go( 'onboarding.step', {step: 'name'} );
-          }
-        });
-      }
-    });
-  },
+  // 'submit .js-submit'(event) {
+  //   event.preventDefault();
+  //   const firstName = event.target.firstName.value;
+  //   const lastName = event.target.lastName.value;
+  //   const email = event.target.email.value;
+  //   const password = event.target.password.value;
+  //   Meteor.call('checkIfUserExists', email, password, (error, response) => {
+  //     if ( error ) {
+  //       console.log( error );
+  //       Session.set('error', error.reason);
+  //     } else {
+  //       Accounts.createUser( { email: email, password: password, profile: {name: { first: firstName, last: lastName } } } );
+  //       Meteor.call('newUserSignup', email, password, (error, response) => {
+  //         if ( error ) {
+  //           //Todo: Better error handling
+  //           console.log(error)
+  //         } else {
+  //           //Successfully logged in, go to the next route
+  //           FlowRouter.go( 'dashboard' );
+  //         }
+  //       });
+  //     }
+  //   });
+  // },
   'click .js-loginFacebook'(event) {
     console.log(event);
     event.preventDefault();

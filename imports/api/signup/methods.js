@@ -7,8 +7,11 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import stripePackage from 'stripe';
 
 import './signup.js';
-
-const stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
+if ( Meteor.isProduction ) {
+  const stripe = stripePackage(Meteor.settings.private.prodStripeSecreteTestKey);
+} else {
+  const stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
+}
 
 Meteor.methods({
   checkIfUserExists(email, password) {
@@ -56,7 +59,7 @@ let _updateUserAccount = ( customer, userId ) => {
 
 let _subscribeToPlan = ( customer, userId ) => {
   let asyncToSync = Meteor.wrapAsync( stripe.subscriptions.create, stripe.subscriptions );
-  resultOfStripeCreateCustomer = asyncToSync( { customer: customer.id, trial_period_days: 7, items: [ { plan: 'basic0917'  } ] } );
+  resultOfStripeCreateCustomer = asyncToSync( { customer: customer.id, trial_period_days: 30, items: [ { plan: 'basic0917'  } ] } );
 
   Meteor.users.update(userId, { $set: { stripeSubscriptionId: resultOfStripeCreateCustomer.id } } );
   let sub = Subscriptions.insert({ resultOfStripeCreateCustomer });
