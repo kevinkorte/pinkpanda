@@ -1,6 +1,7 @@
 <template name="dashboard_navigation">
   <div class="navbar navbar-expand-lg navbar-dark bg-dark-gradient">
     <div class="collapse navbar-collapse">
+      {{#if currentUser}}
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a href="{{pathFor 'dashboard'}}" class="nav-link">Dashboard</a>
@@ -24,6 +25,7 @@
           </div>
         </li>
       </ul>
+      {{/if}}
     </div>
   </div>
 </template>

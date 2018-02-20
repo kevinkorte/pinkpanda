@@ -40,13 +40,27 @@ Template.manageFollowers.events({
         }
       });
     }
-  },'click .editFollower'(event) {
+  },
+  'click .editFollower'(event) {
     event.preventDefault();
     let followerId = $(event.target).data('id');
     let follower = Followers.findOne(followerId);
     if (follower) {
       Session.set('follower', follower);
       Tracker.afterFlush(() => { $('#editPhoneNumber').trigger('input') })
+    }
+  },
+  'click .removeFollower'(event) {
+    let followerId = $(event.target).data('id');
+    let result = window.confirm("Do you really want to remove this person?");
+    if ( result ) {
+      Meteor.call('removeFollower', followerId, (error) => {
+        if ( error ) {
+          Bert.alert(error.reason, 'danger');
+        } else {
+  
+        }
+      });
     }
   },
   'click .close-edit-modal'(event) {
@@ -79,6 +93,13 @@ Template.manageFollowers.events({
 });
 
 Template.manageFollowers.helpers({
+  hasFollowers() {
+    if ( Followers.find().count() > 0 ) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   follower() {
     return Followers.find();
   },

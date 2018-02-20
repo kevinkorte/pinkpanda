@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Accounts } from 'meteor/accounts-base';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
@@ -18,6 +19,31 @@ import '../../ui/pages/new-date/new-date.js';
 import '../../ui/pages/date_can_edit/date_can_edit.js';
 import '../../ui/pages/date_public/date_public.js';
 import '../../ui/pages/not-found/not-found.js';
+
+Accounts.onResetPasswordLink( ( token, done ) => {
+  console.log('password');
+  FlowRouter.go('setNewPassword');
+  Template.setNewPassword.events({
+    'submit #js-password-reset-form'(event) {
+      event.preventDefault();
+      const password = event.target.password.value;
+      const confirmPassword = event.target.confirmPassword.value;
+      if ( password != confirmPassword ) {
+        Bert.alert('Passwords do not match', 'danger');
+      } else {
+        Accounts.resetPassword(token, password, (error) => {
+          if ( error ) {
+            Bert.alert(error.reason, 'danger');
+          } else {
+            Bert.alert('Password successfully reset', 'success');
+            FlowRouter.go('dashboard');
+            done();
+          }
+        });
+      }
+    }
+  });
+});
 
 
 // Set up all routes in the app
@@ -167,7 +193,21 @@ authRoutes.route('/settings', {
   action() {
     BlazeLayout.render('App_settings', { main: 'settings' });
   }
-})
+});
+
+FlowRouter.route('/settings/reset-password', {
+  name: 'reset-password',
+  action() {
+    BlazeLayout.render('App_settings', { main: 'resetPassword' });
+  }
+});
+
+FlowRouter.route('/settings/set-new-password', {
+  name: 'setNewPassword',
+  action() {
+    BlazeLayout.render('App_settings', { main: 'setNewPassword' } );
+  }
+});
 
 FlowRouter.notFound = {
   action() {
@@ -183,4 +223,5 @@ Accounts.onEmailVerificationLink( function( token,done ) {
       done();
     }
   })
-})
+});
+

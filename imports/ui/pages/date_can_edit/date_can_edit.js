@@ -164,10 +164,8 @@ Template.date_can_edit.helpers({
     }
   },
   getLatLng(id) {
-    console.log(id);
     let notification = Notifications.findOne(id);
     if ( notification ) {
-      console.log(notification);
       return notification.coords[0].latitude + " " + notification.coords[0].longitude
     }
   }
@@ -204,6 +202,24 @@ Template.date_can_edit.events({
         let timestamp = position.timestamp;
         let id = FlowRouter.getParam('id');
         Meteor.call('startDate', lat, lng, accuracy, timestamp, id, (error, result) => {
+          if ( error ) {
+            Bert.alert(error.reason, "warning");
+          }
+        });
+      })
+    } else {
+      console.log('no geo');
+    }
+  },
+  'click #end'(event) {
+    if ( "geolocation" in navigator ) {
+      navigator.geolocation.getCurrentPosition( (position) => {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+        let accuracy = position.coords.accuracy;
+        let timestamp = position.timestamp;
+        let id = FlowRouter.getParam('id');
+        Meteor.call('endDate', lat, lng, accuracy, timestamp, id, (error, result) => {
           if ( error ) {
             Bert.alert(error.reason, "warning");
           }
