@@ -6,11 +6,11 @@
   {{#if canEditThisDate user}}
 <div class="navbar navbar-expand-lg navbar-light bg-dark text-light">
   <div class="container-fluid">
-    <span class="navbar-text h3 text-light">
+    <span class="navbar-text h3 text-light d-none d-md-block">
         <i class="fa fa-unlock" aria-hidden="true"></i> Controls
     </span>
-    <div class="d-inline-block">
-      <button type="button" class="btn btn-warning mr-5" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
+    <div class="w-100 d-flex justify-content-between">
+      <button type="button" class="btn btn-warning mr-0 mr-sm-0 mr-md-5 mr-lg-5 mr-xl-5" data-toggle="modal" data-target="#editModal"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</button>
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-secondary" id="start"><i class="fa fa-flag"></i> Start</button>
         <button type="button" class="btn btn-secondary" id="check-in"><i class="fa fa-map-marker"></i> Check-in</button>
