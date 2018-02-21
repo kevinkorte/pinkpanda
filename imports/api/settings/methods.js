@@ -1,6 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 
+import stripePackage from 'stripe';
+
+if ( Meteor.isProduction ) {
+  stripe = stripePackage(Meteor.settings.private.prodStripeSecretTestKey);
+} else {
+  stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
+}
+
 Meteor.methods({
   send_verification_email() {
     Accounts.sendVerificationEmail(Meteor.userId());
@@ -12,6 +20,11 @@ Meteor.methods({
       Accounts.addEmail(Meteor.userId(), email );
       Accounts.sendVerificationEmail(Meteor.userId(), email );
       Accounts.removeEmail(Meteor.userId(), userEmail );
+      stripe.customers.update(user.stripeCustomerId, {
+        email: email
+      }, ( error ) => {
+        console.log(error);
+      });
     }
   },
   sendChangedPasswordEmail() {

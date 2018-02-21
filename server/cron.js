@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Dates } from '../imports/api/dates/dates.js';
 
 Meteor.startup(function() {
-  // SyncedCron.start();
+  SyncedCron.start();
 });
 
 SyncedCron.add({
