@@ -8,9 +8,9 @@ import stripePackage from 'stripe';
 
 import './signup.js';
 if ( Meteor.isProduction ) {
-  const stripe = stripePackage(Meteor.settings.private.prodStripeSecreteTestKey);
+  stripe = stripePackage(Meteor.settings.private.prodStripeSecretTestKey);
 } else {
-  const stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
+  stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
 }
 
 Meteor.methods({
