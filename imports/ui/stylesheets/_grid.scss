@@ -33,3 +33,17 @@ html, body, #__blaze-root {
   overflow-y: auto;
 }
 
+@media (max-width: 768px) {
+  .grid {
+    display: block;
+  }
+  .map {
+    height: 400px;
+    margin-bottom: 30px;
+  }
+  .information {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+

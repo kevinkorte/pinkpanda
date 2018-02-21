@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Dates } from '../imports/api/dates/dates.js';
+import { SyncedCron } from 'meteor/percolate:synced-cron';
+
+SyncedCron.config({log: false});
 
 Meteor.startup(function() {
-  SyncedCron.config({log: false});
   SyncedCron.start();
 });
 
