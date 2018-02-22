@@ -67,24 +67,27 @@ Meteor.methods({
                   address: date.address
                 };
               }
-              date.followers.forEach(function(follower) {
-                if ( follower.phoneNumber ) {
-                  client.messages.create({
-                    body: SSR.render('auto-start-text', data),
-                    to: '+1'+follower.phoneNumber,
-                    from: Meteor.settings.private.twilio.number
-                  })
-                  .then((message) => console.log(message.sid));
-                }
-                if ( follower.email ) {
-                  Email.send({
-                    from: 'SafeTap <notifications@safetap.com>',
-                    to: follower.email,
-                    subject: 'Auto-start for ' + data.userName,
-                    html: SSR.render('checkin-start-email', data)
-                  });
-                }
-              });
+              if ( date.followers ) {
+                date.followers.forEach(function(follower) {
+                  if ( follower.phoneNumber ) {
+                    client.messages.create({
+                      body: SSR.render('auto-start-text', data),
+                      to: '+1'+follower.phoneNumber,
+                      from: Meteor.settings.private.twilio.number
+                    })
+                    .then((message) => console.log(message.sid));
+                  }
+                  if ( follower.email ) {
+                    Email.send({
+                      from: 'SafeTap <notifications@safetap.com>',
+                      to: follower.email,
+                      subject: 'Auto-start for ' + data.userName,
+                      html: SSR.render('checkin-start-email', data)
+                    });
+                  }
+                });
+              }
+
             } else {
               //can't find a date by id
             }
