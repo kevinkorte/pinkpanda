@@ -4,6 +4,7 @@ import { Dates } from './dates.js';
 import { Notifications } from '../notifications/notifications.js';
 
 import twilio from 'twilio';
+import moment from 'moment';
 
 let accountSid = Meteor.settings.private.twilio.accountsid;
 let authToken = Meteor.settings.private.twilio.authToken;
@@ -15,6 +16,7 @@ Meteor.methods({
   },
   'updateDate'(id, start, end, place, placeName, formatted_address, lat, lng, phone, url, dateName, dateURL) {
     console.log('was called');
+    console.log('start', start);
     check(id, String);
     check(start, String);
     check(end, String);
@@ -27,9 +29,10 @@ Meteor.methods({
     check(url, String)
     check(dateName, String);
     check(dateURL, String);
+    console.log(typeof new Date(start).toISOString());
     Dates.update(id, { $set: {
-        starting: start,
-        ending: end,
+        starting: new Date(start).toISOString(),
+        ending: new Date(end).toISOString(),
         place: place,
         placeName: placeName,
         formatted_address: formatted_address,

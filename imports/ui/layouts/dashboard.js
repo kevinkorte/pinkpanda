@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { Dates } from '../../api/dates/dates.js';
 
 import moment from 'moment';
+import timezone from 'moment-timezone';
 
 import "./dashboard.html";
 import '../components/navigation.js';
@@ -34,9 +35,12 @@ Template.dashboard.helpers({
     }
   },
   dateDay(timestamp) {
-    return moment(timestamp).format('ddd MMM, Do')
+    return moment(timestamp).tz(moment.tz.guess()).format('ddd MMM, Do')
   },
   dateTime(timestamp) {
+    let tz = moment.tz.guess();
+    console.log(moment(timestamp).tz(tz).format('h:mm a'));
+    console.log(moment(timestamp).format('h:mm a'));
     return moment(timestamp).format('h:mm a');
   },
   getNumOfFollowers(id) {
