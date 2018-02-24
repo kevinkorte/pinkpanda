@@ -99,6 +99,10 @@ Template.date_can_edit.helpers({
   },
   //dateTime and dateDay are duplicated helpers from the dashboard
   dateTime(timestamp) {
+    console.log(timestamp);
+    console.log(moment.tz.guess());
+    console.log(moment(timestamp).format('h:mm a'));
+    console.log(moment(timestamp).tz(moment.tz.guess()).format('h:mm a'));
     return moment(timestamp).format('h:mm a');
   },
   dateDay(timestamp) {

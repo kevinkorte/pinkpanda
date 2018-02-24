@@ -26,8 +26,8 @@ Template.new_date.events({
     const followers = $('.edit-followers-input').val();
     Meteor.call('updateDate',
       id,
-      start,
-      end,
+      new Date(start).toUTCString(),
+      new Date(end).toUTCString(),
       place,
       placeName,
       formatted_address,

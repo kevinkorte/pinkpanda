@@ -21,6 +21,15 @@ const DatingSchema = new SimpleSchema({
       }
     }
   },
+  test: {
+    type: Date,
+    optional: true,
+    autoValue: function() {
+      if ( this.isInsert ) {
+        return new Date();
+      }
+    }
+  },
   starting: {
     type: Date,
     optional: true
