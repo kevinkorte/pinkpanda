@@ -15,15 +15,8 @@ Meteor.methods({
     return Dates.insert({});
   },
   'updateDate'(id, start, end, place, placeName, formatted_address, lat, lng, phone, url, dateName, dateURL) {
-    console.log('was called');
     console.log('start', start);
     console.log(typeof start);
-    let startDate = new Date(start);
-    console.log(startDate);
-    console.log(typeof startDate);
-    let utcDate = new Date(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate(), startDate.getUTCHours(), startDate.getUTCMinutes(), startDate.getUTCSeconds());
-    console.log(utcDate);
-    console.log(typeof utcDate);
     check(id, String);
     check(start, String);
     check(end, String);
@@ -37,7 +30,7 @@ Meteor.methods({
     check(dateName, String);
     check(dateURL, String);
     Dates.update(id, { $set: {
-        starting: utcDate,
+        starting: new Date(start).toISOString(),
         ending: end,
         place: place,
         placeName: placeName,

@@ -31,11 +31,11 @@ const DatingSchema = new SimpleSchema({
     }
   },
   starting: {
-    type: Date,
+    type: String,
     optional: true
   },
   started: {
-    type: Date,
+    type: String,
     optional: true
   },
   ending: {
