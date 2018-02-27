@@ -39,7 +39,6 @@ Template.dashboard.helpers({
   },
   dateTime(timestamp) {
     let tz = moment.tz.guess();
-    console.log(tz);
     return moment(timestamp).tz(tz).format('h:mm a');
   },
   getNumOfFollowers(id) {

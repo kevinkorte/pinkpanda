@@ -39,7 +39,7 @@ const DatingSchema = new SimpleSchema({
     optional: true
   },
   ending: {
-    type: Date,
+    type: String,
     optional: true
   },
   ended: {

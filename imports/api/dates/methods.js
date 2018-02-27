@@ -30,7 +30,7 @@ Meteor.methods({
     check(dateName, String);
     check(dateURL, String);
     Dates.update(id, { $set: {
-        starting: new Date(start).toISOString(),
+        starting: start,
         ending: end,
         place: place,
         placeName: placeName,
