@@ -14,8 +14,11 @@ SyncedCron.add({
     return parser.text('every 1 minute');
   },
   job: function() {
-    let dates = Dates.find({active: false, starting: { $lte: new Date() } } ).fetch();
+    console.log('checking jobs');
+    let dates = Dates.find({active: false, starting: { $lte: new Date().toISOString() } } ).fetch();
+    console.log('dates', dates);
     dates.forEach(function(date) {
+      console.log('solo date');
       Meteor.call('autoStartDate', date._id);
     });
   }

@@ -63,12 +63,27 @@ Meteor.methods({
               SSR.compileTemplate('auto-start-text', Assets.getText('auto-start-text.html'));
               SSR.compileTemplate('auto-start-email', Assets.getText('auto-start-email.html'));
               let the_user = Meteor.users.findOne(date.user);
-              if ( the_user ) {
-                let data = {
-                  userName: the_user.profile.name.first,
-                  address: date.address
-                };
+              if ( Meteor.isProduction) {
+                console.log('is production');
+              } else {
+                console.log( 'not production' );
               }
+                if ( Meteor.isProduction ) {
+                  let data = await {
+                    userName: the_user.profile.name.first,
+                    address: date.place,
+                    url: 'https://www.safetap.net/date/'+date.user+'/'+date._id,
+                  };
+                } else {
+                  let data = await {
+                    userName: the_user.profile.name.first,
+                    address: date.place,
+                    url: 'http://localhost:3000/date/'+date.user+'/'+date._id,
+                  };
+                }
+                if ( data ) {
+                  console.log('data', data);
+                }
               if ( date.followers ) {
                 date.followers.forEach(function(follower) {
                   if ( follower.phoneNumber ) {
@@ -84,7 +99,7 @@ Meteor.methods({
                       from: 'SafeTap <notifications@safetap.com>',
                       to: follower.email,
                       subject: 'Auto-start for ' + data.userName,
-                      html: SSR.render('checkin-start-email', data)
+                      html: SSR.render('auto-start-email', data)
                     });
                   }
                 });
