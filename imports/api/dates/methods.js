@@ -58,10 +58,14 @@ Meteor.methods({
           if ( error ) {
             // console.log(error);
           } else {
-            let date = Dates.findOne(id);
+            const date = async function findDate() {
+              return await Dates.findOne(id)
+              console.log('await');
+            };
             if ( date ) {
               SSR.compileTemplate('auto-start-text', Assets.getText('auto-start-text.html'));
               SSR.compileTemplate('auto-start-email', Assets.getText('auto-start-email.html'));
+              console.log('date after', date);
               let the_user = Meteor.users.findOne(date.user);
               if ( Meteor.isProduction) {
                 console.log('is production');
@@ -69,13 +73,13 @@ Meteor.methods({
                 console.log( 'not production' );
               }
                 if ( Meteor.isProduction ) {
-                  let data = await {
+                  let data ={
                     userName: the_user.profile.name.first,
                     address: date.place,
                     url: 'https://www.safetap.net/date/'+date.user+'/'+date._id,
                   };
                 } else {
-                  let data = await {
+                  let data = {
                     userName: the_user.profile.name.first,
                     address: date.place,
                     url: 'http://localhost:3000/date/'+date.user+'/'+date._id,
