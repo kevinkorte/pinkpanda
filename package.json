@@ -6,6 +6,7 @@
     "production": "DEPLOY_HOSTNAME=us-east-1.galaxy-deploy.meteor.com meteor deploy http://safetap.net --settings settings.json"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.44",
     "babel-runtime": "^6.26.0",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.0.0-beta.3",

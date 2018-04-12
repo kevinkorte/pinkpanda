@@ -62,7 +62,7 @@ Meteor.methods({
               return await Dates.findOne(id)
               console.log('await');
             };
-            let date = await _getDate(id);
+            // let date = await _getDate(id);
             // let date = Dates.findOne(id);
             if ( date ) {
               SSR.compileTemplate('auto-start-text', Assets.getText('auto-start-text.html'));
