@@ -17,6 +17,7 @@ import '../../ui/pages/home/home.js';
 import '../../ui/pages/settings.js';
 import '../../ui/pages/new-date/new-date.js';
 import '../../ui/pages/date_can_edit/date_can_edit.js';
+import '../../ui/pages/date_can_edit/date_can_edit_2.js';
 import '../../ui/pages/date_public/date_public.js';
 import '../../ui/pages/not-found/not-found.js';
 
@@ -179,11 +180,11 @@ FlowRouter.route('/date/:user/:id', {
   action() {
     let user = FlowRouter.current().params.user;
     if ( Meteor.userId() == user ) {
-      BlazeLayout.render('App_body', { main: 'date_can_edit' });
+      BlazeLayout.render('App_body', { main: 'date_can_edit_2' });
     } else {
       //Don't worry, someone still can't edit it, handling this on the
       //template level, need to sort this out
-      BlazeLayout.render('App_body', { main: 'date_can_edit' });
+      BlazeLayout.render('App_body', { main: 'date_can_edit_2' });
     }
   }
 });

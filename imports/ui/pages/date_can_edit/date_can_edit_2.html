@@ -1,0 +1,98 @@
+<template name="date_can_edit_2">
+  {{> dashboard_navigation }}
+  {{#with date}}
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a href="#" class="nav-link">Item One</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="map-wrapper">{{> googleMap name="locationMap" options=locationMapOptions}}</div>
+    <div class="card border border-light">
+      <div class="card-body">
+        <div class="details-area d-flex text-white active-viewing">
+          <div class="info">
+            <h4 class="display-6 mb-0">{{placeName}}</h4>
+            <p class="lead o-50">{{formatted_address}}</p>
+            <div class="status-bar"><div class="status-item"></div></div>
+          </div>
+        </div>
+        <div class="row blue-gray-bg">
+          <div class="col-md-8">
+            <ul class="list-group list-group-flush">
+              <li class="list-group item">
+                <h6 class="pb-2 mb-0">Notifications</h6>
+                {{#if hasNotifications}}
+                <ul class="list-group list-group-flush">
+                  {{#each notifications}}
+                    <div class="list-group-item border-secondary bg-transparent">
+                      <h5 class="mb-1">{{{getNotificationIcon notificationType}}} {{notificationTitle notificationType}} <small class="float-right text-muted font-weight-light">{{notificationTimestamp timestamp}}</small></h5>
+                      <small>{{getLatLng _id}}</small>
+                      <p class="mb-1">{{notificationAddress _id}}</p>
+                    </div>
+                  {{/each}}
+                </ul>
+                {{else}}
+                <div class="no-notifications card">
+                  <div class="card-body text-center">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-square fa-stack-2x"></i>
+                        <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                      </span>
+                    <h4 class="lead o-50">Nothing to show</h4>
+                  </div>
+                </div>
+                {{/if}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+              <ul class="list-group">
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                      <span>Friend:</span>
+                      <span>Kevin Korte</span>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                      <span>Date:</span>
+                      <span class="font-italic">Private</span>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                      <span>Starts:</span>
+                      <span class="font-italic">4/27/18 at 9:30pm</span>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                      <span>Ends:</span>
+                      <span class="font-italic">4/27/18 at 11:30pm</span>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                      <span>Location Phone:</span>
+                      <span class="font-italic">(509)783-1234</span>
+                    </div>
+                  </li>
+                  <li class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                      <span>Location Website:</span>
+                      <span class="font-italic"><a href="#">Website</a></span>
+                    </div>
+                    </li>
+                </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/with}}
+</template>

@@ -23,7 +23,9 @@ html, body, #__blaze-root {
   grid-row-end: 3;
 }
 .map-canvas {
-  border-radius: 12px;
+  // border-radius: 12px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 .information {
   grid-column: 2;

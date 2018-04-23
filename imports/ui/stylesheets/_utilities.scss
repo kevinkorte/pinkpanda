@@ -17,3 +17,45 @@ body.login-page {
   width: 100%;
   color: #7d79e5;
 }
+.o-50 {
+  opacity: 0.5;
+}
+
+.active-viewing {
+  background: #1aa558;
+}
+
+.status-bar {
+  height: 6px;
+  width: 100%;
+  background: rgba(255,255,255,0.5);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.status-item {
+  width: 20%;
+  height: 6px;
+  background: #fff;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  animation-duration: 4s;
+  animation-name: slide;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(.61,-0.01,.34,.97);
+}
+
+@keyframes slide {
+  0% {
+    margin-left: 0;
+  }
+  50% {
+    margin-left: calc(100% - 20%);
+  }
+  100% {
+    margin-left: 0;
+  }
+}
