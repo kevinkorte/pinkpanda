@@ -17,7 +17,24 @@ Template.date_can_edit_2.onRendered(function() {
     let center = GoogleMaps.maps.editableMap.instance.getCenter();
     google.maps.event.trigger(GoogleMaps.maps.editableMap.instance, "resize");
     GoogleMaps.maps.editableMap.instance.setCenter(center);
-  })
+  });
+  const start_date = $('.start-date').flatpickr({
+    minDate: 'today',
+    altInput: true,
+    enableTime: true,
+    onChange: function(selectedDates, dateStr, instance) {
+      end_date.set('minDate', Date.parse(selectedDates[0]));
+      Session.set('start_date', selectedDates[0]);
+    }
+  });
+  const end_date = $('.end-date').flatpickr({
+    minDate: 'today',
+    altInput: true,
+    enableTime: true,
+    onChange: function(selectedDates, dateStr, instance) {
+      start_date.set('maxDate', Date.parse(selectedDates[0]));
+    }
+  });
 });
 
 Template.date_can_edit_2.onCreated(function() {
