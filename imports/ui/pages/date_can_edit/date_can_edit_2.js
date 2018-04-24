@@ -72,6 +72,15 @@ Template.date_can_edit_2.helpers({
   date() {
     return Dates.findOne();
   },
+  getAuthorName(user_id) {
+    let user = Meteor.users.findOne(user_id);
+    if ( user ) {
+      return user.profile.name.first + " " + user.profile.name.last;
+    }
+  },
+  getDate(timestamp) {
+    return moment(timestamp).format('M/DD/YY [at] h:mm a');
+  },
   locationMapOptions() {
     if ( GoogleMaps.loaded() ) {
       let dates = Dates.findOne(FlowRouter.getParam('id'));

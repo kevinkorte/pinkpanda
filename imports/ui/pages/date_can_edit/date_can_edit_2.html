@@ -4,13 +4,14 @@
   <div class="container">
     <ul class="nav nav-pills bg-warning text-white py-1 px-2">
       <li class="nav-item">
-        <div class="h4 text-dark">Edit <small class="o-50">(Only you can see this)</small></div>
+        <div class="h4 text-dark"><i class="fa fa-lock" aria-hidden="true"></i> Edit <small class="o-50">(Only you can see this)</small></div>
       </li>
       <li class="nav-item ml-auto">
+          <button class="btn btn-secondary">#Edit</button>
           <div class="btn-group" role="group" aria-label="Owner Actions">
               <button type="button" class="btn btn-secondary" id="start" data-loading="<i class='fa fa-circle-o-notch fa-spin'></i>">Start</button>
               <button type="button" class="btn btn-secondary" id="checkin" data-loading="<i class='fa fa-circle-o-notch fa-spin'></i>">Check In</button>
-              <button type="button" class="btn btn-secondary">End</button>
+              <button type="button" class="btn btn-secondary">#End</button>
             </div>
       </li>
     </ul>
@@ -58,7 +59,7 @@
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                       <span>Friend:</span>
-                      <span>Kevin Korte</span>
+                      <span>{{getAuthorName user}}</span>
                     </div>
                   </li>
                   <li class="list-group-item">
@@ -70,25 +71,25 @@
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                       <span>Starts:</span>
-                      <span class="font-italic">4/27/18 at 9:30pm</span>
+                      <span class="font-italic">{{getDate starting}}</span>
                     </div>
                   </li>
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                       <span>Ends:</span>
-                      <span class="font-italic">4/27/18 at 11:30pm</span>
+                      <span class="font-italic">{{getDate ending}}</span>
                     </div>
                   </li>
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                       <span>Location Phone:</span>
-                      <span class="font-italic">(509)783-1234</span>
+                      <span class="font-italic">{{phone}}</span>
                     </div>
                   </li>
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                       <span>Location Website:</span>
-                      <span class="font-italic"><a href="#">Website</a></span>
+                      <span class="font-italic"><a href="{{website}}">Website</a></span>
                     </div>
                     </li>
                 </ul>
