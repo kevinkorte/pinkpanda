@@ -16,7 +16,6 @@ Template.date_can_edit_2.onRendered(function() {
 });
 
 Template.date_can_edit_2.onCreated(function() {
-
   let self = this;
   self.autorun(function() {
     self.subscribe('notifications', FlowRouter.getParam('id'));
@@ -136,3 +135,52 @@ Template.date_can_edit_2.helpers({
     }
   }
 });
+
+Template.date_can_edit_2.events({
+  'click #start'(event) {
+    $(event.target).html($(event.target).data('loading'));
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+        let accuracy = position.coords.accuracy;
+        let timestamp = position.timestamp;
+        let id = FlowRouter.getParam('id');
+        Meteor.call('startDate', lat, lng, accuracy, timestamp, id, (error, result) => {
+          if ( error ) {
+            Bert.alert(error.reason, "warning");
+            $(event.target).html('Start');
+          } else {
+            $(event.target).html('Start');
+          }
+        });
+      })
+    } else {
+      Bert.alert('Geolocation is not enabled on your browser.', "warning");
+      $(event.target).html('Start');
+    }
+  },
+  'click #checkin'(event) {
+    $(event.target).html($(event.target).data('loading'));
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+        let accuracy = position.coords.accuracy;
+        let timestamp = position.timestamp;
+        let id = FlowRouter.getParam('id');
+        Meteor.call('addNotification', lat, lng, accuracy, timestamp, id, function(error, result) {
+          if ( error ) {
+            Bert.alert( error.reason, "warning" );
+            $(event.target).html('Check In');
+          } else {
+            $(event.target).html('Check In');
+          }
+        });
+      });
+    } else {
+      Bert.alert('Geolocation is not enabled on your browser.', "warning");
+      $(event.target).html('Check In');
+    }
+  }
+})
