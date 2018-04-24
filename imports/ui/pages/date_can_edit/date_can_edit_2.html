@@ -7,7 +7,7 @@
         <div class="h4 text-dark"><i class="fa fa-lock" aria-hidden="true"></i> Edit <small class="o-50">(Only you can see this)</small></div>
       </li>
       <li class="nav-item ml-auto">
-          <button class="btn btn-secondary">#Edit</button>
+          <button class="btn btn-secondary" id="edit-btn" data-toggle="modal" data-target="#editModal">Edit</button>
           <div class="btn-group" role="group" aria-label="Owner Actions">
               <button type="button" class="btn btn-secondary" id="start" data-loading="<i class='fa fa-circle-o-notch fa-spin'></i>">Start</button>
               <button type="button" class="btn btn-secondary" id="checkin" data-loading="<i class='fa fa-circle-o-notch fa-spin'></i>">Check In</button>
@@ -89,7 +89,11 @@
                   <li class="list-group-item">
                     <div class="d-flex justify-content-between">
                       <span>Location Website:</span>
+                      {{#if website}}
                       <span class="font-italic"><a href="{{website}}">Website</a></span>
+                      {{else}}
+                      <span class="font-italic">No Website</span>
+                      {{/if}}
                     </div>
                     </li>
                 </ul>
@@ -99,4 +103,26 @@
     </div>
   </div>
   {{/with}}
+
+  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
+    <form id="edit-job" class="edit-job">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="editable-map" id="editable-map">{{> googleMap name="editableMap" options=editableMapOptions}}</div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </template>

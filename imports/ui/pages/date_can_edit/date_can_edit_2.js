@@ -13,6 +13,11 @@ import '../../components/notifications/notifications.js';
 
 Template.date_can_edit_2.onRendered(function() {
   GoogleMaps.initialize();
+  $('#editModal').on('shown.bs.modal', () => {
+    let center = GoogleMaps.maps.editableMap.instance.getCenter();
+    google.maps.event.trigger(GoogleMaps.maps.editableMap.instance, "resize");
+    GoogleMaps.maps.editableMap.instance.setCenter(center);
+  })
 });
 
 Template.date_can_edit_2.onCreated(function() {
@@ -21,8 +26,15 @@ Template.date_can_edit_2.onCreated(function() {
     self.subscribe('notifications', FlowRouter.getParam('id'));
     self.subscribe('dates.single', FlowRouter.getParam('id'), function() {
     });
-
+    GoogleMaps.ready('editableMap', function(map) {
+      let marker = new google.maps.Marker({
+        position: map.options.center,
+        map: map.instance,
+        draggable: true
+      });
+    });
     GoogleMaps.ready('locationMap', function(map) {
+      console.log(map);
       let marker = new google.maps.Marker({
         position: map.options.center,
         map: map.instance
@@ -82,6 +94,17 @@ Template.date_can_edit_2.helpers({
     return moment(timestamp).format('M/DD/YY [at] h:mm a');
   },
   locationMapOptions() {
+    if ( GoogleMaps.loaded() ) {
+      let dates = Dates.findOne(FlowRouter.getParam('id'));
+      if ( dates ) {
+        return {
+          center: new google.maps.LatLng(dates.lat, dates.lng),
+          zoom: 15
+        };
+      }
+    };
+  },
+  editableMapOptions() {
     if ( GoogleMaps.loaded() ) {
       let dates = Dates.findOne(FlowRouter.getParam('id'));
       if ( dates ) {
@@ -191,5 +214,5 @@ Template.date_can_edit_2.events({
       Bert.alert('Geolocation is not enabled on your browser.', "warning");
       $(event.target).html('Check In');
     }
-  }
+  },
 })
