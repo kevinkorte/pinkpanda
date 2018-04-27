@@ -15,7 +15,6 @@ import '../../components/notifications/notifications.js';
 
 Template.date_can_edit_2.onRendered(function() {
   GoogleMaps.initialize();
-  console.log('on rendered');
   $('#editModal').on('shown.bs.modal', () => {
     let center = GoogleMaps.maps.editableMap.instance.getCenter();
     google.maps.event.trigger(GoogleMaps.maps.editableMap.instance, "resize");
