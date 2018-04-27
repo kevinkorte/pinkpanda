@@ -8,33 +8,20 @@ import moment from 'moment';
 import 'flatpickr/dist/flatpickr.min.css';
 
 import './date_can_edit_2.html';
+import './_dates.js';
+import './_map.js';
 import '../../components/svg/chillin.html';
 import '../../components/notifications/notifications.js';
 
 Template.date_can_edit_2.onRendered(function() {
   GoogleMaps.initialize();
+  console.log('on rendered');
   $('#editModal').on('shown.bs.modal', () => {
     let center = GoogleMaps.maps.editableMap.instance.getCenter();
     google.maps.event.trigger(GoogleMaps.maps.editableMap.instance, "resize");
     GoogleMaps.maps.editableMap.instance.setCenter(center);
   });
-  const start_date = $('.start-date').flatpickr({
-    minDate: 'today',
-    altInput: true,
-    enableTime: true,
-    onChange: function(selectedDates, dateStr, instance) {
-      end_date.set('minDate', Date.parse(selectedDates[0]));
-      Session.set('start_date', selectedDates[0]);
-    }
-  });
-  const end_date = $('.end-date').flatpickr({
-    minDate: 'today',
-    altInput: true,
-    enableTime: true,
-    onChange: function(selectedDates, dateStr, instance) {
-      start_date.set('maxDate', Date.parse(selectedDates[0]));
-    }
-  });
+
 });
 
 Template.date_can_edit_2.onCreated(function() {
@@ -43,15 +30,8 @@ Template.date_can_edit_2.onCreated(function() {
     self.subscribe('notifications', FlowRouter.getParam('id'));
     self.subscribe('dates.single', FlowRouter.getParam('id'), function() {
     });
-    GoogleMaps.ready('editableMap', function(map) {
-      let marker = new google.maps.Marker({
-        position: map.options.center,
-        map: map.instance,
-        draggable: true
-      });
-    });
+
     GoogleMaps.ready('locationMap', function(map) {
-      console.log(map);
       let marker = new google.maps.Marker({
         position: map.options.center,
         map: map.instance
@@ -121,17 +101,7 @@ Template.date_can_edit_2.helpers({
       }
     };
   },
-  editableMapOptions() {
-    if ( GoogleMaps.loaded() ) {
-      let dates = Dates.findOne(FlowRouter.getParam('id'));
-      if ( dates ) {
-        return {
-          center: new google.maps.LatLng(dates.lat, dates.lng),
-          zoom: 15
-        };
-      }
-    };
-  },
+  
   hasNotifications() {
     let notifications = Notifications.find().count();
     if ( notifications > 0 ) {
@@ -232,4 +202,5 @@ Template.date_can_edit_2.events({
       $(event.target).html('Check In');
     }
   },
+
 })

@@ -113,20 +113,9 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="editable-map" id="editable-map">{{> googleMap name="editableMap" options=editableMapOptions}}</div>
+            {{> map}}
             <div class="row">
-              <div class="col-md-6 col-12">
-                <div class="form-group">
-                  <label for="start-date">Start</label>
-                  <input type="text" name="startDate" id="start-date" class="form-control start-date bg-white" data-date="{{starting}}">
-                </div>
-              </div>
-              <div class="col-md-6 col-12">
-                <div class="form-group">
-                  <label for="end-date">End</label>
-                  <input type="text" name="endDate" id="end-date" class="form-control end-date bg-white">
-                </div>
-              </div>
+              {{>edit_dates}}
             </div>
           </div>
           <div class="modal-footer">
