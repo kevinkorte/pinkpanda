@@ -1,4 +1,36 @@
 <template name="tabs">
+  <section class="bg-white py-4">
+    <div class="container">
+      <div class="row justify-content align-items-center">
+        <div class="col-auto">
+          <h1 class="h2">Account Settings</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="m-0 p-0 bg-white">
+    <div class="container p-0">
+      <nav class="nav nav-with-underline-active">
+        <a class="nav-link active" href="#">General</a>
+        <a class="nav-link" href="#">Contacts</a>
+        <a class="nav-link" href="#">Billing</a>
+      </nav>
+    </div>
+  </section> 
+
+  <section class="my-3">
+    <div class="container py-4 bg-dark-gradient rounded">
+      <div class="row justify-content align-items-center">
+        <div class="user-profile bg-white">KK</div>
+        <div class="profile-info">
+          <div class="user-name h3 text-white mb-0">Kevin Korte</div>
+          <div class="user-email text-white o-50">kevinkorte15@gmail.com</div>
+          <span class="badge badge-pill badge-success badge-success-outline"><i class="fa fa-check"></i> Verified</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <ul class="nav nav-tabs nav-fill mb-4 mt-5">
     <li class="nav-item">
       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Settings</a>
@@ -10,4 +42,6 @@
       <a class="nav-link" id="pills-payment-tab" data-toggle="pill" href="#pills-payment" role="tab" aria-controls="pills-payment" aria-selected="false">Payments</a>
     </li>
   </ul>
+
+
 </template>

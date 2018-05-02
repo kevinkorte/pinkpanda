@@ -55,3 +55,15 @@
 .hero-nav {
   margin-top: 8px;
 }
+
+.nav-with-underline-active .active {
+  box-shadow: 0 2px 0px 0px #007bff;
+}
+
+.user-profile {
+  font-size: 3rem;
+  padding: 1rem 1.35rem;
+  border-radius: 6px;
+  margin: 0 1rem;
+  color: #7264e5;
+}

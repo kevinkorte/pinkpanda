@@ -191,6 +191,12 @@ FlowRouter.route('/date/:user/:id', {
 
 authRoutes.route('/settings', {
   name: 'settings',
+  triggersEnter: [function() {
+    $('body').addClass('bg-light');
+  }],
+  triggersExit: [function() {
+    $('body').removeClass('bg-light');
+  }],
   action() {
     BlazeLayout.render('App_settings', { main: 'settings' });
   }
