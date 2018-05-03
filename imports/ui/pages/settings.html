@@ -2,6 +2,23 @@
 
         {{> tabs }}
 
+        <section class="mb-3">
+          <div class="container bg-white p-4 border">
+            <div class="row border-bottom pb-5">
+              <div class="col-4"><div class="h6 text-muted text-uppercase font-weight-light"><small>Account</small></div></div>
+              <div class="col-8">{{> update_login }}</div>
+            </div>
+            <div class="row border-bottom py-5">
+              <div class="col-4"><div class="h6 text-muted text-uppercase font-weight-light"><small>Password</small></div></div>
+              <div class="col-8">{{> password}}</div>
+            </div>
+            <div class="row py-5">
+              <div class="col-4"><div class="h6 text-muted text-uppercase font-weight-light"><small>Subscription</small></div></div>
+              <div class="col-8">{{> subscriptionOverview }}</div>
+            </div>
+          </div>
+        </section>
+<!-- 
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
             <div class="list-group card-style">
@@ -25,7 +42,7 @@
           <div class="tab-pane fade" id="pills-payment" role="tabpanel" aria-labelledby="pills-payment-tab">
             {{> payment }}
           </div>
-        </div>
+        </div> -->
 
   {{> add_card_modal }}
 </template>

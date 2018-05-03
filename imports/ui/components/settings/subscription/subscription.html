@@ -1,6 +1,5 @@
 <template name="subscriptionOverview">
-  <div class="d-flex justify-content-between align-items-center bg-light">
-    <span>Subscription
+  <div class="d-flex justify-content-between align-items-center">
       {{#if trialing}}
         <span class="badge badge-pill badge-warning"><i class="fa fa-smile-o"></i> Trialing</span>
       {{else}}
@@ -12,8 +11,6 @@
           {{/if}}
         {{/if}}
       {{/if}}
-    </span>
-    <button class="btn btn-default" data-toggle="collapse" href="#collapse-subscription" aria-expanded="false" aria-controls="collapse-subscription">Expand</button>
   </div>
   <div class="collapse bg-white show" id="collapse-subscription">
     {{> subscription }}

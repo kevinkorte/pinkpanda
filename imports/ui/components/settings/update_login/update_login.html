@@ -1,12 +1,16 @@
 <template name="update_login">
   <form id="update-email-form" class="mt-3">
     <div class="form-group row">
-      <label for="inputNewEmail" class="col-sm-3 col-form-label">New Email</label>
-      <div class="col-sm-7">
-        <input type="email" name="email" class="form-control" id="inputNewEmail" placeholder="New Email">
+      <div class="col-8">
+        <input type="email" name="email" class="form-control" id="inputNewEmail" placeholder="Update Email">
       </div>
-      <div class="col-sm-2">
+      <div class="col-4">
         <button class="btn btn-success btn-block">Update</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <small id="emailHelp" class="form-text text-muted">Has your email changed? You can update your email address here. You'll need to re-verify your new email account after changing it. We'll also start using your updated email for all future commuications immediately after updating it.</small>
       </div>
     </div>
   </form>
