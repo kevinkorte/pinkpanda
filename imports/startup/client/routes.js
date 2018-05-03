@@ -201,6 +201,18 @@ authRoutes.route('/settings', {
     BlazeLayout.render('App_settings', { main: 'settings' });
   }
 });
+authRoutes.route('/contacts', {
+  name: 'contacts',
+  action() {
+    BlazeLayout.render('App_settings', { main: 'manageFollowers' });
+  }
+});
+authRoutes.route('/billing', {
+  name: 'billing',
+  action() {
+    BlazeLayout.render('App_settings', { main: 'payment'})
+  }
+})
 
 FlowRouter.route('/settings/reset-password', {
   name: 'reset-password',

@@ -6,6 +6,11 @@ import './subscription.html';
 
 import './subscription_data.js';
 
+Template.subscriptionOverview.onRendered( () => {
+  Meteor.subscribe('subs.all');
+  Meteor.subscribe('payments');
+})
+
 Template.subscriptionOverview.helpers({
   trialing() {
     let sub = Subscriptions.findOne();
