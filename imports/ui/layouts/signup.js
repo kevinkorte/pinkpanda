@@ -9,13 +9,13 @@ import '../components/svg/signup.html';
 
 
 Template.App_signup.onCreated( function() {
-  Meteor.subscribe('subs.all');
-  Meteor.subscribe('users.all');
+  // Meteor.subscribe('subs.all');
+  // Meteor.subscribe('users.all');
   // console.log(Meteor.subscribe('subs.all'));
 });
 
 Template.App_signup.onRendered( function() {
-  Meteor.subscribe('subs.all');
+  // Meteor.subscribe('subs.all');
   $('.js-submit').validate({
     rules: {
       firstName: {
@@ -50,10 +50,11 @@ Template.App_signup.onRendered( function() {
             $('.sign-up-button').html('Create My Account');
           } else {
             Accounts.createUser( { email: email, password: password, profile: {name: { first: firstName, last: lastName } } } );
+            console.log('created new account on client', email, password);
             Meteor.call('newUserSignup', email, password, (error, response) => {
               if ( error ) {
                 //Todo: Better error handling
-                console.log(error)
+                // console.log(error)
                 $('.sign-up-button').html('Create My Account');
               } else {
                 //Successfully logged in, go to the next route

@@ -25,6 +25,7 @@ Meteor.methods({
   newUserSignup(email, password) {
       let asyncToSync = Meteor.wrapAsync( stripe.customers.create, stripe.customers );
       resultOfStripeCreateCustomer = asyncToSync( { email: email } );
+      console.log('user id', Meteor.userId());
       _updateUserAccount( resultOfStripeCreateCustomer, Meteor.userId() );
       _subscribeToPlan( resultOfStripeCreateCustomer, Meteor.userId() );
   },
@@ -54,6 +55,7 @@ Meteor.methods({
 // };
 
 let _updateUserAccount = ( customer, userId ) => {
+  console.log(customer, userId);
   Meteor.users.update(userId, { $set: { stripeCustomerId: customer.id } } );
 }
 
@@ -63,7 +65,6 @@ let _subscribeToPlan = ( customer, userId ) => {
 
   Meteor.users.update(userId, { $set: { stripeSubscriptionId: resultOfStripeCreateCustomer.id } } );
   let sub = Subscriptions.insert({ resultOfStripeCreateCustomer });
-  console.log(sub);
 }
 
 let _updateProfilePicFromFacebook = ( picture, userId ) => {
