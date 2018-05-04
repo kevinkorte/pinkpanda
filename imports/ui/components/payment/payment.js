@@ -26,6 +26,7 @@ Template.payment.helpers({
   //this helper duplicated on settings page
   hasSource( id ) {
     let source = Sources.findOne();
+    console.log(source);
     if ( source ) {
       return true;
     } else {
