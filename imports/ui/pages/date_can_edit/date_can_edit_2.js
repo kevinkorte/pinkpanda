@@ -102,7 +102,6 @@ Template.date_can_edit_2.helpers({
   },
   isAuthor(author) {
     let id = Meteor.userId();
-    console.log(id);
     if ( id ) {
       if ( id != author) {
         return false;
@@ -150,9 +149,9 @@ Template.date_can_edit_2.helpers({
       } else if ( type == 'manual-start' || type == 'auto-start') {
         return '<span class="fa-stack text-success"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-flag fa-stack-1x fa-inverse"></i></span>';
       } else if ( type == 'auto-end') {
-        return '<i class="icon circular warning sign"></i>'
+        return '<span class="fa-stack text-danger"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i></span>'
       } else if ( type == 'manual-end') {
-        return '<i class="icon circular flag checkered"></i>'
+        return '<span class="fa-stack text-secondary"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-flag-checkered fa-stack-1x fa-inverse"></i></span>'
       }
   },
   notificationTitle(type) {
@@ -233,5 +232,22 @@ Template.date_can_edit_2.events({
       $(event.target).html('Check In');
     }
   },
-
-})
+  'click #stop'(event) {
+    if ( "geolocation" in navigator ) {
+      navigator.geolocation.getCurrentPosition( (position) => {
+        let lat = position.coords.latitude;
+        let lng = position.coords.longitude;
+        let accuracy = position.coords.accuracy;
+        let timestamp = position.timestamp;
+        let id = FlowRouter.getParam('id');
+        Meteor.call('endDate', lat, lng, accuracy, timestamp, id, (error, result) => {
+          if ( error ) {
+            Bert.alert(error.reason, "warning");
+          }
+        });
+      })
+    } else {
+      console.log('no geo');
+    }
+  }
+});
