@@ -2,14 +2,18 @@ import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Sources } from './sources.js';
 
-let stripe = require("stripe")(
-  "sk_test_K7UqikJwYiDZUBELEysK2wjG"
-);
+import stripePackage from 'stripe';
+
+if ( Meteor.isProduction ) {
+  stripe = stripePackage(Meteor.settings.private.prodStripeSecretTestKey);
+} else {
+  stripe = stripePackage(Meteor.settings.private.stripeSecretKey);
+}
 
 Meteor.methods({
   updateSource(token) {
     console.log('called update source');
-    let user = Meteor.users.findOne(Meteor.userId);
+    let user = Meteor.users.findOne(Meteor.userId());
     let cus = user.stripeCustomerId;
     if ( cus ) {
       stripe.customers.update(cus, {
