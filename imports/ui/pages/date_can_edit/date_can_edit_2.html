@@ -18,11 +18,13 @@
     <div class="map-wrapper">{{> googleMap name="locationMap" options=locationMapOptions}}</div>
     <div class="card border border-light">
       <div class="card-body">
-        <div class="details-area d-flex text-white active-viewing">
+        <div class="details-area d-flex text-white {{getJobStatusClass _id}}">
           <div class="info">
             <h4 class="display-6 mb-0">{{placeName}}</h4>
             <p class="lead o-50">{{formatted_address}}</p>
+            {{#if isActive _id}}
             <div class="status-bar"><div class="status-item"></div></div>
+            {{/if}}
           </div>
         </div>
         <div class="row blue-gray-bg">

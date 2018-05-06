@@ -100,7 +100,26 @@ Template.date_can_edit_2.helpers({
       }
     };
   },
-  
+  getJobStatusClass(id) {
+    let date = Dates.findOne(id);
+    if ( date ) {
+      if ( date.active == true && date.expired == false ) {
+        return 'active-viewing'
+      } else if ( date.active == false && date.expired == false ) {
+        return 'upcoming-viewing'
+      } else if ( date.expired == true) {
+        return 'expired-viewing'
+      }
+    } 
+  },
+  isActive(id) {
+    let date = Dates.findOne(id);
+    if ( date ) {
+      if ( date.active == true && date.expired == false ) {
+        return true;
+      }
+    }
+  },
   hasNotifications() {
     let notifications = Notifications.find().count();
     if ( notifications > 0 ) {
