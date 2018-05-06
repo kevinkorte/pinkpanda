@@ -58,10 +58,7 @@ Meteor.methods({
           if ( error ) {
             // console.log(error);
           } else {
-            const date = async function findDate() {
-              return await Dates.findOne(id)
-              console.log('await');
-            };
+            let date = Dates.findOne(id)
             // let date = await _getDate(id);
             // let date = Dates.findOne(id);
             if ( date ) {
@@ -120,7 +117,7 @@ Meteor.methods({
     });
   },
   'autoEndDate'(id) {
-    Dates.update(id, { $set: { expired: true, alertSent: true } }, function(error, response) {
+    Dates.update(id, { $set: { expired: true, alertsSent: true } }, function(error, response) {
       if ( error ) {
         console.log(error);
       } else {

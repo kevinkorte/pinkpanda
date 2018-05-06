@@ -60,6 +60,14 @@ Template.dashboard.helpers({
       }
     }
   },
+  isExpired(id) {
+    let dates = Dates.findOne(id);
+    if ( dates ) {
+      if ( dates.alertsSent == true ) {
+        return 'card-expired';
+      }
+    }
+  },
   isMine(id) {
     let date = Dates.findOne(id);
     if ( date ) {
