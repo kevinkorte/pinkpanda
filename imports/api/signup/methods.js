@@ -28,6 +28,11 @@ Meteor.methods({
       console.log('user id', Meteor.userId());
       _updateUserAccount( resultOfStripeCreateCustomer, Meteor.userId() );
       _subscribeToPlan( resultOfStripeCreateCustomer, Meteor.userId() );
+      Meteor.call('send_verification_email', (error, response) => {
+        if ( error ) {
+          console.log(error);
+        }
+      });
   },
   loginWithFacebook(email) {
     Accounts.addEmail(Meteor.userId(), email, true);
