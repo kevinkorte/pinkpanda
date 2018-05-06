@@ -4,7 +4,7 @@ import { Tracker } from 'meteor/tracker'
 
 import './add_card_modal.html';
 
-const stripe = Stripe('pk_test_nXsnM6WpNgi01xKTncchXhO2');
+const stripe = Stripe(Meteor.settings.public.prodStripePubTestKey);
 const elements = stripe.elements();
 
 Template.add_card_modal.onRendered( () => {

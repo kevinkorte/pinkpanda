@@ -13,6 +13,7 @@ if ( Meteor.isProduction ) {
 Meteor.methods({
   updateSource(token) {
     console.log('called update source');
+    console.log(token);
     let user = Meteor.users.findOne(Meteor.userId());
     let cus = user.stripeCustomerId;
     if ( cus ) {
