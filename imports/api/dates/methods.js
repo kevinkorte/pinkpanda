@@ -14,7 +14,7 @@ Meteor.methods({
   'createNewDate'() {
     return Dates.insert({});
   },
-  'updateDate'(id, start, end, place, placeName, formatted_address, lat, lng, phone, url, dateName, dateURL) {
+  'updateDate'(id, start, end, place, placeName, formatted_address, lat, lng, phone, url) {
     console.log('start', start);
     console.log(typeof start);
     check(id, String);
@@ -27,8 +27,8 @@ Meteor.methods({
     check(lng, String);
     check(phone, String);
     check(url, String)
-    check(dateName, String);
-    check(dateURL, String);
+    // check(dateName, String);
+    // check(dateURL, String);
     Dates.update(id, { $set: {
         starting: start,
         ending: end,
@@ -39,8 +39,8 @@ Meteor.methods({
         lng: lng,
         phone: phone,
         website: url,
-        dateName: dateName,
-        dateURL: dateURL,
+        // dateName: dateName,
+        // dateURL: dateURL,
         draft: false
       }
     });

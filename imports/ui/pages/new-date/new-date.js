@@ -21,8 +21,8 @@ Template.new_date.events({
     const lng = target.lng.value;
     const phone = target.phone.value;
     const url = target.url.value;
-    const dateName = target.dateName.value;
-    const dateURL = target.dateURL.value;
+    // const dateName = target.dateName.value;
+    // const dateURL = target.dateURL.value;
     const followers = $('.edit-followers-input').val();
     Meteor.call('updateDate',
       id,
@@ -35,8 +35,8 @@ Template.new_date.events({
       lng,
       phone,
       url,
-      dateName,
-      dateURL,
+      // dateName,
+      // dateURL,
     (error, result) => {
       if ( error ) {
         Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
