@@ -100,6 +100,19 @@ Template.date_can_edit_2.helpers({
       }
     };
   },
+  isAuthor(author) {
+    let id = Meteor.userId();
+    console.log(id);
+    if ( id ) {
+      if ( id != author) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  },
   getJobStatusClass(id) {
     let date = Dates.findOne(id);
     if ( date ) {
@@ -110,7 +123,7 @@ Template.date_can_edit_2.helpers({
       } else if ( date.expired == true) {
         return 'expired-viewing'
       }
-    } 
+    }   
   },
   isActive(id) {
     let date = Dates.findOne(id);
