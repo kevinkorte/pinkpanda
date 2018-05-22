@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Subscriptions } from '../../api/subscriptions/subscriptions.js';
+import Signup from '../pages/Signup/Signup.js';
 
 import './signup.html';
 import '../components/svg/signup.html';
@@ -83,6 +84,9 @@ Template.App_signup.helpers({
   },
   errorMessage() {
     return Session.get('error');
+  },
+  Signup() {
+    return Signup;
   }
 })
 
