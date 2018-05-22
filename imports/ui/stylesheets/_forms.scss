@@ -1,6 +1,4 @@
-.signup-wrapper {
-  max-width: 525px;
-}
+
 
 body.login-page {
   // background: #9D50BB;  /* fallback for old browsers */
@@ -11,13 +9,30 @@ body.login-page {
 body.signup-page {
   background: #f3f7f9;
 }
-
+.signup-wrapper-2 {
+  // box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.4), 0px 0px 11px 0px rgba(143, 149, 169, 0.2784313725490196);
+  border-radius: 18px;
+  border: 1px solid #ccd2f3;
+}
+.border-left-rounded {
+  padding: 60px 10px;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+.border-right-rounded {
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
 .signup-wrapper {
   background: #fff;
   border-radius: 3px;
   padding: 25px;
   border: 1px solid #e0e0e0;
   border-bottom: 2px solid #d2d2d2;
+}
+.signup-sidebar {
+  background: hsla(242, 67%, 94%, 1);
+  color: hsla(242, 79%, 66%, 1);
 }
 
 // .js-submit input {
