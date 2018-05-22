@@ -50,11 +50,11 @@ Template.App_signup.onRendered( function() {
             $('.sign-up-button').html('Create My Account');
           } else {
             Accounts.createUser( { email: email, password: password, profile: {name: { first: firstName, last: lastName } } } );
-            console.log('created new account on client', email, password);
             Meteor.call('newUserSignup', email, password, (error, response) => {
               if ( error ) {
                 //Todo: Better error handling
-                // console.log(error)
+                console.log(error)
+                Session.set('error', error.reason);
                 $('.sign-up-button').html('Create My Account');
               } else {
                 //Successfully logged in, go to the next route
